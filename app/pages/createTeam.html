@@ -1,6 +1,7 @@
 <div>
 	<h1>Create Team</h1>
-	<!-- event image here -->
+	<!-- team image here -->
+	<img src="" class="img-circle" alt="team picture"></img>
 	<div class="form-group">
 		<label for="name">Name</label>
 		<input type="text" class="form-control" id="name">
@@ -11,7 +12,7 @@
 	</div>
 	<div class="form-control">
 		<label for="currentTeamSize">Prefered Team Size</label>
-		<span>
+		<span id="currentTeamSize">
 			<span class="badge">{{param.currentTeamSize}}</span>
 			<button><span class="glyphicon glyphicon-plus" ng-click="changeCurrentTeamSize(1);"></span></button>
 			<button><span class="glyphicon glyphicon-minus" ng-click="changeCurrentTeamSize(-1);"></span></button>

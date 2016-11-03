@@ -1,6 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster|Montserrat|Roboto');
+
 body {
-	background-color: #1E88E5; /*blue 600*/
-	font-family: 'Roboto Slab', serif;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  	font-size: 14px;
+  	line-height: 1.42857143;
+  	color: #333;
+	background-color:#E3F2FD; /*blue 50*/
 }
 section {
 	padding-top: 100px;
@@ -16,18 +21,40 @@ footer h6 {
 footer h5 {
 	color: #BCAAA4;
 }
-hr.white-line{
+hr.blue-line{
   	padding: 0;
 	border: none;
 	border-top: solid 2px;
 	text-align: center;
-	max-width: 350px;
+	max-width: 800px;
 	margin: 25px auto 30px;
-	border-color: white;
+	border-color: #1E88E5;
 }
+
+.title{
+	color: #1E88E5;
+	font-family: 'Lobster', serif;
+	font-size: 48px;
+}
+
+.main-box {
+	margin-top: 75px;
+	margin-bottom: 200px;
+
+}
+.box {
+	margin-top: 75px;
+	margin-bottom: 75px;
+}
+
 /*-----navbar----- */
+.navbar {
+	background-color: #1E90FF; /*dogerblue*/
+	border-color: transparent;
+}
+
 .navbar-custom {
-	background-color: #E3F2FD; /*blue 50*/
+	background-color: #1E90FF; /*blue 50*/
 	border-color: transparent;
 
 }

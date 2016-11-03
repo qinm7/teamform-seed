@@ -1,0 +1,76 @@
+/*
+color
+#E3F2FD blue 50
+#1E88E5 blue 600
+*/
+/* font */
+@import url('https://fonts.googleapis.com/css?family=Lobster|Montserrat|Roboto');
+
+body{
+	background-color: #E3F2FD; /*blue 50*/
+	font-family: 'Roboto', serif;
+	font-size: 48px;
+}
+div.box{
+	margin: 100px 50px 50px 50px;
+}
+div.white-box{
+	border-radius: 10px;
+	max-width: 80%;
+	background-color: white;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	font-size: 32px;
+	margin: auto;
+	margin-bottom: 20px;
+	padding: 10px 10px;
+}
+div.white-box .caption{
+	font-size: 16px;
+}
+div#about{
+	margin-top: 200px;
+	margin-bottom: 200px
+}
+img.img-center{
+	display: inline;
+}
+hr.blue-line{
+  	padding: 0;
+	border: none;
+	border-top: solid 2px;
+	text-align: center;
+	max-width: 50%;
+	margin: 25px auto 30px;
+	border-color: #1E88E5;
+}
+
+footer {
+	background-color: #3E2723;
+	padding: 50px 0px;
+}
+footer p {
+	font-size: 24px;
+	color: #BCAAA4;
+}
+
+.title{
+	color: #1E88E5;
+	font-family: 'Lobster', serif;
+	font-size: 48px;
+}
+/* navi bar */
+.navbar-custom {
+	background-color: #1E88E5; /*blue 600*/
+	border-color: transparent;
+
+}
+.navbar-custom .navbar-brand{
+	color: white;
+	font-family: 'Lobster', cursive;
+	font-size: 0.5em;
+}
+.navbar-custom .nav li a{
+	color: white;
+	font-family: 'Montserrat', serif;
+	font-size: 0.4em;
+}

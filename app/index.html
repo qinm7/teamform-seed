@@ -7,88 +7,78 @@
       <meta name="keywords" content="teamform, team">
       <!-- The meta tags *must* come first in the head; any other head content must come *after* these tags -->
       <title>teamform - A real-time online team forming app</title>
-	  
+    
       <!-- libraries and CSS 	  
-		JQuery: Necessary for some bootstrap interactions (v1.12.4 is used)		
-		Bootstrap: Library and CSS for bootstrap framework (v3.3.7 is used)
-		Font-awesome: More icons for the web development (v4.6.3 is used)		
-		site.css: A customized css for our web application. Not from any web framework. 
-	  -->
+    	JQuery: Necessary for some bootstrap interactions (v1.12.4 is used)		
+    	Bootstrap: Library and CSS for bootstrap framework (v3.3.7 is used)
+    	Font-awesome: More icons for the web development (v4.6.3 is used)		
+    	site.css: A customized css for our web application. Not from any web framework. 
+      -->
+      <!--Firebase-->
       <script src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>  
-      <script src="js/firebase.js"></script>	        
+      <script src="js/firebase.js"></script>
+
+      <!--Bootstrap-->
       <script src="lib/jquery.min.js"></script>      
       <script src="lib/bootstrap.min.js"></script>
-      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
-  	  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
-      <script src="js/script.js"></script>
-           
-      	  
-	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">   
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"> 
-     <link rel="stylesheet" href="css/home.css">  
-     
 
-      
+      <!--Angular JS-->      	        
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+      <!--
+      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+      -->
+      <!--JavaScript-->
+      <script src="js/script.js"></script>
+             
+      <!--CSS-->  	  
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"> 
+      <link rel="stylesheet" href="css/style.css">  
+ 
       <!-- Customized libraries shared by pages -->
       <script src="js/site.js"></script>
-	  
 
-	  	  
    </head>
-   <body ng-controller="mainController">
-   
-   
-  
+   <body ng-controller="mainController">  
     <!-- navibar -->
-   
-      <div class="navbar-wrapper">
-	  
-         <div class="container">
-            <nav class="navbar navbar-static-top navbar-default">
-               <div class="container">
-                  <div class="navbar-header">
-                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                     <span class="sr-only">Toggle navigation</span>
-                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                     <span class="icon-bar"></span>
-                     </button>
-                     <a class="navbar-brand" href="#">Gaebbi</a>
-                  </div>
-                  <div id="navbar" class="navbar-collapse collapse">
-                     
-                    <a class="navbar-brand" href="#about">About</a>
-                    <a class="navbar-brand" href="#">How to</a>
-                    <a class="navbar-brand" href="#">Events</a>
-                  </div>
-               </div>
-            </nav>
-         </div>
-      </div>
-      <!-- Intro -->
-   <div ng-view>   
-      <div class="main-box" id="intro">
+    <div class="navbar-wrapper">
+        <nav class="navbar navbar-fixed-top navbar-default navbar-custom">
+           <div class="container-fluid">
+              <div class="navbar-header">
+                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                 <span class="sr-only">Toggle navigation</span>
+                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>
+                 </button>
+                 <a class="navbar-brand" href="#">Gaebbi</a>
+              </div>
+              <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                  <li><a href="#about">About</a></li>
+                  <li><a href="#">How to</a></li>
+                  <li><a href="#">Events</a></li>
+                </ul>
+              </div>
+           </div>
+        </nav>
+    </div>
+    <!-- Intro -->
+    <div ng-view>   
+      <div class="box" id="intro">
          <div class="row">
             <div class="col-md-12">
-               <div class="row">
-                  <div class="col-md-12">
-                     
-                     <div class="text-center">
-                        <h1  class="title">Teamform</h1>
-                     </div>
-                 	<hr class="blue-line">
-                 	<br >
-                    <div><center><img src="img/profile.png" class="img-responsive img-circle" align = "middle" alt="profile" width="200" height="200"></center></div>
-                	<br>
-                      
-                        <div class="col-lg-12 text-center">
-                           <a id="btn_creatEevent" href="app/pages/createEvent" class = "btn btn-primary">Create Event</a>
-                           <a id="btn_joinEevent" href="http://getbootstrap.com/components/#btn-groups" class = "btn btn-primary">Join Event</a>
-
-                        </div>
-                  </div>
+               <div class="text-center">
+                  <h1 class="title">Teamform</h1>
                </div>
+                 	<hr class="blue-line">
+                  <div>
+                    <center><img src="img/profile.png" class="img-responsive img-circle" align = "middle" alt="profile" width="200" height="200"></center>
+                  </div>
+                  <div class="col-lg-12 text-center">
+                    <a id="btn_creatEevent" href="app/pages/createEvent" class = "btn btn-primary">Create Event</a>
+                    <a id="btn_joinEevent" href="http://getbootstrap.com/components/#btn-groups" class = "btn btn-primary">Join Event</a>
+                  </div>
             </div>
          </div>
       </div>
@@ -104,15 +94,12 @@
                         <h1 class="title">About Teamform</h1>
                      </div>
                  	<hr class="blue-line">
-                 	<br >
-                	
-                	
                 	<div class="row text-center">
                 	<div class="col-lg-10 col-lg-offset-1">
                 	<div class="row">
   						<div class="col-sm-6 col-md-4">
-    						<div class="thumbnail">
-      							<img src="img/profile.png" class="img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
+    						<div class="white-box">
+      							<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
       							<div class="caption">
        							 <h3>Tags</h3>
        							 <p>can be used to label a user, team or event</p>
@@ -123,8 +110,8 @@
   						</div>
   						
   						<div class="col-sm-6 col-md-4">
-    						<div class="thumbnail">
-      							<img src="img/profile.png" class="img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
+    						<div class="white-box">
+      							<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
       							<div class="caption">
        							 <h3>Recommendations</h3>
        							 <p>when you're unsure of which event to attend</p>
@@ -135,8 +122,8 @@
   						</div>
   						
   						<div class="col-sm-6 col-md-4">
-    						<div class="thumbnail">
-      							<img src="img/profile.png" class="img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
+    						<div class="white-box">
+      							<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
       							<div class="caption">
        							 <h3>Find Your Teams</h3>
        							 <p>already have a team in mind to join?</p>
@@ -146,11 +133,8 @@
    						    </div>
   						</div>
 					</div>
-					
                     </div>
                     </div>
-                
-                     
                   </div>
                </div>
             </div>
@@ -158,123 +142,102 @@
       </div>
      
 
-	 <!-- Development Team -->
-	   <div class="box" id="about">
-         <div class="row">
-            <div class="col-md-12">
-               <div class="row">
-                  <div class="col-md-12">
-                     
-                     <div class="text-center">
-                        <h1 class="title">Development Team</h1>
-                     </div>
-                 	<hr class="blue-line">
-                 	<br >
-                	
-                	<div class="row text-center">
-                	<div class="col-lg-10 col-lg-offset-1">
-                	<div class="row">
-  						<div class="col-sm-6 col-md-4">
-    						<div class="thumbnail">
-      							<img src="img/profile.png" class="img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
-      							<div class="caption">
-       							 <h3>Ananya Mishra</h3>
-       							 <p>3rd year exchange student from UMN</p>
-       							 <p>Back-end developer</p>
-       							 <p>Database creater</p>
-      							</div>
-   						    </div>
-  						</div>
-  						
-  						<div class="col-sm-6 col-md-4">
-    						<div class="thumbnail">
-      							<img src="img/profile.png" class="img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
-      							<div class="caption">
-       							 <h3>Daehyun Bae</h3>
-       							 <p>3rd year exchange student from SKKU</p>
-       							 <p>Front-end developer</p>
-       							 <p>UI designer</p>
-      							</div>
-   						    </div>
-  						</div>
-  						
-  						<div class="col-sm-6 col-md-4">
-    						<div class="thumbnail">
-      							<img src="img/profile.png" class="img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
-      							<div class="caption">
-       							 <h3>Jacquelyn Sloan</h3>
-       							 <p>3rd year exchange student from UMN</p>
-       							 <p>Back-end developer</p>
-       							 <p>Database creater</p>
-      							</div>
-   						    </div>
-  						</div>
-  						
-						<div class="col-sm-6 col-md-4">
-    						<div class="thumbnail">
-      							<img src="img/profile.png" class="img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
-      							<div class="caption">
-       							 <h3>Jiahui Zheng</h3>
-       							 <p>3rd year exchange student from PKU</p>
-       							 <p>Front-end developer</p>
-       							 <p>Algorithm master</p>
-      							</div>
-   						    </div>
-  						</div>
-						
-						<div class="col-sm-6 col-md-4">
-    						<div class="thumbnail">
-      							<img src="img/profile.png" class="img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
-      							<div class="caption">
-       							 <h3>Leonore Guillain</h3>
-       							 <p>3rd year exchange student from EPFL</p>
-       							 <p>Front-end developer</p>
-       							 <p>Algorithm master</p>
-      							</div>
-   						    </div>
-  						</div>
-  						
-  						<div class="col-sm-6 col-md-4">
-    						<div class="thumbnail">
-      							<img src="img/profile.png" class="img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
-      							<div class="caption">
-       							 <h3>Michel Qin</h3>
-       							 <p>3rd year exchange student from Grenoble Tech</p>
-       							 <p>Front-end developer</p>
-       							 <p>UI designer</p>
-      							</div>
-   						    </div>
-  						</div>
-  						
-					
-					
-					
+	  <!-- Development Team -->
+	  <div class="box" id="about">
+       <div class="row text-center">
+          <div class="col-md-12">
+             
+             <div class="text-center">
+                <h1 class="title">Development Team</h1>
+             </div>
+         	<hr class="blue-line">                	
+        	
+					<div class="col-sm-6 col-md-4">
+						<div class="white-box">
+  							<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
+  							<div class="caption">
+   							 <h3>Ananya Mishra</h3>
+   							 <p>3rd year exchange student from UMN</p>
+   							 <p>Back-end developer</p>
+   							 <p>Database creater</p>
+  							</div>
+						    </div>
+					</div>  						
+					<div class="col-sm-6 col-md-4">
+						<div class="white-box">
+  							<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
+  							<div class="caption">
+   							 <h3>Daehyun Bae</h3>
+   							 <p>3rd year exchange student from SKKU</p>
+   							 <p>Front-end developer</p>
+   							 <p>UI designer</p>
+  							</div>
+						    </div>
+					</div>  						
+					<div class="col-sm-6 col-md-4">
+						<div class="white-box">
+  							<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
+  							<div class="caption">
+   							 <h3>Jacquelyn Sloan</h3>
+   							 <p>3rd year exchange student from UMN</p>
+   							 <p>Back-end developer</p>
+   							 <p>Database creater</p>
+  							</div>
+						    </div>
+					</div>  						
+					<div class="col-sm-6 col-md-4">
+						<div class="white-box">
+  							<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
+  							<div class="caption">
+   							 <h3>Jiahui Zheng</h3>
+   							 <p>3rd year exchange student from PKU</p>
+   							 <p>Front-end developer</p>
+   							 <p>Algorithm master</p>
+  							</div>
+						    </div>
+					</div>    						
+					<div class="col-sm-6 col-md-4">
+						<div class="white-box">
+  							<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
+  							<div class="caption">
+   							 <h3>Leonore Guillain</h3>
+   							 <p>3rd year exchange student from EPFL</p>
+   							 <p>Front-end developer</p>
+   							 <p>Algorithm master</p>
+  							</div>
+						    </div>
+					</div>  						
+					<div class="col-sm-6 col-md-4">
+						<div class="white-box">
+  							<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
+  							<div class="caption">
+   							 <h3>Michel Qin</h3>
+   							 <p>3rd year exchange student from Grenoble Tech</p>
+   							 <p>Front-end developer</p>
+   							 <p>UI designer</p>
+  							</div>
+						    </div>
 					</div>
-					
-                    </div>
-                    </div>
-                
-                     
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-     
-   </div>
+          </div>
+       </div>
+      </div> 
+    </div>
         
-         <!-- FOOTER -->
-         <hr>
-         <footer>
-            <p class="pull-right"><a href="#">Back to top</a></p>
-            <p>&copy; 2017 COMP3111/H teaching team </p>
-            <p>Powered by <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a></p>
-         </footer>
+    <!-- FOOTER -->
+    <footer>
+      <div class="container-fluid">
+        <div class="row text-center">
+          <p>&copy; 2017 COMP3111/H teaching team </p>
+          <p>Powered by <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a></p>
+        </div>
+        
       </div>
-      <!-- /.container -->
+      <p class="pull-right"><a href="#">Back to top</a></p>
+    </footer>
+    <!-- /.container -->
 
-      <!-- JavaScript of this page -->
-      <script src="js/index.js"></script>
+    <!-- JavaScript of this page -->
+    <script src="js/index.js"></script>
 
 
    </body>

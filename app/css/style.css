@@ -2,6 +2,9 @@
 color
 #E3F2FD blue 50
 #1E88E5 blue 600
+#9E9E9E grey 500
+#424242 grey 800
+#43A047 green 600
 */
 /* font */
 @import url('https://fonts.googleapis.com/css?family=Lobster|Montserrat|Roboto');
@@ -11,8 +14,21 @@ body{
 	font-family: 'Roboto', serif;
 	font-size: 48px;
 }
+div.inline{
+	display: inline;
+}
+div.right{
+	margin: 0px 0px 0px auto;
+}
 div.box{
 	margin: 100px 50px 50px 50px;
+}
+div.create-box{
+	padding-top: 100px;
+	background-color: white;
+	max-width: 70%;
+	margin: auto;
+	height: 100%;
 }
 div.white-box{
 	border-radius: 10px;
@@ -27,10 +43,19 @@ div.white-box{
 div.white-box .caption{
 	font-size: 16px;
 }
+div.inner-box{
+	width: 60%;
+	margin: auto;
+}
+div.form{
+	margin: 50px;
+}
+
 div#about{
 	margin-top: 200px;
 	margin-bottom: 200px
 }
+
 img.img-center{
 	display: inline;
 }
@@ -43,7 +68,23 @@ hr.blue-line{
 	margin: 25px auto 30px;
 	border-color: #1E88E5;
 }
-
+label{
+	font-size: 24px;
+	color: #424242;
+}
+input.submit{
+	padding: 10px;
+	margin: 0px 50px 100px 50px;
+	background-color: #00C853;
+	font-family: 'Montserrat', serif;
+	color: white;
+	font-size: 18px;
+	width: -moz-available;
+}
+button.controller{
+	height: 36px;
+	font-size: 24px;
+}
 footer {
 	background-color: #3E2723;
 	padding: 50px 0px;
@@ -57,6 +98,7 @@ footer p {
 	color: #1E88E5;
 	font-family: 'Lobster', serif;
 	font-size: 48px;
+	margin-bottom: 50px;
 }
 /* navi bar */
 .navbar-custom {

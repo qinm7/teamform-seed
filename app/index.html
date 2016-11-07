@@ -36,6 +36,7 @@
       
       <!--JavaScript-->
       <script src="js/script.js"></script>
+      <script src="js/router.js"></script>
       
   
       
@@ -81,27 +82,6 @@
     <!-- Main Part -->
     <div ng-view></div>
     
-    <script>
-    
-	var app = angular.module('teamformApp', ['ngRoute']);
-	app.config(function($routeProvider) {
-		$routeProvider
-	
-		//route for the home page
-		.when('/about', {
-			templateUrl : 'pages/main.html'
-		})
-		
-		.when('/signup', {
-			templateUrl : 'pages/createProfile.html'
-		})
-		
-		.when('/events', {
-			templateUrl : 'pages/createEvent.html'
-		})
-		.otherwise('/about');
-	});
-	</script>
        
     <!-- FOOTER -->
     <footer>

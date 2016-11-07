@@ -1,0 +1,118 @@
+/*
+color
+#E3F2FD blue 50
+#1E88E5 blue 600
+#9E9E9E grey 500
+#424242 grey 800
+#43A047 green 600
+*/
+/* font */
+@import url('https://fonts.googleapis.com/css?family=Lobster|Montserrat|Roboto');
+
+body{
+	background-color: #E3F2FD; /*blue 50*/
+	font-family: 'Roboto', serif;
+	font-size: 48px;
+}
+div.inline{
+	display: inline;
+}
+div.right{
+	margin: 0px 0px 0px auto;
+}
+div.box{
+	margin: 100px 50px 50px 50px;
+}
+div.create-box{
+	padding-top: 100px;
+	background-color: white;
+	max-width: 70%;
+	margin: auto;
+	height: 100%;
+}
+div.white-box{
+	border-radius: 10px;
+	max-width: 80%;
+	background-color: white;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	font-size: 32px;
+	margin: auto;
+	margin-bottom: 20px;
+	padding: 10px 10px;
+}
+div.white-box .caption{
+	font-size: 16px;
+}
+div.inner-box{
+	width: 60%;
+	margin: auto;
+}
+div.form{
+	margin: 50px;
+}
+
+div#about{
+	margin-top: 200px;
+	margin-bottom: 200px
+}
+
+img.img-center{
+	display: inline;
+}
+hr.blue-line{
+  	padding: 0;
+	border: none;
+	border-top: solid 2px;
+	text-align: center;
+	max-width: 50%;
+	margin: 25px auto 30px;
+	border-color: #1E88E5;
+}
+label{
+	font-size: 24px;
+	color: #424242;
+}
+input.submit{
+	padding: 10px;
+	margin: 0px 50px 100px 50px;
+	background-color: #00C853;
+	font-family: 'Montserrat', serif;
+	color: white;
+	font-size: 18px;
+	width: -moz-available;
+}
+button.controller{
+	height: 36px;
+	font-size: 24px;
+}
+footer {
+	background-color: #3E2723;
+	padding: 50px 0px;
+}
+footer p {
+	font-size: 24px;
+	color: #BCAAA4;
+}
+
+.title{
+	color: #1E88E5;
+	font-family: 'Lobster', serif;
+	font-size: 48px;
+	margin-bottom: 50px;
+}
+/* navi bar */
+.navbar-custom {
+	background-color: #1E88E5; /*blue 600*/
+	border-color: transparent;
+
+}
+.navbar-custom .navbar-brand{
+	color: white;
+	font-family: 'Lobster', cursive;
+	font-size: 0.5em;
+}
+.navbar-custom .nav li a{
+	color: white;
+	font-family: 'Montserrat', serif;
+	font-size: 0.4em;
+}

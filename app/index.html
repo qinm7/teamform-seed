@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="scotchApp">
-   <head>
+<html lang="en" ng-app="teamformApp" >
+    <head>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,13 +22,16 @@
       <script src="lib/jquery.min.js"></script>      
       <script src="lib/bootstrap.min.js"></script>
 
-      <!--Angular JS-->      	        
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
-      <!--
-      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
-      -->
+      <!--Angular JS and router--> 
+      <script src="node_modules/angular/angular.min.js"></script>     	      
+      <script src="node_modules/angular-route/angular-route.js"></script>
+      
       <!--JavaScript-->
       <script src="js/script.js"></script>
+      
+      
+          <!-- JavaScript of this page -->
+     <script src="js/index.js"></script>
              
       <!--CSS-->  	  
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -39,7 +42,8 @@
       <script src="js/site.js"></script>
 
    </head>
-   <body ng-controller="mainController">  
+   
+   <body>
     <!-- navibar -->
     <div class="navbar-wrapper">
         <nav class="navbar navbar-fixed-top navbar-default navbar-custom">
@@ -51,178 +55,44 @@
                  <span class="icon-bar"></span>
                  <span class="icon-bar"></span>
                  </button>
-                 <a class="navbar-brand" href="#">Gaebbi</a>
+                 <a class="navbar-brand" href="#about">Gaebbi</a>
               </div>
               <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                   <li><a href="#about">About</a></li>
-                  <li><a href="#">How to</a></li>
-                  <li><a href="#">Events</a></li>
+                  <li><a href="#signup">Sign Up</a></li>
+                  <li><a href="#events">Events</a></li>
                 </ul>
               </div>
            </div>
         </nav>
     </div>
-    <!-- Intro -->
-    <div ng-view>   
-      <div class="box" id="intro">
-         <div class="row">
-            <div class="col-md-12">
-               <div class="text-center">
-                  <h1 class="title">Teamform</h1>
-               </div>
-                 	<hr class="blue-line">
-                  <div>
-                    <center><img src="img/profile.png" class="img-responsive img-circle" align = "middle" alt="profile" width="200" height="200"></center>
-                  </div>
-                  <div class="col-lg-12 text-center">
-                    <a id="btn_creatEevent" href="app/pages/createEvent" class = "btn btn-primary">Create Event</a>
-                    <a id="btn_joinEevent" href="http://getbootstrap.com/components/#btn-groups" class = "btn btn-primary">Join Event</a>
-                  </div>
-            </div>
-         </div>
-      </div>
-      
-      <!-- About-->
-      <div class="box" id="about">
-         <div class="row">
-            <div class="col-md-12">
-               <div class="row">
-                  <div class="col-md-12">
-                     
-                     <div class="text-center">
-                        <h1 class="title">About Teamform</h1>
-                     </div>
-                 	<hr class="blue-line">
-                	<div class="row text-center">
-                	<div class="col-lg-10 col-lg-offset-1">
-                	<div class="row">
-  						<div class="col-sm-6 col-md-4">
-    						<div class="white-box">
-      							<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
-      							<div class="caption">
-       							 <h3>Tags</h3>
-       							 <p>can be used to label a user, team or event</p>
-       							 <p>provide information of either skill or interest</p>
-       							 <p>is foundation for recommendation system</p>
-      							</div>
-   						    </div>
-  						</div>
-  						
-  						<div class="col-sm-6 col-md-4">
-    						<div class="white-box">
-      							<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
-      							<div class="caption">
-       							 <h3>Recommendations</h3>
-       							 <p>when you're unsure of which event to attend</p>
-       							 <p>when you're trying to find an appropriate team</p>
-       							 <p>we recommend event&team based on your tags</p>
-      							</div>
-   						    </div>
-  						</div>
-  						
-  						<div class="col-sm-6 col-md-4">
-    						<div class="white-box">
-      							<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
-      							<div class="caption">
-       							 <h3>Find Your Teams</h3>
-       							 <p>already have a team in mind to join?</p>
-       							 <p>use search engine to find your team</p>
-       							 <p>the team can be found using name</p>
-      							</div>
-   						    </div>
-  						</div>
-					</div>
-                    </div>
-                    </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-     
-
-	  <!-- Development Team -->
-	  <div class="box" id="about">
-       <div class="row text-center">
-          <div class="col-md-12">
-             
-             <div class="text-center">
-                <h1 class="title">Development Team</h1>
-             </div>
-         	<hr class="blue-line">                	
-        	
-					<div class="col-sm-6 col-md-4">
-						<div class="white-box">
-  							<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
-  							<div class="caption">
-   							 <h3>Ananya Mishra</h3>
-   							 <p>3rd year exchange student from UMN</p>
-   							 <p>Back-end developer</p>
-   							 <p>Database creater</p>
-  							</div>
-						    </div>
-					</div>  						
-					<div class="col-sm-6 col-md-4">
-						<div class="white-box">
-  							<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
-  							<div class="caption">
-   							 <h3>Daehyun Bae</h3>
-   							 <p>3rd year exchange student from SKKU</p>
-   							 <p>Front-end developer</p>
-   							 <p>UI designer</p>
-  							</div>
-						    </div>
-					</div>  						
-					<div class="col-sm-6 col-md-4">
-						<div class="white-box">
-  							<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
-  							<div class="caption">
-   							 <h3>Jacquelyn Sloan</h3>
-   							 <p>3rd year exchange student from UMN</p>
-   							 <p>Back-end developer</p>
-   							 <p>Database creater</p>
-  							</div>
-						    </div>
-					</div>  						
-					<div class="col-sm-6 col-md-4">
-						<div class="white-box">
-  							<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
-  							<div class="caption">
-   							 <h3>Jiahui Zheng</h3>
-   							 <p>3rd year exchange student from PKU</p>
-   							 <p>Front-end developer</p>
-   							 <p>Algorithm master</p>
-  							</div>
-						    </div>
-					</div>    						
-					<div class="col-sm-6 col-md-4">
-						<div class="white-box">
-  							<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
-  							<div class="caption">
-   							 <h3>Leonore Guillain</h3>
-   							 <p>3rd year exchange student from EPFL</p>
-   							 <p>Front-end developer</p>
-   							 <p>Algorithm master</p>
-  							</div>
-						    </div>
-					</div>  						
-					<div class="col-sm-6 col-md-4">
-						<div class="white-box">
-  							<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
-  							<div class="caption">
-   							 <h3>Michel Qin</h3>
-   							 <p>3rd year exchange student from Grenoble Tech</p>
-   							 <p>Front-end developer</p>
-   							 <p>UI designer</p>
-  							</div>
-						    </div>
-					</div>
-          </div>
-       </div>
-      </div> 
-    </div>
-        
+    
+    <!-- Main Part -->
+    <div ng-view></div>
+    
+    <script>
+    
+	var app = angular.module('teamformApp', ['ngRoute']);
+	app.config(function($routeProvider) {
+		$routeProvider
+	
+		//route for the home page
+		.when('/about', {
+			templateUrl : 'pages/main.html'
+		})
+		
+		.when('/signup', {
+			templateUrl : 'pages/createProfile.html'
+		})
+		
+		.when('/events', {
+			templateUrl : 'pages/createEvent.html'
+		})
+		.otherwise('/about');
+	});
+	</script>
+       
     <!-- FOOTER -->
     <footer>
       <div class="container-fluid">
@@ -236,8 +106,7 @@
     </footer>
     <!-- /.container -->
 
-    <!-- JavaScript of this page -->
-    <script src="js/index.js"></script>
+
 
 
    </body>

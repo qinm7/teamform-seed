@@ -1,6 +1,7 @@
-# teamform-seed modified the 4th times....
-## The seed project for the team forming web application
+# teamform-seed modified the Xth times....
+## The introductino to team-forming, the single-webpage application
 
+## Server is needed to execute the single-webpage app
 
 ## Recommendation Algorithm 1.0
  1. getting training data set:Google/Twitter(hashtag)

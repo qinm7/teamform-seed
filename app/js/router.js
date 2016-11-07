@@ -1,18 +1,18 @@
-
-angular.module('teamformApp', ['ngRoute'])
-.config(function($routeProvider) {
-	$routeProvider
+var app = angular.module('teamformApp', ['ngRoute']);
+	app.config(function($routeProvider) {
+		$routeProvider
 	
 		//route for the home page
 		.when('/about', {
 			templateUrl : 'pages/main.html'
 		})
 		
-		.when('/how', {
-			templateUrl : 'pages/createEvent.html'
+		.when('/signup', {
+			templateUrl : 'pages/createProfile.html'
 		})
 		
 		.when('/events', {
-			templateUrl : 'pages/createProfile.html'
-		});
+			templateUrl : 'pages/createEvent.html'
+		})
+		.otherwise('/about');
 	});

@@ -1,21 +1,15 @@
-# teamform-seed modified the 4th times....
-## The seed project for the team forming web application
+# teamform-seed modified the Xth times....
+## The introductino to team-forming, the single-webpage application
 
+## Server is needed to execute the single-webpage app
 
-## Recommendation Algorithm 1.0
- 1. getting training data set:Google/Twitter(hashtag)
- 2. generating word vectors: word2vec
- 3. caculating the matching scores between users and events: 
-       using skills&interests tags from users and events
-       caculating similarities between two tags using the result of word2vec
-       averaging scores using (S1^2+S2^2+...+Sn^2)/(S1+S2+...+Sn)
- 4. caculating the matching scores between users and teams: 
-       using skills tags from users and skills(&needs) tags from teams 
-       caculating similarities between two tags using the result of word2vec
-       averaging scores using (S1^2+S2^2+...+Sn^2)/(S1+S2+...+Sn)
- 
-   
-
+## Recommendation Algorithm 2.0
+ 1. distribute points based on tag being idenical, in the same subcategory or in the same category.
+ 2. track tags of pages visited in a key: tag, value: nbrVisits array.
+ 3. caculating the matching scores between users and events(and teams): 
+       using tags from users (both tags input by user and tags accumulated by page visits with more than 5 hits) and events
+       caculating similarities between two tags using the similarity points
+       order by most points not showing zero point matches.
 
 
 

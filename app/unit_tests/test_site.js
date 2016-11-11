@@ -11,6 +11,23 @@ describe('Test site.js', function() {
 	  });
 
    });
+   describe('initializeFirebase Coverage Test', function() {
+	var $controller, $rootScope, controller, $scope;;
+
+	beforeEach( function() {
+		inject(function(_$controller_,_$rootScope_) {
+			$controller=_$controller_;
+			$rootScope=_$rootScope_;
+		});
+	});
+		beforeEach(function() {
+			$scope=$rootScope.$new();
+			controller = $controller('TodoListController', {$scope: $scope});
+		});
+	it('initializeFirebase has no return', function() {
+		expect(controller.initializeFirebase()).toBeUndefined();
+	});
+   });
 
 
 });

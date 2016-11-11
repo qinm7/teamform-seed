@@ -12,7 +12,19 @@ var app = angular.module('teamformApp', ['ngRoute']);
 		})
 		
 		.when('/events', {
+			templateUrl : 'pages/event.html'
+		})
+		
+		.when('/createEvent', {
 			templateUrl : 'pages/createEvent.html'
+		})
+		
+		.when('/eventSample', {
+			templateUrl : 'pages/event_info.html'
+		})
+		
+		.when('/adminEvent', {
+			templateUrl : 'pages/event_admin.html'
 		})
 		.otherwise('/about');
 	});

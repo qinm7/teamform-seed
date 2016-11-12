@@ -1,28 +1,27 @@
-
 //create new module
-var app = angular.module("app", []);
-
-app.controller("AuthCtrl", ['$scope',
-  function ($scope) {
-    //creates provider object
-    var provider = new firebase.auth.FacebookAuthProvider();
-    //log in user
-    $scope.login = function () {
+var app = angular.module("teamformApp");
+app.factory('loginService', function () {
+  var provider = new firebase.auth.FacebookAuthProvider();
+  provider.addScope('email');
+  var database = firebase.database();
+  var storage = firebase.storage();
+  var user;
+  return {
+    login: function ($scope) {
       firebase.auth().signInWithPopup(provider).then(function (result) {
         // This gives you a Facebook Access Token. You can use it to access the Facebook API.
         var token = result.credential.accessToken;
         // The signed-in user info.
-        var user = result.user;
+        user = result.user;
         // ...some useful variables
-        var displayName = user.displayName;
-        var email = user.email;
-        var emailVerified = user.emailVerified;
-        var photoURL = user.photoURL;
-        var isAnonymous = user.isAnonymous;
-        var uid = user.uid;
-        var providerData = user.providerData;
-        //for testing
-        alert(uid);
+        var displayName = $scope.user.displayName;
+        var email = $scope.user.email;
+        var emailVerified = $scope.user.emailVerified;
+        var photoURL = $scope.user.photoURL;
+        var isAnonymous = $scope.user.isAnonymous;
+        var uid = $scope.user.uid;
+        var providerData = $scope.user.providerData;
+
 
       }).catch(function (error) {
         // Handle Errors here.
@@ -36,12 +35,36 @@ app.controller("AuthCtrl", ['$scope',
       });
 
 
+    },
+    updateUser: function ($scope) {
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          database.ref('TeamForm/users/' + user.uid).set({
+            name: user.displayName,
+            email: (user.email ? (user.email) : null),
+            profile_picture: user.photoURL,
+            description: "Hi there! My name is " + user.displayName
+          });
+        }
+      });
+    },
+
+    logout: function () {
+      firebase.auth().signOut();
+    }
+  }
+});
+
+app.controller("AuthCtrl", ['$scope',
+  function ($scope, loginService) {
+    $scope.isLoggedIn;
+
+    $scope.login = function () {
+      $scope.isLoggedIn=true;
     };
 
-//log out user
     $scope.logout = function () {
-      firebase.auth().signOut();
-      alert("you logged out");
+      $scope.isLoggedIn=false;
     };
 
   }]);

@@ -46,7 +46,7 @@
    
    <body>
     <!-- navibar -->
-    <div class="navbar-wrapper" ng-controller="AuthCtrl">
+    <div class="navbar-wrapper">
         <nav class="navbar navbar-fixed-top navbar-default navbar-custom">
            <div class="container-fluid">
               <div class="navbar-header">
@@ -58,11 +58,11 @@
                  </button>
                  <a class="navbar-brand" href="#about">Gaebbi</a>
               </div>
-              <div id="navbar" class="navbar-collapse collapse">
+              <div ng-controller="AuthCtrl" id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                   <li><a href="#about">About</a></li>
-                  <li><a href="#signup">Sign Up</a></li>
-                  <li><a>Log Out<a></li>
+                  <li ng-click="login()" ng-hide="isLoggedIn"><a href="#login">Login</a></li>
+                  <li ng-click="logout()" ng-show="isLoggedIn"><a href="#logout">Logout</a></li>
                   <li><a href="#events">Events</a></li>
                 </ul>
               </div>

@@ -7,9 +7,28 @@ var app = angular.module('teamformApp', ['ngRoute']);
 			templateUrl : 'pages/main.html'
 		})
 		
-		.when('/signup', {
-			templateUrl : 'pages/createProfile.html'
+		.when('/login', {
+			templateUrl : 'pages/createProfile.html',
+			resolve: {
+            login: function(loginService) {
+              return loginService.login();
+            },
+			updateUser: function(loginService) {
+			  return loginService.updateUser();
+            }
+          }
+		
 		})
+
+			.when('/logout', {
+				templateUrl: 'pages/main.html',
+				resolve: {
+					logout: function (loginService) {
+						return loginService.logout();
+					}
+				}
+
+			})
 		
 		.when('/events', {
 			templateUrl : 'pages/event.html'
@@ -27,4 +46,4 @@ var app = angular.module('teamformApp', ['ngRoute']);
 			templateUrl : 'pages/event_admin.html'
 		})
 		.otherwise('/about');
-	});
+	})

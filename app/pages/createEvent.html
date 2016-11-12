@@ -1,0 +1,28 @@
+
+<div>
+    <div ng-controller="js/createCtrl" class="container-fluid">
+		<div class="row create-box">
+			<h1 class="title text-center">Create Event</h1>
+			<!-- event image here -->
+			<center><img src="img/profile.png" class="img-circle"></img></center>
+			<div class="inner-box">
+				<div class="form form-group">
+					<label for="name">Name</label>
+					<input type="text" class="form-control" ng-model="input.name" id="name" placeholder="name">
+				</div>
+				<div class="form form-group">
+					<label for="desciption">Description</label>
+					<textarea class="form-control" rows="5" ng-model="input.description" id="description" placeholder="description"></textarea>
+				</div>
+				
+				<div class="form ui-widget">
+					<label for="tags">Skills</label>
+					<input id="tags" class="form-control ui-autocomplete-input" ng-model="input.tags" placeholder="i.e. Java, Angular JS, Firebase...">
+				</div>
+				<div class="text-center">
+					<input class="submit" type="button" value="SUBMIT" ng-click="addEvent()" ng-disabled="!input.description || !input.name || !input.tags"/>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,45 @@
+<div>
+    <div class="container-fluid">
+		<div class="row create-box">
+			<h1 class="title text-center">Create Team</h1>
+			<!-- team image here -->
+			<center><img src="img/profile.png" class="img-circle" alt="team picture"></img></center>
+			<div class="inner-box">
+				<div class="form form-group">
+					<label for="name">Name</label>
+					<input type="text" class="form-control" id="name" placeholder="name">
+				</div>
+				<div class="form form-group">
+					<label for="desciption">Description</label>
+					<textarea class="form-control" rows="5" id="description" placeholder="description"></textarea>
+				</div>
+				<div class="form form-group">
+					<label for="currentTeamSize">Prefered Team Size(min)</label>
+					<span id="currentTeamSize">
+						<span class="badge">{{param.currentTeamSize}}</span>
+						<div class="inline right">
+						<button class="controller"><span class="glyphicon glyphicon-plus" ng-click="changeCurrentTeamSize(1);"></span></button>
+						<button class="controller"><span class="glyphicon glyphicon-minus" ng-click="changeCurrentTeamSize(-1);"></span></button>
+						</div>
+					</span>
+				</div>
+				<div class="form form-group">
+					<label for="currentTeamSize">Prefered Team Size(max)</label>
+					<span id="currentTeamSize">
+						<span class="badge">{{param.currentTeamSize}}</span>
+						<div class="inline right">
+						<button class="controller"><span class="glyphicon glyphicon-plus" ng-click="changeCurrentTeamSize(1);"></span></button>
+						<button class="controller"><span class="glyphicon glyphicon-minus" ng-click="changeCurrentTeamSize(-1);"></span></button>
+						</div>
+					</span>
+				</div>
+				<div class="form ui-widget">
+					<label for="tags">Tags</label>
+					<input id="tags" class="form-control ui-autocomplete-input" placeholder="placeholder">
+				</div>
+				<input class="submit" type="submit" value="SUBMIT"/>
+			</div>
+		</div>	
+	</div>
+
+</div>

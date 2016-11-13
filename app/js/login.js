@@ -1,6 +1,6 @@
 //create new module
 var app = angular.module("teamformApp");
-app.factory('loginService', function () {
+app.factory('loginService', function ($location) {
   var provider = new firebase.auth.FacebookAuthProvider();
   provider.addScope('email');
   var database = firebase.database();
@@ -17,6 +17,7 @@ app.factory('loginService', function () {
   var login = function ($scope) {
       firebase.auth().signInWithPopup(provider).then(function (result) {
         isLoggedIn.set(true);
+        $scope.$digest();
         // This gives you a Facebook Access Token. You can use it to access the Facebook API.
         var token = result.credential.accessToken;
         // The signed-in user info.
@@ -72,8 +73,8 @@ app.factory('loginService', function () {
 
 
 //handels ng-hide and click events to show or hide login button
-app.controller("AuthCtrl", ['$scope', 'loginService',
-  function ($scope, loginService) {
+app.controller("AuthCtrl", ['$scope', 'loginService', '$location',
+  function ($scope, loginService, $location) {
 
     //define show or hide login resp logout button
     $scope.isLoggedIn = loginService.isLoggedIn.get();
@@ -81,11 +82,15 @@ app.controller("AuthCtrl", ['$scope', 'loginService',
     //call login function on click
     $scope.login = function () {
       loginService.login();
+
     };
 
     //change value of isLogged in if user logs in or out
     firebase.auth().onAuthStateChanged(function (user) {
        $scope.isLoggedIn = loginService.isLoggedIn.get();
+      
+        $scope.$digest();
+       
     });
     //call logout function on click
     $scope.logout = function () {

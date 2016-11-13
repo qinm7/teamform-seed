@@ -6,7 +6,16 @@ app.factory('loginService', function () {
   var database = firebase.database();
   var storage = firebase.storage();
   var user;
+  var isLogged = false;
+  var isLoggedIn = {};
+  isLoggedIn.get = function(){
+    return isLogged;
+  }
+  isLoggedIn.set = function(boolean){
+    isLogged = boolean;
+  }
   return {
+    isLoggedIn, 
     login: function ($scope) {
       firebase.auth().signInWithPopup(provider).then(function (result) {
         // This gives you a Facebook Access Token. You can use it to access the Facebook API.
@@ -21,6 +30,7 @@ app.factory('loginService', function () {
         var isAnonymous = $scope.user.isAnonymous;
         var uid = $scope.user.uid;
         var providerData = $scope.user.providerData;
+        isLogged.set(true);
 
 
       }).catch(function (error) {
@@ -50,21 +60,32 @@ app.factory('loginService', function () {
     },
 
     logout: function () {
+      
       firebase.auth().signOut();
     }
   }
 });
 
-app.controller("AuthCtrl", ['$scope',
-  function ($scope, loginService) {
-    $scope.isLoggedIn;
 
+//handels ng-hide and click events to show or hide login button
+app.controller("AuthCtrl", ['$scope', 'loginService',
+  function ($scope, loginService) {
+
+    //define show or hide login resp logout button
+    $scope.isLoggedIn = loginService.isLoggedIn.get();
+
+    //call login function on click
     $scope.login = function () {
-      $scope.isLoggedIn=true;
+      loginService.isLoggedIn.set(true);
+      $scope.isLoggedIn= loginService.login();
+      $scope.isLoggedIn = loginService.isLoggedIn.get();;
     };
 
+    //call logout function on click
     $scope.logout = function () {
-      $scope.isLoggedIn=false;
+      loginService.isLoggedIn.set(false);
+      $scope.isLoggedIn = loginService.logout();
+      $scope.isLoggedIn = loginService.isLoggedIn.get();;
     };
 
   }]);

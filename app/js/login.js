@@ -1,15 +1,24 @@
 'use strict';
 //create new module
-var app = angular.module('teamformApp');
-app.factory('loginService', function () {
+var app = angular.module("teamformApp");
+app.factory('loginService', function ($location) {
   var provider = new firebase.auth.FacebookAuthProvider();
   provider.addScope('email');
   var database = firebase.database();
   var storage = firebase.storage();
   var user;
-  return {
-    login: function ($scope) {
+  var isLogged = false;
+  var isLoggedIn = {};
+  isLoggedIn.get = function(){
+    return isLogged;
+  }
+  isLoggedIn.set = function(boolean){
+    isLogged = boolean;
+  }
+  var login = function ($scope) {
       firebase.auth().signInWithPopup(provider).then(function (result) {
+        isLoggedIn.set(true);
+        $scope.$digest();
         // This gives you a Facebook Access Token. You can use it to access the Facebook API.
         var token = result.credential.accessToken;
         // The signed-in user info.
@@ -22,7 +31,7 @@ app.factory('loginService', function () {
         var isAnonymous = $scope.user.isAnonymous;
         var uid = $scope.user.uid;
         var providerData = $scope.user.providerData;
-
+        
 
       }).catch(function (error) {
         // Handle Errors here.
@@ -32,11 +41,17 @@ app.factory('loginService', function () {
         var email = error.email;
         // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
+
         // ...
       });
+      
+    };
 
-
-    },
+  
+  return {
+    isLogged,
+    isLoggedIn, 
+    login,
     updateUser: function ($scope) {
       firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
@@ -46,26 +61,41 @@ app.factory('loginService', function () {
             profile_picture: user.photoURL,
             description: "Hi there! My name is " + user.displayName
           });
-        }
+        } 
       });
     },
 
     logout: function () {
+      isLoggedIn.set(false);
       firebase.auth().signOut();
     }
   }
 });
 
-app.controller("AuthCtrl", ['$scope',
-  function ($scope, loginService) {
-    $scope.isLoggedIn;
 
+//handels ng-hide and click events to show or hide login button
+app.controller("AuthCtrl", ['$scope', 'loginService', '$location',
+  function ($scope, loginService, $location) {
+
+    //define show or hide login resp logout button
+    $scope.isLoggedIn = loginService.isLoggedIn.get();
+
+    //call login function on click
     $scope.login = function () {
-      $scope.isLoggedIn=true;
+      loginService.login();
+
     };
 
+    //change value of isLogged in if user logs in or out
+    firebase.auth().onAuthStateChanged(function (user) {
+       $scope.isLoggedIn = loginService.isLoggedIn.get();
+      
+        $scope.$digest();
+       
+    });
+    //call logout function on click
     $scope.logout = function () {
-      $scope.isLoggedIn=false;
+      loginService.logout();
     };
 
   }]);

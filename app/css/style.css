@@ -94,6 +94,11 @@ footer p {
 	color: #BCAAA4;
 }
 
+.btm-right{
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+}
 .title{
 	color: #1E88E5;
 	font-family: 'Lobster', serif;

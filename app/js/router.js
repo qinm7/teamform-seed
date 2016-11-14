@@ -1,6 +1,7 @@
-var app = angular.module('teamformApp', ['ngRoute']);
-	app.config(function($routeProvider) {
-		$routeProvider
+'use strict';
+var app = angular.module('teamformApp', ['ngRoute','firebase']);
+app.config(function($routeProvider) {
+	$routeProvider
 	
 		//route for the home page
 		.when('/about', {
@@ -9,33 +10,33 @@ var app = angular.module('teamformApp', ['ngRoute']);
 		
 		.when('/login', {
 			templateUrl : 'pages/createProfile.html',
+			controller : 'AuthCtrl',
 			resolve: {
-            login: function(loginService) {
-              return loginService.login();
-            },
-			updateUser: function(loginService) {
-			  return loginService.updateUser();
-            }
-          }
-		
+				login: function(loginService) {
+					return loginService.login();
+				},
+				updateUser: function(loginService) {
+					return loginService.updateUser();
+				}
+			}
 		})
 
-			.when('/logout', {
-				templateUrl: 'pages/main.html',
-				resolve: {
-					logout: function (loginService) {
-						return loginService.logout();
-					}
+		.when('/logout', {
+			templateUrl: 'pages/main.html',
+			resolve: {
+				logout: function (loginService) {
+					return loginService.logout();
 				}
-
-			})
+			}
+		})
 		
 		.when('/events', {
 			templateUrl : 'pages/event.html'
 		})
 		
 		.when('/createEvent', {
-			templateUrl : 'pages/createEvent.html'
+			templateUrl : 'pages/createEvent.html',
+			controller : 'createCtrl'
 		})
 		
 		.when('/eventSample', {
@@ -45,5 +46,7 @@ var app = angular.module('teamformApp', ['ngRoute']);
 		.when('/adminEvent', {
 			templateUrl : 'pages/event_admin.html'
 		})
+
 		.otherwise('/about');
 	})
+

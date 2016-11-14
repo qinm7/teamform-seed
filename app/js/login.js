@@ -1,5 +1,6 @@
+'use strict';
 //create new module
-var app = angular.module("teamformApp");
+var app = angular.module('teamformApp');
 app.factory('loginService', function () {
   var provider = new firebase.auth.FacebookAuthProvider();
   provider.addScope('email');

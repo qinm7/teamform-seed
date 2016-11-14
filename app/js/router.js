@@ -1,63 +1,58 @@
-var app = angular.module('teamformApp', ['ngRoute']);
-app.config(function ($routeProvider) {
-	$routeProvider
-
+var app = angular.module('teamformApp', ['ui.router']);
+app.config(function ($stateProvider, $urlRouterProvider) {
+	$stateProvider
 		//route for the home page
-		.when('/about', {
-			templateUrl: 'pages/main.html'
-		})
-
-		.when('/login', {
-			templateUrl: 'pages/createProfile.html',
-			resolve: {
-				checkLogged: function (loginService, $location) {
-					firebase.auth().onAuthStateChanged(function (user) {
-					console.log("In the login I am " + loginService.isLoggedIn.get());
-					if (loginService.isLoggedIn.get()) {
-						console.log("I went there!");
-						$location.path('/logintrue');
-						console.log("I went there TWICE!");
-					}
-					else{
-						$location.path('/events');
-						
-					}
-					})
-				}
-			}
-
-		})
-		.when('/', {
-			templateUrl: 'pages/main.html'
-		})
-		.when('/logintrue', {
-			templateUrl: 'pages/createProfile.html'
-		})
-
-		.when('/logout', {
+		.state('about', {
+			url: '/about',
 			templateUrl: 'pages/main.html',
-			resolve: {
-				logout: function (loginService) {
-					//return loginService.logout();
-				}
-			}
+			authenticate: false
+		})
+		.state('createProfile', {
+			url: '/profile',
+			templateUrl: 'pages/createProfile.html',
+			authenticate: true
+		})
+
+		.state('logout', {
+			url: "/logout",
+			templateUrl: 'pages/main.html',
+			authenticate: true
 
 		})
 
-		.when('/events', {
-			templateUrl: 'pages/event.html'
+		.state('events', {
+			url: '/events',
+			templateUrl: 'pages/event.html',
+			authenticate: false
 		})
 
-		.when('/createEvent', {
-			templateUrl: 'pages/createEvent.html'
+		.state('createEvent', {
+			url: "/createEvent",
+			templateUrl: 'pages/createEvent.html',
+			authenticate: true
 		})
 
-		.when('/eventSample', {
-			templateUrl: 'pages/event_info.html'
+		.state('eventPage', {
+			url: "eventPage",
+			templateUrl: 'pages/event_info.html',
+			authenticate: false
 		})
 
-		.when('/adminEvent', {
-			templateUrl: 'pages/event_admin.html'
+		.state('adminEvent', {
+			url: "/adminEvent",
+			templateUrl: 'pages/event_admin.html',
+			authenticate: true
 		})
-		.otherwise('/about');
+		$urlRouterProvider.otherwise("about");
 })
+.run(function ($rootScope, $state, loginService) {
+
+
+  $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+    if (toState.authenticate && !loginService.isLoggedIn.get()){
+      $state.transitionTo("about");
+      event.preventDefault(); 
+    }
+
+  	});
+});

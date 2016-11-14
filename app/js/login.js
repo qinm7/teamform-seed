@@ -14,7 +14,7 @@ app.factory('loginService', function ($location) {
   isLoggedIn.set = function(boolean){
     isLogged = boolean;
   }
-  var login = function ($scope) {
+  var login = function ($scope, $state) {
       firebase.auth().signInWithPopup(provider).then(function (result) {
         isLoggedIn.set(true);
         $scope.$digest();
@@ -73,8 +73,8 @@ app.factory('loginService', function ($location) {
 
 
 //handels ng-hide and click events to show or hide login button
-app.controller("AuthCtrl", ['$scope', 'loginService', '$location',
-  function ($scope, loginService, $location) {
+app.controller("AuthCtrl", ['$scope', 'loginService', '$state',
+  function ($scope, loginService, $state) {
 
     //define show or hide login resp logout button
     $scope.isLoggedIn = loginService.isLoggedIn.get();
@@ -88,8 +88,8 @@ app.controller("AuthCtrl", ['$scope', 'loginService', '$location',
     //change value of isLogged in if user logs in or out
     firebase.auth().onAuthStateChanged(function (user) {
        $scope.isLoggedIn = loginService.isLoggedIn.get();
-      
-        $scope.$digest();
+       $scope.$digest();
+       if(user)$state.transitionTo("createProfile");
        
     });
     //call logout function on click

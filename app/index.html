@@ -22,9 +22,9 @@
       <script src="lib/bootstrap.min.js"></script>
 
       <!--Angular JS and router-->
-      <script src="lib/angular.min.js"></script>     	      
-      <script src="lib/angular-route.js"></script>   
-      
+      <script src="lib/angular.min.js"></script>     	 
+      <script src="lib/angular-ui-router.js" />      
+    
       
       <!--JavaScript-->
       <script src="js/script.js"></script>
@@ -41,6 +41,8 @@
  
       <!-- Customized libraries shared by pages -->
       <script src="js/site.js"></script>
+
+
 
    </head>
    
@@ -60,10 +62,11 @@
               </div>
               <div ng-controller="AuthCtrl" id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                  <li><a href="#about">About</a></li>
-                  <li ng-click="login()" ng-hide="isLoggedIn"><a href="#login">Login</a></li>
-                  <li ng-click="logout()" ng-show="isLoggedIn"><a href="#logout">Logout</a></li>
-                  <li><a href="#events">Events</a></li>
+                  <li><a ui-sref="about">About</a></li>
+                  <li ng-click="login()" ng-hide="isLoggedIn"><a>Login</a></li>
+                  <li><a ui-sref="events">Events</a></li>
+                  <li ng-show="isLoggedIn"><a ui-sref="createProfile">MyPage</a></li>
+                  <li ng-click="logout()" ng-show="isLoggedIn"><a ui-sref="logout">Logout</a></li>
                 </ul>
               </div>
            </div>
@@ -71,7 +74,7 @@
     </div>
     
     <!-- Main Part -->
-    <div ng-view></div>
+    <ui-view></ui-view>
     
        
     <!-- FOOTER -->

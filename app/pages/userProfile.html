@@ -1,29 +1,29 @@
     <div class="container-fluid">
 		<div class="row create-box">
-			<h1 class="title text-center">Create Profile</h1>
+			<h1 class="title text-center">{{getName}}'s Profile</h1>
 
 			<!-- profile image here -->
 			<center><img src="img/profile.png" class="img-circle" alt="profile picture"></img></center>
 
-			<div class="inner-box" ng-controller="myProfileCtrl">
+			<div class="inner-box">
 				<div class="form form-group">
 					<label for="name">Name</label>
-					<input type="text" class="form-control" id="name" ng-model="getName" required>
+					<h4>{{getName}}</h4>
 				</div>
 				<div class="form form-group">
 					<label for="desciption">Description</label>
-					<textarea class="form-control" rows="5" id="description" ng-model="getDesc" required>{{getDesc}}</textarea>
+                    <h4>{{getDesc}}</h4>
 				</div>
 				<div class="form ui-widget">
 					<label for="tags">Interests</label>
-					<input id="tags" class="form-control ui-autocomplete-input" ng-model="getTags">
+					<h4>{{getTags}}</h4>
 				</div>
 				<div class="form ui-widget">
 					<label for="tags">Teams</label>
 					<h4>{{getTeams}}</h4>
 				</div>
 				<div class="text-center">
-					<button type="button" ng-click="submit()" class="btn btn-success btn-lg" ui-sref="userProfile" ng-disabled="!getName && !getDesc">Save</button>
+					<button type="button" class="btn btn-info btn-lg" ui-sref="myProfile">Edit</button>
 				</div>
 			</div>
 			

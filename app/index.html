@@ -32,20 +32,19 @@
       <script src="lib/bootstrap.min.js"></script>
 
       <!--Angular JS and router-->
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.min.js"></script>        	      
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>   
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.js" />              
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/angularFire/2.1.0/angularfire.min.js"></script>          
 
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/angularFire/2.1.0/angularfire.min.js"></script>
- 
       <!--JavaScript-->
       <script src="js/router.js"></script>
-      <script src="js/createCtrl.js"></script>
+      <!--script src="js/createCtrl.js"></script-->
       <script src="js/login.js"></script>
 
       <!-- JavaScript of this page -->
       <script src="js/index.js"></script>
              
-      <!--CSS-->  	  
+      <!--CSS-->      
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"> 
       <link rel="stylesheet" href="css/style.css">  
@@ -76,10 +75,11 @@
               </div>
               <div ng-controller="AuthCtrl" id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                  <li><a href="#about">About</a></li>
-                  <li ng-click="login()" ng-hide="isLoggedIn"><a href="#login">Login</a></li>
-                  <li ng-click="logout()" ng-show="isLoggedIn"><a href="#logout">Logout</a></li>
-                  <li><a href="#events">Events</a></li>
+                  <li><a ui-sref="about">About</a></li>
+                  <li ng-click="login()" ng-hide="isLoggedIn"><a>Login</a></li>
+                  <li><a ui-sref="events">Events</a></li>
+                  <li ng-show="isLoggedIn"><a ui-sref="createProfile">MyPage</a></li>
+                  <li ng-click="logout()" ng-show="isLoggedIn"><a ui-sref="logout">Logout</a></li>
                 </ul>
               </div>
            </div>
@@ -87,7 +87,7 @@
     </div>
     
     <!-- Main Part -->
-    <div ng-view></div>
+    <ui-view></ui-view>
     
        
     <!-- FOOTER -->

@@ -1,10 +1,10 @@
 'use strict';
 // inject firebase service
 var app = angular.module('teamformApp');
-app.controller('createCtrl', 
+app.controller('createCtrl', [ '$scope'/*, '$firebaseArray'*/,
 
 	// Implementation the todoCtrl 
-	function($scope, $firebaseArray) {
+	function($scope/*, $firebaseArray*/) {
 
 		$scope.input = {
 			admin:"",
@@ -18,11 +18,11 @@ app.controller('createCtrl',
 			tags: []
 		}
 		
-		$scope.tags = "";
+		$scope.tags = "Java";
 
 		// sync with firebaseArray
-		var ref = firebase.database().ref("eventApp");
-		$scope.events = $firebaseArray(ref);
+		//var ref = firebase.database().ref("TeamForm/event/");
+		//$scope.events = $firebaseArray(ref);
 
 		$scope.addEvent = function() {
 			

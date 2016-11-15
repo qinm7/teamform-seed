@@ -1,70 +1,97 @@
-'use strict';
-var app = angular.module('teamformApp', ['ngRoute','firebase']);
-app.config(function($routeProvider) {
-	$routeProvider
-
+var app = angular.module('teamformApp', ['ui.router','firebase']);
+app.config(function ($stateProvider, $urlRouterProvider) {
+	$stateProvider
 		//route for the home page
-		.when('/about', {
-			templateUrl: 'pages/main.html'
+		.state('about', {
+			url: '/about',
+			templateUrl: 'pages/main.html',
+			authenticate: false
 		})
 
-		.when('/login', {
+		.state('createProfile', {
+			url: '/profile',
 			templateUrl: 'pages/createProfile.html',
 			controller : 'AuthCtrl',
-			resolve: {
-				checkLogged: function (loginService, $location) {
-					firebase.auth().onAuthStateChanged(function (user) {
-					console.log("In the login I am " + loginService.isLoggedIn.get());
-					if (loginService.isLoggedIn.get()) {
-						console.log("I went there!");
-						$location.path('/logintrue');
-						console.log("I went there TWICE!");
-					}
-					else{
-						$location.path('/events');
-						
-					}
-					})
-				}
-			}
+			authenticate: true
 		})
 
-		.when('/', {
-			templateUrl: 'pages/main.html'
-		})
-
-		.when('/logintrue', {
-			templateUrl: 'pages/createProfile.html'
-		})
-
-		.when('/logout', {
+		.state('logout', {
+			url: "/logout",
 			templateUrl: 'pages/main.html',
-			resolve: {
-				logout: function (loginService) {
-					//return loginService.logout();
+			authenticate: true
+		})
+
+		.state('events', {
+			url: '/events',
+			templateUrl: 'pages/event.html',
+			authenticate: false
+		})
+
+		.state('createEvent', {
+			url: "/createEvent",
+			templateUrl: 'pages/createEvent.html',
+			controller : function($scope, $firebaseArray) {
+
+				$scope.input = {
+					admin:"",
+					created: "",
+					description: "",
+					icon: "",
+					id: "",
+					members: [],
+					name: "",
+					public: true,
+					tags: []
 				}
-			}
+				
+				$scope.tags = "Java";
+
+				// sync with firebaseArray
+				var ref = firebase.database().ref("TeamForm/event/");
+				$scope.events = $firebaseArray(ref);
+
+				$scope.addEvent = function() {
+					
+					// update the date
+					if ( $scope.input.name != "" && $scope.input.description != "" && $scope.tags != "") {
+						$scope.input.created = new Date().toString();
+						var re = new RegExp(", |,");
+						var tags = $scope.tags.split(re);
+						if (tags[tags.length - 1] == "")
+							tags.splice(tags.length - 1,1);
+						$scope.input.tags = tags;
+						// add an input event
+						$scope.events.$add($scope.input);
+					}
+				}
+
+			},
+			authenticate: true
 		})
 
-		.when('/events', {
-			templateUrl: 'pages/event.html'
+		.state('eventPage', {
+			url: "/eventPage",
+			templateUrl: 'pages/event_info.html',
+			authenticate: false
 		})
 
-		.when('/createEvent', {
-			templateUrl : 'pages/createEvent.html',
-			controller : 'createCtrl'
+		.state('adminEvent', {
+			url: "/adminEvent",
+			templateUrl: 'pages/event_admin.html',
+			authenticate: true
 		})
 
-		.when('/eventSample', {
-			templateUrl: 'pages/event_info.html'
-		})
+		$urlRouterProvider.otherwise('/about');
+	})
 
-		.when('/adminEvent', {
-			templateUrl: 'pages/event_admin.html'
-		})
+.run(function ($rootScope, $state, loginService) {
 
-		.otherwise({
-			redirectTo:'/about'
-		});
-})
 
+	$rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+		if (toState.authenticate && !loginService.isLoggedIn.get()){
+			$state.transitionTo("about");
+			event.preventDefault(); 
+		}
+
+	});
+});

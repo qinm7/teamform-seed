@@ -11,14 +11,15 @@ app.controller('createCtrl',
 			created: "",
 			description: "",
 			icon: "",
-			id: "",
-			members: [],
+			teams: [],
 			name: "",
 			public: true,
 			tags: []
 		}
-		
-		$scope.tags = "Java";
+
+		$scope.addImage = function(){
+			$scope.input.icon = prompt("Add your Image URL", "default.jpg");
+		}
 
 		// sync with firebaseArray
 		var ref = firebase.database().ref("TeamForm/events/");
@@ -28,6 +29,7 @@ app.controller('createCtrl',
 			
 			// update the date
 			if ( $scope.input.name != "" && $scope.input.description != "" && $scope.tags != "") {
+				$scope.input.admin = firebase.auth().currentUser.uid;
 				$scope.input.created = new Date().toString();
 				var re = new RegExp(", |,");
 				var tags = $scope.tags.split(re);

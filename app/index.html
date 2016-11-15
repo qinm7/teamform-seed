@@ -36,6 +36,8 @@
       <script src="js/createCtrl.js"></script>
       <script src="js/recommend.js"></script>
       <script src="js/team.js"></script>
+      <script src="js/myProfile.js"></script>
+      <script src="js/createCtrl.js"></script>
 
           <!-- JavaScript of this page -->
      <script src="js/index.js"></script>
@@ -77,7 +79,7 @@
                   <li><a ui-sref="about">About</a></li>
                   <li ng-click="login()" ng-hide="isLoggedIn"><a>Login</a></li>
                   <li><a ui-sref="events">Events</a></li>
-                  <li ng-show="isLoggedIn"><a ui-sref="userProfile">MyPage</a></li>
+                  <li ng-show="isLoggedIn"><a ui-sref="userProfile">Profile</a></li>
                   <li ng-click="logout()" ng-show="isLoggedIn"><a ui-sref="logout">Logout</a></li>
                 </ul>
               </div>
@@ -86,7 +88,7 @@
     </div>
     
     <!-- Main Part -->
-    <ui-view ></ui-view>
+    <ui-view autoscroll="true"></ui-view>
     
        
     <!-- FOOTER -->

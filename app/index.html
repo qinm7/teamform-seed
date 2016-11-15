@@ -71,11 +71,17 @@
               <div ng-controller="AuthCtrl" id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                   <li><a ui-sref="about">About</a></li>
-                  <li ng-click="login()" ng-hide="isLoggedIn"><a>Login</a></li>
                   <li><a ui-sref="events">Events</a></li>
-                  <li ng-show="isLoggedIn"><a ui-sref="createProfile">MyPage</a></li>
+                  <li ng-click="login()" ng-hide="isLoggedIn"><a>Login</a></li>
                   <li ng-click="logout()" ng-show="isLoggedIn"><a ui-sref="logout">Logout</a></li>
                 </ul>
+                <div class="dropdown right">
+                  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">user<span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li ng-show="isLoggedIn"><a ui-sref="createProfile">MyPage</a></li>
+                    <li><a ui-sref="myProfile">Profile</a></li>
+                  </ul>
+                </div>
               </div>
            </div>
         </nav>

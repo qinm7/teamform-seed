@@ -32,7 +32,7 @@ div.create-box{
 }
 div.white-box{
 	border-radius: 10px;
-	max-width: 80%;
+	min-height: 350px;
 	background-color: white;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 	font-size: 32px;
@@ -92,6 +92,9 @@ footer {
 footer p {
 	font-size: 18px;
 	color: #BCAAA4;
+}
+i.fa-circle{
+	color: #1E88E5;
 }
 .btm-right{
 	position: fixed;

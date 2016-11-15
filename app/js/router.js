@@ -1,18 +1,58 @@
-var app = angular.module('teamformApp', ['ngRoute']);
-	app.config(function($routeProvider) {
-		$routeProvider
-	
+var app = angular.module('teamformApp', ['ui.router']);
+app.config(function ($stateProvider, $urlRouterProvider) {
+	$stateProvider
 		//route for the home page
-		.when('/about', {
-			templateUrl : 'pages/main.html'
+		.state('about', {
+			url: '/about',
+			templateUrl: 'pages/main.html',
+			authenticate: false
 		})
-		
-		.when('/signup', {
-			templateUrl : 'pages/createProfile.html'
+		.state('createProfile', {
+			url: '/profile',
+			templateUrl: 'pages/createProfile.html',
+			authenticate: true
 		})
-		
-		.when('/events', {
-			templateUrl : 'pages/createEvent.html'
+
+		.state('logout', {
+			url: "/logout",
+			templateUrl: 'pages/main.html',
+			authenticate: true
+
 		})
-		.otherwise('/about');
-	});
+
+		.state('events', {
+			url: '/events',
+			templateUrl: 'pages/event.html',
+			authenticate: false
+		})
+
+		.state('createEvent', {
+			url: "/createEvent",
+			templateUrl: 'pages/createEvent.html',
+			authenticate: true
+		})
+
+		.state('eventPage', {
+			url: "eventPage",
+			templateUrl: 'pages/event_info.html',
+			authenticate: false
+		})
+
+		.state('adminEvent', {
+			url: "/adminEvent",
+			templateUrl: 'pages/event_admin.html',
+			authenticate: true
+		})
+		$urlRouterProvider.otherwise("about");
+})
+.run(function ($rootScope, $state, loginService) {
+
+
+  $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+    if (toState.authenticate && !loginService.isLoggedIn.get()){
+      $state.transitionTo("about");
+      event.preventDefault(); 
+    }
+
+  	});
+});

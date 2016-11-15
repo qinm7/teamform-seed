@@ -23,7 +23,11 @@ module.exports = function(config) {
 		 'js/team.js' : ['coverage'],
 		 'js/member.js' : ['coverage'],
 		 'js/createCtrl.js' : ['coverage'],
-		 'js/router.js' : ['coverage']
+		 'js/router.js' : ['coverage'],
+		 'js/recommend.js' : ['coverage'],
+		 'js/script.js' : ['coverage'],
+		 'js/firebase.js' : ['coverage'],
+		 'js/login.js' : ['coverage']
 	},
 	reporters: ['progress', 'coverage'],
 	coverageReporter: {

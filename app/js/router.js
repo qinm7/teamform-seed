@@ -37,7 +37,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		.state('createEvent', {
 			url: "/createEvent",
 			templateUrl: 'pages/createEvent.html',
-			controller: 'CreateCtrl',
+			controller: 'createCtrl',
 			authenticate: true
 		})
 
@@ -59,21 +59,21 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			templateUrl: 'pages/event_admin.html',
 			authenticate: true
 		})
-		$urlRouterProvider.otherwise("/about");
+	$urlRouterProvider.otherwise("/about");
 })
-.run(function ($rootScope, $state, loginService, myProfileService) {
+	.run(function ($rootScope, $state, loginService, myProfileService) {
 
 
-  $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-    if (toState.authenticate && !loginService.isLoggedIn.get()){
-	  alert("Please login first");
-      $state.transitionTo("about");
-      event.preventDefault(); 
-    }
+		$rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
+			if (toState.authenticate && !loginService.isLoggedIn.get()) {
+				alert("Please login first");
+				$state.transitionTo("about");
+				event.preventDefault();
+			}
 
-	if(toState.url=='/profile' || toState.url=='/userprofile' ){
-		myProfileService.queryData();
-	}
+			if (toState.url == '/profile' || toState.url == '/userprofile') {
+				myProfileService.queryData();
+			}
 
-  	});
-});
+		});
+	});

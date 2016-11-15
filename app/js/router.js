@@ -37,14 +37,14 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		.state('createEvent', {
 			url: "/createEvent",
 			templateUrl: 'pages/createEvent.html',
-			controller: 'createCtrl',
+			controller: 'createEventCtrl',
 			authenticate: true
 		})
 
 		.state('createTeam', {
 			url: "/createTeam",
 			templateUrl: 'pages/createTeam.html',
-			controller: 'TeamCtrl',
+			controller: 'createTeamCtrl',
 			authenticate: true
 		})
 

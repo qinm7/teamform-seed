@@ -1,7 +1,7 @@
 'use strict';
 // inject firebase service
 var app = angular.module('teamformApp');
-app.controller('createCtrl',
+app.controller('createEventCtrl',
 
 	// Implementation the todoCtrl 
 	function($scope, $firebaseArray) {

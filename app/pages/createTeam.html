@@ -7,37 +7,37 @@
 			<div class="inner-box">
 				<div class="form form-group">
 					<label for="name">Name</label>
-					<input type="text" class="form-control" id="name" placeholder="name">
+					<input type="text" class="form-control" id="name" ng-model="input.name">
 				</div>
 				<div class="form form-group">
 					<label for="desciption">Description</label>
-					<textarea class="form-control" rows="5" id="description" placeholder="description"></textarea>
+					<textarea class="form-control" rows="5" id="description" ng-model="input.description">{{input.description}}</textarea>
 				</div>
 				<div class="form form-group">
-					<label for="currentTeamSize">Prefered Team Size(min)</label>
+					<label for="currentTeamSize">Minimum Prefered Team Size</label>
 					<span id="currentTeamSize">
-						<span class="badge">{{param.currentTeamSize}}</span>
+						<span class="badge" ng-model="input.min">{{input.min}}</span>
 						<div class="inline right">
-						<button class="controller"><span class="glyphicon glyphicon-plus" ng-click="changeCurrentTeamSize(1);"></span></button>
-						<button class="controller"><span class="glyphicon glyphicon-minus" ng-click="changeCurrentTeamSize(-1);"></span></button>
+						<button class="controller"><span class="glyphicon glyphicon-plus" ng-click="increaseMin();"></span></button>
+						<button class="controller"><span class="glyphicon glyphicon-minus" ng-click="decreaseMin();"></span></button>
 						</div>
 					</span>
 				</div>
 				<div class="form form-group">
-					<label for="currentTeamSize">Prefered Team Size(max)</label>
+					<label for="currentTeamSize">Maximum Prefered Team Size</label>
 					<span id="currentTeamSize">
-						<span class="badge">{{param.currentTeamSize}}</span>
+						<span class="badge" ng-model="input.max">{{input.max}}</span>
 						<div class="inline right">
-						<button class="controller"><span class="glyphicon glyphicon-plus" ng-click="changeCurrentTeamSize(1);"></span></button>
-						<button class="controller"><span class="glyphicon glyphicon-minus" ng-click="changeCurrentTeamSize(-1);"></span></button>
+						<button class="controller"><span class="glyphicon glyphicon-plus" ng-click="increaseMax();"></span></button>
+						<button class="controller"><span class="glyphicon glyphicon-minus" ng-click="decreaseMax();"></span></button>
 						</div>
 					</span>
 				</div>
-				<div class="form ui-widget">
+				<div class="form form-group">
 					<label for="tags">Tags</label>
-					<input id="tags" class="form-control ui-autocomplete-input" placeholder="placeholder">
+					<input id="tags" class="form-control ui-autocomplete-input" ng-model="input.tags">
 				</div>
-				<input class="submit" type="submit" value="SUBMIT"/>
+				<button type="button" ng-click="addTeam()" class="btn btn-success btn-lg"  ng-disabled="!input.name && !input.description">Submit</button>
 			</div>
 		</div>	
 	</div>

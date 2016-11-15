@@ -14,10 +14,8 @@ angular.module('teamformApp')
   }
   var queryData = function () {
     if (userExists()) {
-      console.log(userExists());
       database.ref('TeamForm/users/' + user.uid).once('value', function (info) {
         userInfo = info.val();
-        console.log(userInfo);
       });
       return userInfo;
     }
@@ -76,7 +74,6 @@ angular.module('teamformApp')
 
 .controller("myProfileCtrl", ['$scope', 'myProfileService', '$state',
   function ($scope, myProfileService, $state) {
-    console.log("hell");
     $scope.userExists = function () {
       myProfileService.userExists();
     };

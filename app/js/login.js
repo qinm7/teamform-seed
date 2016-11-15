@@ -1,3 +1,4 @@
+'use strict';
 //create new module
 var app = angular.module("teamformApp");
 app.factory('loginService', function ($location) {

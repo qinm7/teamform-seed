@@ -1,4 +1,5 @@
-var app = angular.module('teamformApp', ['ui.router']);
+'use strict';
+var app = angular.module('teamformApp', ['ui.router','firebase']);
 app.config(function ($stateProvider, $urlRouterProvider) {
 	$stateProvider
 		//route for the home page
@@ -7,9 +8,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			templateUrl: 'pages/main.html',
 			authenticate: false
 		})
+
 		.state('createProfile', {
 			url: '/profile',
 			templateUrl: 'pages/createProfile.html',
+			controller : 'AuthCtrl',
 			authenticate: true
 		})
 
@@ -29,6 +32,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		.state('createEvent', {
 			url: "/createEvent",
 			templateUrl: 'pages/createEvent.html',
+			controller : 'createCtrl',
 			authenticate: true
 		})
 
@@ -43,16 +47,19 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			templateUrl: 'pages/event_admin.html',
 			authenticate: true
 		})
-		$urlRouterProvider.otherwise("about");
-})
+
+		$urlRouterProvider.otherwise('/about');
+	})
+
 .run(function ($rootScope, $state, loginService) {
 
 
-  $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-    if (toState.authenticate && !loginService.isLoggedIn.get()){
-      $state.transitionTo("about");
-      event.preventDefault(); 
-    }
+	$rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+		if (toState.authenticate && !loginService.isLoggedIn.get()){
+			$state.transitionTo("about");
+			event.preventDefault(); 
+		}
 
-  	});
+	});
+	
 });

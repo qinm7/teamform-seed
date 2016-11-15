@@ -94,6 +94,16 @@ footer p {
 	color: #BCAAA4;
 }
 
+.btm-right{
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+}
+.btn-primary{
+	background-color: #1E88E5;
+	border-color: #1E88E5;
+	font-size: 18px;
+}
 .title{
 	color: #1E88E5;
 	font-family: 'Lobster', serif;

@@ -1,3 +1,4 @@
+'use strict';
 var app = angular.module('teamformApp', ['ui.router','firebase']);
 app.config(function ($stateProvider, $urlRouterProvider) {
 	$stateProvider
@@ -19,6 +20,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			url: "/logout",
 			templateUrl: 'pages/main.html',
 			authenticate: true
+
 		})
 
 		.state('events', {
@@ -59,4 +61,5 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		}
 
 	});
+	
 });

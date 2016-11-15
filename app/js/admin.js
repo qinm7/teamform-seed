@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	
+	//var testVar = 6;
 	$('#admin_page_controller').hide();
 	$('#text_event_name').text("Error: Invalid event name ");
 	var eventName = getURLParameter("q");

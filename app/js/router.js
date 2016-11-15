@@ -33,7 +33,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		})
 
 		.state('eventPage', {
-			url: "eventPage",
+			url: "/eventPage",
 			templateUrl: 'pages/event_info.html',
 			authenticate: false
 		})

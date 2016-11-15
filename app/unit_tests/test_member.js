@@ -13,13 +13,22 @@ describe('member.js test', function() {
 	describe('Member.js Function tests', function() {
 		beforeEach(function() {
 			$scope=$rootScope.$new();
-			controller = $controller('MemberCtrl', {$scope: $scope});
+			firebaseObject = $firebaseObject;
+			firebaseArray = $firebaseArray;
+			controller = $controller('MemberCtrl', {$scope: $scope, $firebaseObject: firebaseObject, $firebaseArray: firebaseArray});
 		});
 		it('testing initial variables', function() {
-			expect($scope.userID).toBe("");
+			expect($scope.userID).toBeUndefined();
+			expect($('#text_event_name').value).toBeUndefined();
 		});
 		it('loadFunc should be Defined', function() {
-			expect($scope.loadFunc()).toBeDefined();
+			expect(controller.loadFunc()).toBeDefined();
+		});
+		it('saveFunc should be defined', function() {
+			expect(controller.saveFunc()).toBeDefined();
+		});
+		it('refreshTeams is defined', function() {
+			expect(controller.refreshTeams()).toBeDefined();
 		});
 	});
 });

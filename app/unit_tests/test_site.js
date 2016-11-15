@@ -11,8 +11,14 @@ describe('Test site.js', function() {
 	  });
 
    });
+   describe('getURLParameter Coverage Test', function() {
+	it('value returns name', function() {
+		var value = getURLParameter("http://stackoverflow.com/questions/21673404/error-ngareq-from-angular-controller");
+		expect(value).toEqual(null);
+	});
+   });
    describe('initializeFirebase Coverage Test', function() {
-	var $controller, $rootScope, controller, $scope;;
+	/*var $controller, $rootScope, controller, $scope;;
 
 	beforeEach( function() {
 		inject(function(_$controller_,_$rootScope_) {
@@ -26,6 +32,19 @@ describe('Test site.js', function() {
 		});
 	it('initializeFirebase has no return', function() {
 		expect(controller.initializeFirebase()).toBeUndefined();
+	});*/
+	it('initializeFirebase has no return', function() {
+		expect(initalizeFirebase()).toBeDefined();
+	});
+   });
+
+   describe('retrieveOnceFirebase Coverage Test', function() {
+	it('no return function', function() {
+		var firebase = "something";
+		var refPath = "app/long";
+		var callbackFunc = "somefunction";
+		var value = retrieveOnceFirebase(firebase, refPath, callbackFunc);
+		expect(value).toBeDefined();
 	});
    });
 

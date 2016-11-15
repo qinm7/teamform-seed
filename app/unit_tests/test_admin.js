@@ -1,5 +1,12 @@
 describe('admin.js test', function() {
-	var $controller, $rootScope, controller, $scope;;
+	/*describe('testing document.ready functions', function() {
+		it('testing testVar', function() {
+			angular.element(document).ready(function() {
+				expect(testVar).toEqual(6);
+			});
+		});
+	});*/
+	var $controller, $rootScope, controller, $scope;
 
 		beforeEach( function() {
 			module('teamform-admin-app');
@@ -18,6 +25,11 @@ describe('admin.js test', function() {
 			it('testing eventName', function() {
 				expect(controller.eventName).toBeUndefined();
 			});
+			/*it('testing document ready', function() {
+				angular.element(document).ready(function() {
+					expect($scope.eventName).toEqual(getURLParameter("q"));
+				});
+			});*/
 
 		});
 

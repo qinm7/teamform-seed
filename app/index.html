@@ -72,7 +72,7 @@
               <div ng-controller="AuthCtrl" id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                   <li><a ui-sref="about">About</a></li>
-                  <li ng-click="login()" ng-hide="isLoggedIn"><a>Login</a></li>
+                  <li ng-click="login()" ng-hide="isLoggedIn"><a ui-sref="about">Login</a></li>
                   <li><a ui-sref="events">Events</a></li>
                   <li ng-show="isLoggedIn"><a ui-sref="userProfile">Profile</a></li>
                   <li ng-click="logout()" ng-show="isLoggedIn"><a ui-sref="logout">Logout</a></li>

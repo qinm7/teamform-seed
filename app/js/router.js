@@ -31,6 +31,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		.state('events', {
 			url: '/events',
 			templateUrl: 'pages/event.html',
+			controller: 'displayEventCtrl',
 			authenticate: false
 		})
 

@@ -10,7 +10,7 @@ app.controller("searchCtrl", ['$scope',
 		$scope.tag3 = "tag3";
 		$scope.tag4 = "tag4";
 
-		$scope.searchText = "Search your Team!";
+		$scope.searchText = "";
 		$scope.startSearch = function() {
 			var text = $scope.searchText;
 			var team = null;

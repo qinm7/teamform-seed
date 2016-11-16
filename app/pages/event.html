@@ -24,43 +24,36 @@
 			<hr class="blue-line">
 			<div class="row text-center">
 				<div class="col-lg-10 col-lg-offset-1">
-					<div class="row">
+					<div class="row" ng-repeat="event in events | orderBy:'name'" ng-if="$index % 3 == 0">
 						<div class="col-sm-6 col-md-4">
 							<div class="white-box">
 								<a href="#eventPage"><img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150" ></a>
 								<div class="caption">
-									<h3>Event Sample1</h3>
-									<p>description of the event</p>
-									<p>description of the event</p>
-									<p>description of the event</p>
+									<h3>{{events[$index].name}}</h3>
+									<p>{{events[$index].description}}</p>
 								</div>
 							</div>
 						</div>
 
-						<div class="col-sm-6 col-md-4">
+						<div class="col-sm-6 col-md-4" ng-show="events[$index+1]">
 							<div class="white-box">
 								<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
 								<div class="caption">
-									<h3>Event Sample2</h3>
-									<p>description of the event</p>
-									<p>description of the event</p>
-									<p>description of the event</p>
+									<h3>{{events[$index+1].name}}</h3>
+									<p>{{events[$index+1].description}}</p>
 								</div>
 							</div>
 						</div>
 
-						<div class="col-sm-6 col-md-4">
+						<div class="col-sm-6 col-md-4" ng-show="events[$index+2]">
 							<div class="white-box">
 								<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
 								<div class="caption">
-									<h3>Event Sample2</h3>
-									<p>description of the event</p>
-									<p>description of the event</p>
-									<p>description of the event</p>
+									<h3>{{events[$index+2].name}}</h3>
+									<p>{{events[$index+2].description}}</p>
 								</div>
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</div>

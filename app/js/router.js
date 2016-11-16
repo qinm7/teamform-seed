@@ -55,6 +55,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			authenticate: false
 		})
 
+	   .state('teamPage', {
+			url: "/teamPage",
+			templateUrl: 'pages/team_info.html',
+			authenticate: false
+		})
+
 		.state('adminEvent', {
 			url: "/adminEvent",
 			templateUrl: 'pages/event_admin.html',

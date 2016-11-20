@@ -50,7 +50,11 @@ div.inner-box{
 div.form{
 	margin: 50px;
 }
-
+div.input-box{
+	margin: auto;
+	margin-top: 40px;
+	width: 60%;
+}
 div#about{
 	margin-top: 200px;
 	margin-bottom: 200px

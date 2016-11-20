@@ -31,6 +31,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		.state('events', {
 			url: '/events',
 			templateUrl: 'pages/event.html',
+			controller: 'displayEventCtrl',
 			authenticate: false
 		})
 
@@ -51,6 +52,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		.state('eventPage', {
 			url: "/eventPage",
 			templateUrl: 'pages/event_info.html',
+			authenticate: false
+		})
+
+	   .state('teamPage', {
+			url: "/teamPage",
+			templateUrl: 'pages/team_info.html',
 			authenticate: false
 		})
 

@@ -47,9 +47,7 @@ app.factory('loginService', function ($location) {
       
     };
 
-  
   return {
-    isLogged,
     isLoggedIn, 
     login,
     updateUser: function ($scope) {
@@ -99,3 +97,4 @@ app.controller("AuthCtrl", ['$scope', 'loginService', '$state',
     };
 
   }]);
+

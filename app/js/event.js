@@ -1,10 +1,10 @@
 var app = angular.module('teamformApp');
-app.controller('displayEventCtrl', ['$scope', '$firebaseArray', 'searchService',
-  function($scope, $firebaseArray, searchService){
+app.controller('displayEventCtrl', ['$scope', '$firebaseArray',
+  function($scope, $firebaseArray){
       $scope.searchText = "";
-      $scope.startSearch = function(){
-        $scope.events = searchService.startSearchEvent($scope.searchText)
-      };
+      // $scope.startSearch = function(){
+      //   $scope.events = searchService.startSearchEvent($scope.searchText)
+      // };
       var ref= firebase.database().ref('TeamForm/events');
       $scope.events = $firebaseArray(ref);
 }])

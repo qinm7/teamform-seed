@@ -1,16 +1,18 @@
 'use strict';
 // inject firebase service
 var app = angular.module('teamformApp');
-app.controller('createTeamCtrl',
+app.controller('createTeamCtrl', 
 
 	// Implementation the todoCtrl 
-	function($scope, $firebaseArray) {
+	function($scope, $firebaseArray, $state, $stateParams) {
 
 		$scope.input = {
+			event: $stateParams.id, 
 			admin:"",
 			description: "",
 			icon: "",
 			members: [],
+			prospects: [],
 			name: "",
 			public: true,
 			tags: [],

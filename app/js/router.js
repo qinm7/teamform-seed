@@ -15,7 +15,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		})
 
 		.state('userProfile', {
-			url: '/userprofile',
+			url: '/userprofile/:id',
 			templateUrl: 'pages/userProfile.html',
 			controller: 'myProfileCtrl',
 			authenticate: true
@@ -43,7 +43,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		})
 
 		.state('createTeam', {
-			url: "/createTeam",
+			url: "/createTeam/:id",
 			templateUrl: 'pages/createTeam.html',
 			controller: 'createTeamCtrl',
 			authenticate: true

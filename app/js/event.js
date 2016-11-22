@@ -15,7 +15,7 @@ app.controller('displayEventCtrl', ['$scope', '$firebaseArray',
  $scope.event = $firebaseObject(ref);
  //$scope.teams = $firebaseArray(refTeams);
  $scope.teams = $firebaseArray(refTeams);
- console.log($scope.teams);
+ //console.log($scope.teams);
   //console.log($scope.teams);
 
 

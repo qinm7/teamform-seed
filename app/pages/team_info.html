@@ -1,8 +1,8 @@
-<div class="box" >
+<div class="box">
 	<div class="row">
 		<div class="col-md-12">
 			<div>
-				<center><img src="img/profile.png" class="img-responsive img-circle" align = "middle" alt="profile" width="200" height="200"></center>
+				<center><img src="img/profile.png" class="img-responsive img-circle" align="middle" alt="profile" width="200" height="200"></center>
 			</div>
 			<h1 class="title text-center">{{team.name}}</h1>
 			<h3 class="text-center">{{team.description}}</h3>
@@ -10,58 +10,52 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<textarea class="form-control" rows="5" readonly></textarea>
+			<!--<textarea class="form-control" rows="5" readonly></textarea>-->
 			<div class="input-group input-box">
 				<span class="input-group-btn">
-					<button class="btn btn-default" type="button"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
-					<button class="btn btn-default" type="button"><i class="fa fa-arrow-right" aria-hidden="true"></i> JOIN</button>
-					<button class="btn btn-default" type="button"><i class="fa fa-check" aria-hidden="true"></i> JOINED</button>
+					<!--<button ng-show="joined" class="btn btn-default" type="button"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>-->
+					<button ng-hide="joined" class="btn btn-default" type="button"><i class="fa fa-arrow-right" aria-hidden="true"></i> JOIN</button>
+					<button ng-show="joined" class="btn btn-default" type="button"><i class="fa fa-check" aria-hidden="true"></i>LEAVE</button>
 				</span>
 			</div>
 		</div>
 	</div>
 </div>
-<div class="box">
+<div class="box" ng-show="isAdmin">
 	<div class="row">
 		<div class="col-md-12">
 			<h1 class="title text-center"> Propective Members </h1>
 			<hr class="blue-line">
 			<div class="row text-center">
 				<div class="col-lg-10 col-lg-offset-1">
-					<div class="row">
+					<div class="row" ng-repeat="pUser in prospectUser" ng-if="$index % 3 == 0">
 
-						<div class="col-sm-6 col-md-4">
-							<div class="white-box">
-								<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
+						<div class="col-sm-6 col-md-4" ng-show="prospectUser[$index]">
+							<div class="white-box" ui-sref="userProfile({id : prospectUser[$index].$id})">
+								<img src="img/profile.png" class="img-center img-responsive img-circle" align="middle" alt="profile" width="150" height="150">
 								<div class="caption">
-									<h3>Tags</h3>
-									<p>can be used to label a user, team or event</p>
-									<p>provide information of either skill or interest</p>
-									<p>is foundation for recommendation system</p>
+									<h3>{{prospectUser[$index].name}}</h3>
+									<p>{{prospectUser[$index].description}}</p>
 								</div>
 							</div>
 						</div>
 
-						<div class="col-sm-6 col-md-4">
-							<div class="white-box">
-								<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
+						<div class="col-sm-6 col-md-4" ng-show="prospectUser[$index+1]">
+							<div class="white-box" ui-sref="userProfile({id : prospectUser[$index+1].$id})">
+								<img src="img/profile.png" class="img-center img-responsive img-circle" align="middle" alt="profile" width="150" height="150">
 								<div class="caption">
-									<h3>Recommendations</h3>
-									<p>when you're unsure of which event to attend</p>
-									<p>when you're trying to find an appropriate team</p>
-									<p>we recommend event and team based on your tags</p>
+									<h3>{{prospectUser[$index+1].name}}</h3>
+									<p>{{prospectUser[$index+1].description}}</p>
 								</div>
 							</div>
 						</div>
 
-						<div class="col-sm-6 col-md-4">
-							<div class="white-box">
-								<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
+						<div class="col-sm-6 col-md-4" ng-show="prospectUser[$index+2]">
+							<div class="white-box" ui-sref="userProfile({id : prospectUser[$index+2].$id})">
+								<img src="img/profile.png" class="img-center img-responsive img-circle" align="middle" alt="profile" width="150" height="150">
 								<div class="caption">
-									<h3>Find Your Teams</h3>
-									<p>already have a team in mind to join? fdssd q </p>
-									<p>use search engine to find your teamqsffqsd</p>
-									<p>the team can be found using nameqsdfqsdf</p>
+									<h3>{{prospectUser[$index+2].name}}</h3>
+									<p>{{prospectUser[$index+2].description}}</p>
 								</div>
 							</div>
 						</div>
@@ -72,6 +66,7 @@
 		</div>
 	</div>
 </div>
+
 <div class="box">
 	<div class="row">
 		<div class="col-md-12">
@@ -79,40 +74,34 @@
 			<hr class="blue-line">
 			<div class="row text-center">
 				<div class="col-lg-10 col-lg-offset-1">
-					<div class="row">
+					<div class="row" ng-repeat="user in users" ng-if="$index % 3 == 0">
 
-						<div class="col-sm-6 col-md-4">
-							<div class="white-box">
-								<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
+						<div class="col-sm-6 col-md-4" ng-show="users[$index]">
+							<div class="white-box" ui-sref="userProfile({id : users[$index].$id})">
+								<img src="img/profile.png" class="img-center img-responsive img-circle" align="middle" alt="profile" width="150" height="150">
 								<div class="caption">
-									<h3>Tags</h3>
-									<p>can be used to label a user, team or event</p>
-									<p>provide information of either skill or interest</p>
-									<p>is foundation for recommendation system</p>
+									<h3>{{users[$index].name}}</h3>
+									<p>{{users[$index].description}}</p>
 								</div>
 							</div>
 						</div>
 
-						<div class="col-sm-6 col-md-4">
-							<div class="white-box">
-								<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
+						<div class="col-sm-6 col-md-4" ng-show="users[$index+1]">
+							<div class="white-box" ui-sref="userProfile({id : users[$index+1].$id})">
+								<img src="img/profile.png" class="img-center img-responsive img-circle" align="middle" alt="profile" width="150" height="150">
 								<div class="caption">
-									<h3>Recommendations</h3>
-									<p>when you're unsure of which event to attend</p>
-									<p>when you're trying to find an appropriate team</p>
-									<p>we recommend event and team based on your tags</p>
+									<h3>{{users[$index+1].name}}</h3>
+									<p>{{users[$index+1].description}}</p>
 								</div>
 							</div>
 						</div>
 
-						<div class="col-sm-6 col-md-4">
-							<div class="white-box">
-								<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
+						<div class="col-sm-6 col-md-4" ng-show="users[$index+2]">
+							<div class="white-box" ui-sref="userProfile({id : users[$index+2].$id})">
+								<img src="img/profile.png" class="img-center img-responsive img-circle" align="middle" alt="profile" width="150" height="150">
 								<div class="caption">
-									<h3>Find Your Teams</h3>
-									<p>already have a team in mind to join? fdssd q </p>
-									<p>use search engine to find your teamqsffqsd</p>
-									<p>the team can be found using nameqsdfqsdf</p>
+									<h3>{{users[$index+2].name}}</h3>
+									<p>{{users[$index+2].description}}</p>
 								</div>
 							</div>
 						</div>
@@ -122,6 +111,4 @@
 			</div>
 		</div>
 	</div>
-</div>		
-
-
+</div>

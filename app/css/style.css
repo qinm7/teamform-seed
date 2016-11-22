@@ -145,3 +145,8 @@ i.fa-circle{
 	padding-top: 0px;
 	margin-bottom: 20px;
 }
+.fixed{
+    position: fixed;
+    top: 93%;
+    left: 97%;    
+}

@@ -7,7 +7,8 @@
       <meta name="keywords" content="teamform, team">
       <!-- The meta tags *must* come first in the head; any other head content must come *after* these tags -->
       <title>teamform - A real-time online team forming app</title>
-    
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  
       <!-- libraries and CSS 	  
     	JQuery: Necessary for some bootstrap interactions (v1.12.4 is used)		
     	Bootstrap: Library and CSS for bootstrap framework (v3.3.7 is used)
@@ -20,6 +21,8 @@
       <!--Bootstrap-->
       <script src="lib/jquery.min.js"></script>      
       <script src="lib/bootstrap.min.js"></script>
+      <script src="lib/bootstrap-tagsinput.js"></script>
+        <script src="lib/typeahead.bundle.js"></script>
 
       <!--Angular JS and router-->
       <script src="lib/angular.min.js"></script> 	 
@@ -39,11 +42,12 @@
       <script src="js/team.js"></script>
 
           <!-- JavaScript of this page -->
-     <script src="js/index.js"></script>
-       <script src="js/search.js"></script>
+      <script src="js/index.js"></script>
+      <script src="js/search.js"></script>
       <!--CSS-->  	  
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"> 
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/bootstrap-tagsinput.css">
       <link rel="stylesheet" href="css/style.css">  
  
       <!-- Customized libraries shared by pages -->
@@ -52,7 +56,6 @@
 
         <!-- jQuery -->
       <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
       <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
@@ -89,7 +92,8 @@
     <!-- Main Part -->
     <ui-view autoscroll="true"></ui-view>
     
-       
+   <a href="#"><i class="fa fa-chevron-circle-up fixed"></i></a>
+
     <!-- FOOTER -->
     <footer>
       <div class="container-fluid">
@@ -99,7 +103,7 @@
         </div>
         
       </div>
-      <p class="pull-right"><a href="#">Back to top</a></p>
+        
     </footer>
     <!-- /.container -->
 

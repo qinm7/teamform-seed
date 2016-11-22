@@ -78,7 +78,7 @@
                   <li><a ui-sref="about">About</a></li>
                   <li ng-click="login()" ng-hide="isLoggedIn"><a ui-sref="about">Login</a></li>
                   <li><a ui-sref="events">Events</a></li>
-                  <li ng-show="isLoggedIn"><a ui-sref="userProfile">Profile</a></li>
+                  <li ng-show="isLoggedIn"><a ui-sref="userProfile({id : isLoggedIn.uid})">Profile</a></li>
                   <li ng-click="logout()" ng-show="isLoggedIn"><a ui-sref="logout">Logout</a></li>
                 </ul>
               </div>

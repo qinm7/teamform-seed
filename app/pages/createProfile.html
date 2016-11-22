@@ -1,6 +1,6 @@
     <div class="container-fluid">
 		<div class="row create-box">
-			<h1 class="title text-center">Create Profile</h1>
+			<h1 class="title text-center">Edit Profile</h1>
 
 			<!-- profile image here -->
 			<center><img src="img/profile.png" class="img-circle" alt="profile picture"></img></center>
@@ -8,22 +8,22 @@
 			<div class="inner-box">
 				<div class="form form-group">
 					<label for="name">Name</label>
-					<input type="text" class="form-control" id="name" ng-model="getName" required>
+					<input type="text" class="form-control" id="name" ng-model="user.name" required>
 				</div>
 				<div class="form form-group">
 					<label for="desciption">Description</label>
-					<textarea class="form-control" rows="5" id="description" ng-model="getDesc" required>{{getDesc}}</textarea>
+					<textarea class="form-control" rows="5" id="description" ng-model="user.description" required></textarea>
 				</div>
 				<div class="form form-group">
 					<label for="tags">Interests</label>
-					<input  type="text" id="tags" class="form-control" ng-model="getTags">
+					<input  type="text" id="tags" class="form-control" ng-model="tags">
 				</div>
 				<div class="form form-group">
 					<label for="tags">Teams</label>
-					<h4>{{getTeams}}</h4>
+					<h4>{{teams}}</h4>
 				</div>
 				<div class="text-center">
-					<button type="button" ng-click="submit()" class="btn btn-success btn-lg" ui-sref="userProfile" ng-disabled="!getName && !getDesc">Save</button>
+					<button type="button" ng-click="submit()" class="btn btn-success btn-lg" ui-sref="userProfile({id : currentUser.uid})" ng-disabled="!user.name && !user.description">Save</button>
 				</div>
 			</div>
 			

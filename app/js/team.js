@@ -11,24 +11,63 @@
 // });
 
 angular.module('teamformApp')
-	.controller('teamCtrl', ['$scope', '$firebaseObject', '$stateParams', '$firebaseArray',
-		function ($scope, $firebaseObject, $stateParams, $firebaseArray) {
-			$scope.idAdmin = false;
-			var ref = firebase.database().ref('TeamForm/teams/' + $stateParams.id);
-			var refUsers = firebase.database().ref('TeamForm/teams/'+ $stateParams.id+ '/members');
-			$scope.team = $firebaseObject(ref);
-			$scope.team.members = $firebaseArray(refUsers);
-			//$scope.users = [];
-			console.log($scope.team.members);
-			$scope.users = [];
-			$scope.team.members.forEach(function(element){
+    .controller('teamCtrl', ['$scope', '$firebaseObject', '$stateParams', '$firebaseArray',
+        function($scope, $firebaseObject, $stateParams, $firebaseArray) {
+            //internal variables
+            var user = firebase.auth().currentUser;
+            var ref = firebase.database().ref('TeamForm/teams/' + $stateParams.id);
+            //var refUsers = firebase.database().ref('TeamForm/teams/' + $stateParams.id + '/members/');
+            //var refProspect = firebase.database().ref('TeamForm/teams/' + $stateParams.id + '/prospects/');
 
-				$scope.users.push(user);
-			});
-			//console.log($scope.team);
+            $scope.team = $firebaseObject(ref);
+            //$scope.members = $firebaseArray(refUsers);
+            $scope.prospect = {};
+            $scope.users = [];
+            $scope.prospectUser = [];
 
 
-}]);
+            //handels display of participating users
+            $scope.team.$loaded().then(function(data) {
+                console.log(data.members);
+                data.members.forEach(function(value, index) {
+                    var refUsers = firebase.database().ref('TeamForm/users/' + value);
+                    var user = $firebaseObject(refUsers);
+                    user.$loaded().then(function(data) {
+                        $scope.users.push(user);
+                        //console.log(user);
+                    })
+
+                });
+
+                if (user) {
+                    $scope.isAdmin = (user.uid == data.admin);
+                    //console.log($scope.isAdmin + " " + user.uid + " " + data.admin);
+                } else $scope.isAdmin = false;
+
+                //if member is admin load prospective members
+                if ($scope.isAdmin) {
+                    data.prospects.forEach(function(value, index) {
+                        var refUsers = firebase.database().ref('TeamForm/users/' + value);
+                        var user = $firebaseObject(refUsers);
+                        $scope.prospectUser.push(user);
+                    });
+                }
+                //$scope.joined = data.members.indexOf(user.uid) >= 0 || data.prospects.indexOf(user.uid) >= 0;
+                //console.log($scope.users);
+
+            });
+
+
+
+
+            $scope.join = function() {
+                $scope.prospect = $firebaseArray(refProspect);
+                $scope.prospect.push(user.uid);
+                $scope.joined = true;
+            }
+
+
+        }]);
 
 	// .controller('TeamCtrl_peter', ['$scope', '$firebaseObject', '$firebaseArray',
 	// 	function ($scope, $firebaseObject, $firebaseArray) {

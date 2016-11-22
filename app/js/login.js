@@ -1,107 +1,57 @@
 //create new module
 var app = angular.module("teamformApp");
 app.factory('loginService', function ($location) {
-  var provider = new firebase.auth.FacebookAuthProvider();
-  provider.addScope('email');
-  var database = firebase.database();
-  var storage = firebase.storage();
-  var user;
-  var isLogged = false;
-  var isLoggedIn = {};
-  isLoggedIn.get = function(){
-    return isLogged;
-  }
-  isLoggedIn.set = function(boolean){
-    isLogged = boolean;
-  }
-  var login = function ($scope, $state) {
-      firebase.auth().signInWithPopup(provider).then(function (result) {
-        isLoggedIn.set(true);
-        $scope.$digest();
-        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        var token = result.credential.accessToken;
-        // The signed-in user info.
-        user = result.user;
-        // ...some useful variables
-        var displayName = user.displayName;
-        var email = user.email;
-        var emailVerified = user.emailVerified;
-        var photoURL = user.photoURL;
-        var isAnonymous = user.isAnonymous;
-        var uid = user.uid;
-        var providerData = user.providerData;
-        
 
-      }).catch(function (error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-
-        // ...
-      });
-      
-    };
-
-  
-  return {
-    isLogged,
-    isLoggedIn, 
-    login,
-    user,
-    updateUser: function ($scope) {
-      database.ref('TeamForm/users/' + user.uid).once('value', function(snapshot) {
-        var exists = (snapshot.val() !== null);
-      });
-      firebase.auth().onAuthStateChanged(function (user) {
-        if (user && !exists) {
-          database.ref('TeamForm/users/' + user.uid).set({
-            name: user.displayName,
-            email: (user.email ? (user.email) : null),
-            profile_picture: user.photoURL,
-            description: "Hi there! My name is " + user.displayName,
-            tags: [],
-            teams: []
-          });
-        } 
-      });
-    },
-
-    logout: function () {
-      isLoggedIn.set(false);
-      firebase.auth().signOut();
-    }
-  }
 });
 
 
 //handels ng-hide and click events to show or hide login button
-app.controller("AuthCtrl", ['$scope', 'loginService', '$state',
-  function ($scope, loginService, $state) {
-
+app.controller("AuthCtrl", ['$scope', '$state', '$firebaseArray',
+  function ($scope, $state, $firebaseArray) {
+    var provider = new firebase.auth.FacebookAuthProvider();
+    provider.addScope('email');
+    var database = firebase.database();
+    var storage = firebase.storage();
     //define show or hide login resp logout button
-    $scope.isLoggedIn = loginService.isLoggedIn.get();
 
     //call login function on click
-    $scope.login = function () {
-      loginService.login();
+    $scope.login = function ($scope, $state) {
+      firebase.auth().signInWithPopup(provider).then(function (result) {
+        //$scope.$digest();
+        var user = result.user;
+        var ref = database.ref('TeamForm/users');
+        ref.once('value', function (snapshot) {
+          if (!snapshot.hasChild(user.uid)) {
+            console.log("wtf is going on");
+            database.ref('TeamForm/users/' + user.uid).set({
+              name: user.displayName,
+              email: (user.email ? (user.email) : null),
+              profile_picture: user.photoURL,
+              description: "Hi there! My name is " + user.displayName,
+              tags: [""]
+            });
+          }
+          
+        });
+      }).catch(function (error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        var email = error.email;
+        var credential = error.credential;
+      });
 
     };
 
     //change value of isLogged in if user logs in or out
     firebase.auth().onAuthStateChanged(function (user) {
-       $scope.isLoggedIn = loginService.isLoggedIn.get();
-       $scope.$digest();
-       if(user)$state.transitionTo("userProfile");
-       
+      $scope.isLoggedIn = user;
+      $scope.$digest();
+
     });
     //call logout function on click
     $scope.logout = function () {
       alert("Goodbye!");
-      loginService.logout();
+      firebase.auth().signOut();
     };
 
   }]);

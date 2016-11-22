@@ -1,94 +1,52 @@
 angular.module('teamformApp')
-.factory('myProfileService', function () {
-  var database = firebase.database();
-  var userInfo = {};
-  var user;
-  var tagString;
-  var teamString;
-  //function to retrive all data and display text
-  //edit button when triggered changes text to textboxes (done in the controller)
-  //^^ also saves changes made in textbox to database
-  var userExists = function () {
-    user = firebase.auth().currentUser;
-    return user;
-  }
-  var queryData = function () {
-    if (userExists()) {
-      database.ref('TeamForm/users/' + user.uid).once('value', function (info) {
-        userInfo = info.val();
+  //everything that changes view is in controller
+  //everything that's an object is in the factory
+  .factory('myProfileService', function () {
+    var queryData = function () {
+      //what did we need this for agan?
+      if (userExists()) {
+        database.ref('TeamForm/users/' + user.uid).once('value', function (info) {
+          userInfo = info.val();
+        });
+        return userInfo;
+      }
+    };
+    return {
+      queryData
+    }
+  })
+
+  .controller("myProfileCtrl", ['$scope', '$state', '$stateParams',
+    function ($scope, $state, $stateParams) {
+      $scope.currentUser = firebase.auth().currentUser;
+      var database = firebase.database();
+      $scope.user = {};
+      $scope.isAdmin = false;
+      database.ref('TeamForm/users/' + $stateParams.id).once('value', function (info) {
+        $scope.user = info.val();
+        $scope.tags = info.val().tags.join(", ");
+        $scope.isAdmin = $scope.currentUser.uid == $stateParams.id;
+        $scope.$digest();
       });
-      return userInfo;
-    }
-  }
-  return {
 
-    userExists,
-    queryData,
+      $scope.teams = " ";
 
-    getName: function () {
-      return userInfo.name;
-    },
-    getDesc: function () {
-      return userInfo.description;
-    },
-    getTags: function () {
-      tagString = userInfo.tags.join(',');
-      return tagString;
-    },
-    getTeams: function () {
-      teamString = userInfo.teams.join(',');
-      return teamString;
-    },
-    setName: function (value) {
-      userInfo.name = value;
-    },
-    setDesc: function (value) {
-      userInfo.description = value;
-    },
-    setTags: function (value) {
-      tagString = value;
-    },
+      $scope.submit = function () {
+        var re = new RegExp(", |,");
+        var tags = $scope.tags.split(re);
+        var teams = $scope.teams.split(re);
+        if (tags[tags.length - 1] == "") {
+          tags.splice(tags.length - 1, 1);
+        }
 
-    submit: function () {
-      var re = new RegExp(", |,");
-      var tags = tagString.split(re);
-      var teams = teamString.split(re);
-      if (tags[tags.length - 1] == "") {
-        tags.splice(tags.length - 1, 1);
-      }
-      if (teams[teams.length - 1] == "") {
-        teams.splice(teams.length - 1, 1);
-      }
+        $scope.user.tags = tags;
+        database.ref('TeamForm/users/' + $stateParams.id).update({
+          name: $scope.user.name,
+          description: $scope.user.description,
+          tags: $scope.user.tags
+        });
 
-      userInfo.tags = tags;
-      userInfo.teams = teams;
-      database.ref('TeamForm/users/' + user.uid).update({ name: userInfo.name, description: userInfo.description, tags: userInfo.tags });
+      };
 
     }
-
-  }
-})
-
-//everything that changes view is in controller
-//everything that's an object is in the factory
-
-.controller("myProfileCtrl", ['$scope', 'myProfileService', '$state',
-  function ($scope, myProfileService, $state) {
-    $scope.userExists = function () {
-      myProfileService.userExists();
-    };
-    $scope.queryData = function () {
-      myProfileService.queryData();
-    };
-    $scope.submit = function () {
-      myProfileService.setName($scope.getName);
-      myProfileService.setDesc($scope.getDesc);
-      myProfileService.setTags($scope.getTags);
-      myProfileService.submit();
-    }
-    $scope.getName = myProfileService.getName();
-    $scope.getDesc = myProfileService.getDesc();
-    $scope.getTags = myProfileService.getTags();
-    $scope.getTeams = myProfileService.getTeams();
-  }
-]);
+  ]);

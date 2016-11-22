@@ -8,7 +8,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			authenticate: false
 		})
 		.state('myProfile', {
-			url: '/profile',
+			url: '/profile/:id',
 			templateUrl: 'pages/createProfile.html',
 			controller: 'myProfileCtrl',
 			authenticate: true
@@ -56,7 +56,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			authenticate: false
 		})
 
-	   .state('teamPage', {
+		.state('teamPage', {
 			url: "/teamPage/:id",
 			templateUrl: 'pages/team_info.html',
 			controller: 'teamCtrl',
@@ -70,18 +70,17 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		})
 	$urlRouterProvider.otherwise("/about");
 })
-	.run(function ($rootScope, $state, loginService, myProfileService) {
-
-
+	.run(function ($rootScope, $state) {
 		$rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
-			if (toState.authenticate && !loginService.isLoggedIn.get()) {
+			var user = firebase.auth().currentUser;
+			if (toState.authenticate && !user) {
 				alert("Please login first");
-				$state.transitionTo("about");
+				//$state.transitionTo("about");
 				event.preventDefault();
 			}
 
 			if (toState.url == '/profile' || toState.url == '/userprofile') {
-				myProfileService.queryData();
+				//myProfileService.queryData();
 			}
 
 		});

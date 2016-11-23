@@ -7,11 +7,13 @@ fileUpload.addEventListener('change', function(e){
     //get file
     var file = e.target.files[0];
     // create storage ref
+    var profileRef = firebase.storage().ref('users/'+ file.name);
     
     // upload
     var task = profileRef.put(file);
     
     // handle progress bar
+    task.on('state_changed', 
         function progress(snapshot) {
         var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         progressbar.value = percentage;

@@ -7,7 +7,10 @@
 				<img src="img/profile.png" class="img-circle" alt="profile picture">
 				<div class="overlay">
 					<p>
-						<a href="#"><i class="fa fa-picture-o"></i></a>
+                        <i class="fa fa-picture-o">
+						<input type="file" value="upload" id="fileUpload" />
+                        </i>
+                        <progress value="0" max="100" id="progressbar">0%</progress>
 					</p>
 				</div>
 			</div>
@@ -36,3 +39,4 @@
 			
 		</div>
 	</div>
+	<script src="js/firebase_storage.js"></script>

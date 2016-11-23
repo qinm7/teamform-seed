@@ -85,6 +85,10 @@ input.submit{
 	font-size: 18px;
 	width: -moz-available;
 }
+input#fileUpload{
+    font-size: 12px;
+    margin: auto;
+}
 button.controller{
 	height: 36px;
 	font-size: 24px;

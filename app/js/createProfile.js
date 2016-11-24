@@ -20,6 +20,7 @@ angular.module('teamformApp')
     function ($scope, $state, $stateParams) {
       $scope.currentUser = firebase.auth().currentUser;
       var database = firebase.database();
+      var storage = firebase.storage();
       $scope.user = {};
       $scope.isAdmin = false;
       database.ref('TeamForm/users/' + $stateParams.id).once('value', function (info) {
@@ -30,7 +31,12 @@ angular.module('teamformApp')
       });
 
       $scope.teams = " ";
-
+      //$scope.imgSrc = 'https://firebasestorage.googleapis.com/v0/b/teamform-46380.appspot.com/o/users%2FOi7PnjCx09Z7FYdqd7njETis2Wf1.png?alt=media&token=cc8ceac0-bdf6-4d5a-bfb2-9df45ff82682';
+      storage.ref().child('users/'+ firebase.auth().currentUser.uid+'.png').getDownloadURL().then(function(url){
+        $scope.imgSrc = url;
+      }).catch(function(error){
+        alert('img loading error');
+      });
       $scope.submit = function () {
         var re = new RegExp(", |,");
         var tags = $scope.tags.split(re);
@@ -47,6 +53,32 @@ angular.module('teamformApp')
         });
 
       };
+
+      $scope.upload = function() {
+        var fileUpload = document.getElementById('fileUpload');
+        fileUpload.addEventListener('change', function(e){
+          //get file
+          var file = e.target.files[0];
+          // create storage ref
+          var profileRef = storage.ref('users/'+ firebase.auth().currentUser.uid+".png");
+          
+          // upload
+          var task = profileRef.put(file);
+          
+          // handle progress bar
+          task.on('state_changed', 
+            function progress(snapshot) {
+      
+            },
+            function error(err){
+            
+            },
+            function complete(){
+            alert('upload complete!');
+            });
+        });
+      };
+
 
     }
   ]);

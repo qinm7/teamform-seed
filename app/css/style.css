@@ -63,6 +63,10 @@ div#about{
 img.img-center{
 	display: inline;
 }
+img.profile{
+	min-height: 150px;
+	max-height: 256px;
+}
 hr.blue-line{
   	padding: 0;
 	border: none;

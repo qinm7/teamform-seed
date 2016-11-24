@@ -56,7 +56,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			authenticate: true
 		})
 
-				.state('editTeam', {
+		.state('editTeam', {
 			url: "/editTeam/:id",
 			templateUrl: 'pages/editTeam.html',
 			controller: 'editTeamCtrl',
@@ -82,6 +82,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			templateUrl: 'pages/event_admin.html',
 			authenticate: true
 		})
+
 	$urlRouterProvider.otherwise("/about");
 })
 	.run(function ($rootScope, $state) {

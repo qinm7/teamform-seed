@@ -28,7 +28,6 @@ angular.module('teamformApp')
 
             //handels display of participating users
             $scope.team.$loaded().then(function(data) {
-                console.log(data.members);
                 data.members.forEach(function(value, index) {
                     var refUsers = firebase.database().ref('TeamForm/users/' + value);
                     var user = $firebaseObject(refUsers);

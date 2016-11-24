@@ -37,6 +37,7 @@ angular.module('teamformApp')
       }).catch(function(error){
         alert('img loading error');
       });
+      
       $scope.submit = function () {
         var re = new RegExp(", |,");
         var tags = $scope.tags.split(re);

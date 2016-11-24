@@ -58,3 +58,63 @@ app.controller('createTeamCtrl',
 
 	}
 );
+
+app.controller('editTeamCtrl', 
+
+	// Implementation the todoCtrl 
+	function($scope, $firebaseArray, $state, $stateParams, $firebaseObject) {
+
+		var database = firebase.database();
+		var ref = database.ref("TeamForm/teams/" + $stateParams.id);
+		$firebaseObject(ref).$loaded().then(function (info) {
+			$scope.team = info;
+			console.log($scope.team);
+			$scope.tags = info.tags.join(", ");
+			console.log($scope.tags);
+			//$scope.$digest();
+		});
+
+		$scope.addImage = function(){
+			$scope.input.icon = prompt("Add your Image URL", "default.jpg");
+		}
+        $scope.increaseMin = function(){
+            if($scope.team.min<=$scope.team.max) $scope.team.min++;
+        }
+        $scope.decreaseMin = function(){
+            if($scope.team.min>0) $scope.team.min--;
+        }
+        $scope.increaseMax = function(){
+            if($scope.team.max<=25) $scope.team.max++;
+        }
+        $scope.decreaseMax = function(){
+            if($scope.team.max>$scope.team.min) $scope.team.max--;
+        }
+
+		// sync with firebaseArray
+
+		$scope.submit = function() {
+			
+			// update the date
+			if ( $scope.team.name != "" && $scope.team.description != "" && $scope.team.tags != "") {
+				//$scope.team.admin = firebase.auth().currentUser.uid;
+				//$scope.t.created = new Date().toString();
+				var re = new RegExp(", |,");
+				var tags = $scope.tags.split(re);
+				if (tags[tags.length - 1] == "")
+					tags.splice(tags.length - 1,1);
+				$scope.team.tags = tags;
+				// add an input event
+				database.ref('TeamForm/teams/' + $stateParams.id).update({
+				name: $scope.team.name,
+				description: $scope.team.description,
+				tags: $scope.team.tags,
+				min: $scope.team.min,
+				max: $scope.team.max
+			});
+			}
+		}
+
+
+
+
+	})

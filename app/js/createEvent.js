@@ -43,13 +43,14 @@ app.controller('createEventCtrl',
 )
 	.controller('editEventCtrl',
 	// Implementation the todoCtrl 
-	function ($scope, $firebaseArray, $stateParams) {
-		var ref = firebase.database().ref("TeamForm/events/" + $stateParams.id);
-		ref.once('value', function (info) {
-			$scope.event = info.val();
-			console.log(info.val().$id);
-			$scope.tags = info.val().tags.join(", ");
-			$scope.$digest();
+	function ($scope, $firebaseObject, $stateParams) {
+		var database = firebase.database();
+		var ref = database.ref("TeamForm/events/" + $stateParams.id);
+		$firebaseObject(ref).$loaded().then(function (info) {
+			$scope.event = info;
+			console.log(info);
+			$scope.tags = info.tags.join(", ");
+			//$scope.$digest();
 		});
 
 		$scope.submit = function () {

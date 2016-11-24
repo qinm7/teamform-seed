@@ -11,62 +11,72 @@
 // });
 
 angular.module('teamformApp')
-    .controller('teamCtrl', ['$scope', '$firebaseObject', '$stateParams', '$firebaseArray',
-        function($scope, $firebaseObject, $stateParams, $firebaseArray) {
-            //internal variables
-            var user = firebase.auth().currentUser;
-            var ref = firebase.database().ref('TeamForm/teams/' + $stateParams.id);
-            //var refUsers = firebase.database().ref('TeamForm/teams/' + $stateParams.id + '/members/');
-            //var refProspect = firebase.database().ref('TeamForm/teams/' + $stateParams.id + '/prospects/');
+	.controller('teamCtrl', ['$scope', '$firebaseObject', '$stateParams', '$firebaseArray',
+		function ($scope, $firebaseObject, $stateParams, $firebaseArray) {
+			//internal variables
 
-            $scope.team = $firebaseObject(ref);
-            //$scope.members = $firebaseArray(refUsers);
-            $scope.prospect = {};
-            $scope.users = [];
-            $scope.prospectUser = [];
+			var ref = firebase.database().ref('TeamForm/teams/' + $stateParams.id);
+			$scope.users = [];
+			$scope.prospectUsers = [];
+			var user = firebase.auth().currentUser;
+			$scope.joined = false;
+			var accepted = false;
+			var relid;
 
 
-            //handels display of participating users
-            $scope.team.$loaded().then(function(data) {
-                data.members.forEach(function(value, index) {
-                    var refUsers = firebase.database().ref('TeamForm/users/' + value);
-                    var user = $firebaseObject(refUsers);
-                    user.$loaded().then(function(data) {
-                        $scope.users.push(user);
-                        //console.log(user);
-                    })
 
-                });
-
-                if (user) {
-                    $scope.isAdmin = (user.uid == data.admin);
-                    //console.log($scope.isAdmin + " " + user.uid + " " + data.admin);
-                } else $scope.isAdmin = false;
-
-                //if member is admin load prospective members
-                if ($scope.isAdmin) {
-                    data.prospects.forEach(function(value, index) {
-                        var refUsers = firebase.database().ref('TeamForm/users/' + value);
-                        var user = $firebaseObject(refUsers);
-                        $scope.prospectUser.push(user);
-                    });
-                }
-                //$scope.joined = data.members.indexOf(user.uid) >= 0 || data.prospects.indexOf(user.uid) >= 0;
-                //console.log($scope.users);
-
-            });
+			$firebaseObject(ref).$loaded().then(function (data) {
+				$scope.team = data;
+				$scope.isAdmin = (user.uid == data.admin);
+			});
 
 
 
 
-            $scope.join = function() {
-                $scope.prospect = $firebaseArray(refProspect);
-                $scope.prospect.push(user.uid);
-                $scope.joined = true;
-            }
+			var refRelations = firebase.database().ref("TeamForm/RelationUT/");
+			$scope.relations = $firebaseArray(refRelations);
+			var calculate = function () {
+				var refUsers = firebase.database().ref('TeamForm/RelationUT/').orderByChild("team").equalTo($stateParams.id);
+				$firebaseArray(refUsers).$loaded().then(function (data) {
+					data.forEach(function (value, index) {
+						if (user.uid == value.user) {
+							$scope.joined = true;
+							accepted = value.accepted;
+							relid = index;
+						}
+						if (value.accepted) {
+							$firebaseObject(firebase.database().ref("TeamForm/users/" + value.user)).$loaded().then(function (data) {
+								$scope.users.push(data);
+							})
+						} else {
+							$firebaseObject(firebase.database().ref("TeamForm/users/" + value.user)).$loaded().then(function (data) {
+								$scope.prospectUsers.push(data);
+							})
+
+						}
+					})
+				});
+			}
+			calculate();
+
+			$scope.join = function () {
+				$scope.relations.$add({ user: user.uid, team: $scope.team.$id, accepted: false });
+				calculate();
+			}
+
+			$scope.accept = function (relID) {
+				database.ref('TeamForm/RelationUT/' + relID).update({
+					accepted: true
+				});
+			}
 
 
-        }]);
+			//can also be used to reject user.
+			$scope.leave = function () {
+				$scope.relations.$remove(relid);
+			}
+
+		}]);
 
 	// .controller('TeamCtrl_peter', ['$scope', '$firebaseObject', '$firebaseArray',
 	// 	function ($scope, $firebaseObject, $firebaseArray) {

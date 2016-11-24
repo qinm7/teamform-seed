@@ -49,6 +49,20 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			authenticate: true
 		})
 
+		.state('editEvent', {
+			url: "/editEvent/:id",
+			templateUrl: 'pages/editEvent.html',
+			controller: 'editEventCtrl',
+			authenticate: true
+		})
+
+				.state('editTeam', {
+			url: "/editTeam/:id",
+			templateUrl: 'pages/editTeam.html',
+			controller: 'editTeamCtrl',
+			authenticate: true
+		})
+
 		.state('eventPage', {
 			url: "/eventPage/:id",
 			templateUrl: 'pages/event_info.html',

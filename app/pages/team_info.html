@@ -13,9 +13,9 @@
 			<!--<textarea class="form-control" rows="5" readonly></textarea>-->
 			<div class="input-group input-box">
 				<span class="input-group-btn">
-					<!--<button ng-show="joined" class="btn btn-default" type="button"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>-->
-					<button ng-hide="joined" class="btn btn-default" type="button"><i class="fa fa-arrow-right" aria-hidden="true"></i> JOIN</button>
-					<button ng-show="joined" class="btn btn-default" type="button"><i class="fa fa-check" aria-hidden="true"></i>LEAVE</button>
+					<button ui-sref="editTeam({id : team.$id})" ng-show="isAdmin" class="btn btn-default" type="button"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
+					<button ng-click="join()" ng-hide="joined" class="btn btn-default" type="button"><i class="fa fa-arrow-right" aria-hidden="true"></i> JOIN</button>
+					<button ng-click="leave()" ng-show="joined" class="btn btn-default" type="button"><i class="fa fa-check" aria-hidden="true"></i>LEAVE</button>
 				</span>
 			</div>
 		</div>
@@ -28,34 +28,34 @@
 			<hr class="blue-line">
 			<div class="row text-center">
 				<div class="col-lg-10 col-lg-offset-1">
-					<div class="row" ng-repeat="pUser in prospectUser" ng-if="$index % 3 == 0">
+					<div class="row" ng-repeat="pro in prospectUsers" ng-if="$index % 3 == 0">
 
-						<div class="col-sm-6 col-md-4" ng-show="prospectUser[$index]">
-							<div class="white-box" ui-sref="userProfile({id : prospectUser[$index].$id})">
+						<div class="col-sm-6 col-md-4" ng-show="prospectUsers[$index]">
+							<div class="white-box" ui-sref="userProfile({id : prospectUsers[$index].$id})">
 								<img src="img/profile.png" class="img-center img-responsive img-circle" align="middle" alt="profile" width="150" height="150">
 								<div class="caption">
-									<h3>{{prospectUser[$index].name}}</h3>
-									<p>{{prospectUser[$index].description}}</p>
+									<h3>{{prospectUsers[$index].name}}</h3>
+									<p>{{prospectUsers[$index].description}}</p>
 								</div>
 							</div>
 						</div>
 
-						<div class="col-sm-6 col-md-4" ng-show="prospectUser[$index+1]">
-							<div class="white-box" ui-sref="userProfile({id : prospectUser[$index+1].$id})">
+						<div class="col-sm-6 col-md-4" ng-show="prospectUsers[$index+1]">
+							<div class="white-box" ui-sref="userProfile({id : prospectUsers[$index+1].$id})">
 								<img src="img/profile.png" class="img-center img-responsive img-circle" align="middle" alt="profile" width="150" height="150">
 								<div class="caption">
-									<h3>{{prospectUser[$index+1].name}}</h3>
-									<p>{{prospectUser[$index+1].description}}</p>
+									<h3>{{prospectUsers[$index+1].name}}</h3>
+									<p>{{prospectUsers[$index+1].description}}</p>
 								</div>
 							</div>
 						</div>
 
-						<div class="col-sm-6 col-md-4" ng-show="prospectUser[$index+2]">
-							<div class="white-box" ui-sref="userProfile({id : prospectUser[$index+2].$id})">
+						<div class="col-sm-6 col-md-4" ng-show="prospectUsers[$index+2]">
+							<div class="white-box" ui-sref="userProfile({id : prospectUsers[$index+2].$id})">
 								<img src="img/profile.png" class="img-center img-responsive img-circle" align="middle" alt="profile" width="150" height="150">
 								<div class="caption">
-									<h3>{{prospectUser[$index+2].name}}</h3>
-									<p>{{prospectUser[$index+2].description}}</p>
+									<h3>{{prospectUsers[$index+2].name}}</h3>
+									<p>{{prospectUsers[$index+2].description}}</p>
 								</div>
 							</div>
 						</div>

@@ -16,8 +16,8 @@ angular.module('teamformApp')
     }
   })
 
-  .controller("myProfileCtrl", ['$scope', '$state', '$stateParams',
-    function ($scope, $state, $stateParams) {
+  .controller("myProfileCtrl", ['$scope', '$state', '$stateParams', '$firebaseArray', '$firebaseObject',
+    function ($scope, $state, $stateParams, $firebaseArray, $firebaseObject) {
       $scope.currentUser = firebase.auth().currentUser;
       var database = firebase.database();
       $scope.user = {};
@@ -29,7 +29,18 @@ angular.module('teamformApp')
         $scope.$digest();
       });
 
-      $scope.teams = " ";
+      var teams = [];
+      var teamsRef = database.ref('TeamForm/RelationUT/').orderByChild("user").equalTo($stateParams.id);
+      $firebaseArray(teamsRef).$loaded().then(function (data) {
+        data.forEach(function (value) {
+          $firebaseObject(firebase.database().ref("TeamForm/teams/" + value.team)).$loaded().then(function (data) {
+            teams.push(data.name);
+            $scope.teams = teams.join(", ");
+          });
+        });
+        
+
+      });
 
       $scope.submit = function () {
         var re = new RegExp(", |,");

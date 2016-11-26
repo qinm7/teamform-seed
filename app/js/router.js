@@ -67,7 +67,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			url: "/eventPage/:id",
 			templateUrl: 'pages/event_info.html',
 			controller: 'eventCtrl',
-			authenticate: false
+			authenticate: false	
 		})
 
 		.state('teamPage', {

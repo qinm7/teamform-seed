@@ -19,8 +19,6 @@ angular.module('teamformApp')
 			$scope.users = [];
 			$scope.prospectUsers = [];
 			var user = firebase.auth().currentUser;
-			$scope.joined = false;
-			var accepted = false;
 			var relid;
 
 
@@ -36,20 +34,24 @@ angular.module('teamformApp')
 			var refRelations = firebase.database().ref("TeamForm/RelationUT/");
 			$scope.relations = $firebaseArray(refRelations);
 			var calculate = function () {
+				$scope.users = [];
+				$scope.prospectUsers = [];
+				$scope.joined = false;
 				var refUsers = firebase.database().ref('TeamForm/RelationUT/').orderByChild("team").equalTo($stateParams.id);
 				$firebaseArray(refUsers).$loaded().then(function (data) {
 					data.forEach(function (value, index) {
 						if (user.uid == value.user) {
 							$scope.joined = true;
-							accepted = value.accepted;
 							relid = index;
 						}
 						if (value.accepted) {
 							$firebaseObject(firebase.database().ref("TeamForm/users/" + value.user)).$loaded().then(function (data) {
+								data.ref = value.$id;
 								$scope.users.push(data);
 							})
 						} else {
 							$firebaseObject(firebase.database().ref("TeamForm/users/" + value.user)).$loaded().then(function (data) {
+								data.ref = value.$id;
 								$scope.prospectUsers.push(data);
 							})
 
@@ -65,15 +67,16 @@ angular.module('teamformApp')
 			}
 
 			$scope.accept = function (relID) {
-				database.ref('TeamForm/RelationUT/' + relID).update({
-					accepted: true
-				});
+				$scope.relations.$getRecord(relID).accepted = true;
+				$scope.relations.$save($scope.relations.$getRecord(relID)).then(calculate);
+
 			}
 
 
 			//can also be used to reject user.
 			$scope.leave = function () {
-				$scope.relations.$remove(relid);
+				$scope.relations.$remove(relid).then(calculate);
+				//calculate();
 			}
 
 		}]);

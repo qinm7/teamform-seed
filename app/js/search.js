@@ -1,58 +1,51 @@
-var app = angular.module("teamformApp"); 
+var app = angular.module("teamformApp");
 
-app.controller("searchCtrl", ['$scope',
-	function($scope) {
-	
+app.factory("searchService",
+	function () {
+
 		var eventInfo = {};
 		var event = "test1";
 		var eventID = null;
 		var teams = {};
 		var name = "default";
-		$scope.searchText = "";
-		$scope.startSearch = function() {
+
+
+		var startSearch = function (text, toReturn) {
+			var events = [];
 			var flag = false;
-			var text = $scope.searchText;
 			var database = firebase.database();
 			var query = database.ref("TeamForm/events/");
-			query.once("value").then(function(snapshot) {
-				snapshot.forEach(function(childSnapshot) {
-				
+			query.once("value").then(function (snapshot) {
+				snapshot.forEach(function (childSnapshot) {
 					var name = childSnapshot.child("name").val();
-					if(name == text){
-						event = name;
-						eventID = childSnapshot.key;
-						flag = true;
+					if (name == text) {
+						var event = childSnapshot.val();
+						event.$id = childSnapshot.key;
+						events.push(event);
+						console.log(event);
+					} else {
+						var tags = childSnapshot.child("tags");
+						tags.forEach(function (tagSnapshot) {
+							if (tagSnapshot.val() == text) {
+								var event = childSnapshot.val();
+								event.$id = childSnapshot.key;
+								events.push(event);
+								console.log(event);
+							}
+						});
 					}
-					var tags = childSnapshot.child("tags");
-					tags.forEach(function(tagSnapshot){
-						if(tagSnapshot.val() == text) {
-							event = name;
-							eventID = childSnapshot.key;
-							flag = true;
-						}
-					});
 				});
-			if(event == null) {
-				$scope.searchText = "Event doesn't exist, search another one!";
-			}
-			else{
-				
-				$scope.searchText = event;
-				window.location= "#eventPage/"+ eventID;
-				/*
-				database.ref("TeamForm/teams/"+team).once("value").then(function(snapshot){
-					teamInfo = snapshot.val();
-				});
-      			$scope.teamName = teamInfo.name;
-				$scope.teamDescription = teamInfo.description;
-				$scope.teamTags = teamInfo.tags;//return an array of tags
-			
-				*/
-				
-				
-			}
-			
-		}); 
-	}
-}])
+				if (events.length == 0) alert("your search had no matches");
+				console.log(events);
+				toReturn =  events;
+
+			});
+			return;
+
+		}
+
+		return {
+			startSearch,
+		}
+	})
 

@@ -9,10 +9,10 @@
 			<form>
 				<div class="input-group input-box">
 					<div class="form-group has-feedback">
-						<input type="text" class="form-control" placeholder="Search for Team"/>
+						<input type="text" class="form-control" ng-model="searchText" placeholder="Search for Team"/>
 					</div>
 					<span class="input-group-btn">
-						<button class="btn btn-default" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+						<button class="btn btn-default" type="button"><i class="fa fa-search" aria-hidden="true" ng-click="startSearch()"></i></button>
 						<button class="btn btn-default" type="button"><i class="fa fa-magic" aria-hidden="true"></i></button>
 						<button ng-show="isAdmin" ui-sref="editEvent({id : event.$id})" class="btn btn-default" type="button"><i class="fa fa-arrow-right" aria-hidden="true"></i>Edit</button>
 						<button ui-sref="createTeam({id : event.$id})" class="btn btn-default" type="button"><i class="fa fa-check" aria-hidden="true"></i>Create</button>

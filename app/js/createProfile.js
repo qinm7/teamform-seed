@@ -25,7 +25,7 @@ angular.module('teamformApp')
       database.ref('TeamForm/users/' + $stateParams.id).once('value', function (info) {
         $scope.user = info.val();
         $scope.tags = info.val().tags.join(", ");
-        $scope.isAdmin = $scope.currentUser.uid == $stateParams.id;
+        $scope.isAdmin = $scope.currentUser ? $scope.currentUser.uid == $stateParams.id : false;
         $scope.$digest();
       });
 

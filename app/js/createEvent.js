@@ -27,7 +27,8 @@ app.controller('createEventCtrl',
 
 			// update the date
 			if ($scope.input.name != "" && $scope.input.description != "" && $scope.tags != "") {
-				$scope.input.admin = firebase.auth().currentUser.uid;
+				var currentUser = firebase.auth().currentUser;
+				$scope.input.admin = currentUser.uid;
 				$scope.input.created = new Date().toString();
 				var re = new RegExp(", |,");
 				var tags = $scope.tags.split(re);

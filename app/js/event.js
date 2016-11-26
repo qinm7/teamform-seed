@@ -53,25 +53,47 @@ app.controller('displayEventCtrl', ['$scope', '$firebaseArray', 'searchService',
       var admin = firebase.auth().currentUser;
       var refTeams = firebase.database().ref('TeamForm/teams/').orderByChild("event").equalTo($stateParams.id);
       $firebaseObject(ref).$loaded().then(function (data) {
-        $scope.isAdmin = data.admin == admin.uid;
+        $scope.isAdmin = admin? data.admin == admin.uid : false;
         $scope.event = data;
       });
 
-      //$scope.teams = $firebaseArray(refTeams);
       $scope.teams = $firebaseArray(refTeams);
-      //console.log($scope.teams);
-      //console.log($scope.teams);
+      $scope.searchText;
 
-      ///////////
+      var startSearch = function (text) {
+        var teams = [];
+        var flag = false;
+        var database = firebase.database();
+        var query = database.ref("TeamForm/teams/");
+        query.once("value").then(function (snapshot) {
+          snapshot.forEach(function (childSnapshot) {
+            var name = childSnapshot.child("name").val();
+            if (name == text) {
+              var event = childSnapshot.val();
+              event.$id = childSnapshot.key;
+              teams.push(event);
+            } else {
+              var tags = childSnapshot.child("tags");
+              tags.forEach(function (tagSnapshot) {
+                if (tagSnapshot.val() == text) {
+                  var event = childSnapshot.val();
+                  event.$id = childSnapshot.key;
+                  teams.push(event);
+                  console.log(event);
+                }
+              });
+            }
+          });
+          if (teams.length == 0) alert("your search had no match");
+          $scope.teams = teams;
+          $scope.$digest();
 
-      //  var eventInfo;
-      //    database.ref("TeamForm/events/" + $stateParams.id).once("value").then(function(snapshot){
-      // 		eventInfo = snapshot.val();
-      //  });
-      // if(eventInfo == null )
-      // 	alert("No event is found, try again");
-      //   document.getElementById("eventName").innerHTML = eventInfo.name;
-      //   document.getElementById("eventDescription").innerHTML  = eventInfo.description;
+        });
+        return;
+      }
+      $scope.startSearch = function () {
+        startSearch($scope.searchText);
+      }
 
 
 

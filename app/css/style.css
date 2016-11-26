@@ -64,6 +64,8 @@ img.img-center{
 	display: inline;
 }
 img.profile{
+	min-width: 150px;
+	max-width: 256px;
 	min-height: 150px;
 	max-height: 256px;
 }

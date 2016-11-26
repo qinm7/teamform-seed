@@ -3,7 +3,16 @@
 		<div class="row create-box">
 			<h1 class="title text-center">Edit Team</h1>
 			<!-- team image here -->
-			<center><img src="img/profile.png" class="img-circle" alt="team picture"></img></center>
+			<div class="hovereffect">
+				<img ng-src="{{imgSrc}}" class="img-circle profile" alt="Image Loading..."></img>
+				<div class="overlay">
+					<p>
+                    	<i class="fa fa-picture-o">
+						<input type="file" value="upload" id="fileUpload" ng-click="upload()"/>
+                    	</i>
+					</p>
+				</div>
+			</div>	
 			<div class="inner-box">
 				<div class="form form-group">
 					<label for="name">Name</label>

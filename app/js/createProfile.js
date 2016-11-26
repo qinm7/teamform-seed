@@ -30,6 +30,7 @@ angular.module('teamformApp')
         $scope.$digest();
       });
       $scope.teams = " ";
+      
       storage.ref().child('users/'+ $scope.currentUser.uid+'.png').getDownloadURL().then(function(url){
         $scope.imgSrc = url;
         $scope.$digest();

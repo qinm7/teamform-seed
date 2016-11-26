@@ -75,33 +75,32 @@ app.controller('recommendCtrl', ['$firebaseArray', '$scope', '$location', functi
 
   var compareEventTags = function () {
     for (var i = 0; i < events.length; i++) {
-      for (var j = 0; j < events[i].tags.length; j++) {
-        recEvents = compareToUser((events[i].tags[j]), recEvents, events[i]);
+      recEvents = compareToUser((events[i].tags), recEvents, events[i]);
 
-      }
     }
   }
 
-  var compareToUser = function (compareTag, array, id) {
+  var compareToUser = function (compareTags, array, id) {
     var points = 0;
     for (var i = 0; i < userTags.length; i++) {
-
-      if (allTags[compareTag] && allTags[userTags[i].$value]) {
-
-        if (allTags[compareTag].name == allTags[userTags[i].$value].name) {
-          points += 4;
-        }
-        if (allTags[compareTag].Sub == allTags[userTags[i].$value].Sub) {
-          points += 2;
-        }
-        if (allTags[compareTag].Cat == allTags[userTags[i].$value].Cat) {
-          points += 1;
+      for (var j = 0; j < compareTags.length; j++) {
+        if (allTags[compareTags[j]] && allTags[userTags[i].$value]) {
+          if (allTags[compareTags[j]].name == allTags[userTags[i].$value].name) {
+            points += 4;
+          }
+          if (allTags[compareTags[j]].Sub == allTags[userTags[i].$value].Sub) {
+            points += 2;
+          }
+          if (allTags[compareTags[j]].Cat == allTags[userTags[i].$value].Cat) {
+            points += 1;
+          }
         }
       }
     }
     if (points > 0) {
       var element = id;
       element.points = points;
+      console.log(points + id.name);
       array.push(element);
     }
     return array;
@@ -111,19 +110,6 @@ app.controller('recommendCtrl', ['$firebaseArray', '$scope', '$location', functi
     return b.points - a.points;
   }
 
-
-  // var getSpecTeams = function(eventID){
-  //   database.ref('TeamForm/event/' + eventID + '/team').once('value').then(function(info) {
-  //      teamId = info.val();
-  //   });
-  // }
-
-
-
-  // return {
-  //   getRecommendations,
-  //   recEvents
-  // }
   getRecommendations();
 
   $scope.go = function (path) {

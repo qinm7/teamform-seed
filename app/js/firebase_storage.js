@@ -7,7 +7,7 @@ fileUpload.addEventListener('change', function(e){
     //get file
     var file = e.target.files[0];
     // create storage ref
-    var profileRef = firebase.storage().ref('users/'+ file.name);
+    var profileRef = firebase.storage().ref('users/'+ user.name);
     
     // upload
     var task = profileRef.put(file);

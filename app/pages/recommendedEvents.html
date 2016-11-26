@@ -3,12 +3,8 @@
 		<div class="col-md-12">
 			<h1 class="title text-center">Recommended Events</h1>
 			<form >
-				<div class="input-group input-box" ng-controller="searchCtrl">
-					<div class="form-group has-feedback">
-						<input type="text" class="form-control" ng-model="searchText" placeholder="Search Event"/>
-					</div>
+				<div class="input-group input-box">
 					<span class="input-group-btn">
-						<button class="btn btn-default" type="button" ng-click="startSearch()"><i class="fa fa-search" aria-hidden="true" ></i></button>
 						<button class="btn btn-default" ng-click="go('/events')" type="button" ><i class="fa fa-magic" aria-hidden="true" ></i></button>
 					</span>
 				</div>
@@ -22,7 +18,7 @@
 			<hr class="blue-line">
 			<div class="row text-center">
 				<div class="col-lg-10 col-lg-offset-1">
-					<div class="row" ng-repeat="test in testing" ng-if="$index % 3 == 0">
+					<div class="row" ng-repeat="test in testing track by $index"" ng-if="$index % 3 == 0">
 						<div class="col-sm-6 col-md-4">
 							<div class="white-box" ui-sref="eventPage({id : testing[$index].$id})">
 									<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150" ></a>

@@ -131,7 +131,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		$rootScope.$on("$stateChangeError", function (event, toState, toParams, fromState, fromParams, error) {
 			if (error === "AUTH_REQUIRED") {
 				alert("Please login first");
-				$state.go("about");
+				//$state.go("about");
 			}
 		});
 	});

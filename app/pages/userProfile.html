@@ -1,0 +1,31 @@
+    <div class="container-fluid">
+		<div class="row create-box">
+			<h1 class="title text-center">{{user.name}}'s Profile</h1>
+
+			<!-- profile image here -->
+			<center><img src="{{user.profile_picture}}" class="img-circle" alt="profile picture"></img></center>
+
+			<div class="inner-box">
+				<div class="form form-group">
+					<label for="name">Name</label>
+					<h4>{{user.name}}</h4>
+				</div>
+				<div class="form form-group">
+					<label for="desciption">Description</label>
+                    <h4>{{user.description}}</h4>
+				</div>
+				<div class="form ui-widget">
+					<label for="tags">Interests</label>
+					<h4>{{tags}}</h4>
+				</div>
+				<div class="form ui-widget">
+					<label for="tags">Teams</label>
+					<h4>{{teams}}</h4>
+				</div>
+				<div class="text-center" ng-show="isAdmin">
+					<button type="button" class="btn btn-info btn-lg" ui-sref="myProfile({id : currentUser.uid})">Edit</button>
+				</div>
+			</div>
+			
+		</div>
+	</div>

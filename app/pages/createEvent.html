@@ -1,28 +1,105 @@
+<style>
+	.required{color: red;}
+</style>
+<script>
+$( function() {
+	var availableTags = [
+	"ActionScript",
+	"AppleScript",
+	"Asp",
+	"BASIC",
+	"C",
+	"C++",
+	"Clojure",
+	"COBOL",
+	"ColdFusion",
+	"Erlang",
+	"Fortran",
+	"Groovy",
+	"Haskell",
+	"Java",
+	"JavaScript",
+	"Lisp",
+	"Perl",
+	"PHP",
+	"Python",
+	"Ruby",
+	"Scala",
+	"Scheme"
+	];
 
-<div>
-    <div ng-controller="js/createCtrl" class="container-fluid">
-		<div class="row create-box">
-			<h1 class="title text-center">Create Event</h1>
-			<!-- event image here -->
-			<center><img src="img/profile.png" class="img-circle"></img></center>
-			<div class="inner-box">
-				<div class="form form-group">
-					<label for="name">Name</label>
-					<input type="text" class="form-control" ng-model="input.name" id="name" placeholder="name">
-				</div>
-				<div class="form form-group">
-					<label for="desciption">Description</label>
-					<textarea class="form-control" rows="5" ng-model="input.description" id="description" placeholder="description"></textarea>
-				</div>
-				
-				<div class="form ui-widget">
-					<label for="tags">Skills</label>
-					<input id="tags" class="form-control ui-autocomplete-input" ng-model="input.tags" placeholder="i.e. Java, Angular JS, Firebase...">
-				</div>
-				<div class="text-center">
-					<input class="submit" type="button" value="SUBMIT" ng-click="addEvent()" ng-disabled="!input.description || !input.name || !input.tags"/>
-				</div>
+	function split( val ) {
+		return val.split( /,\s*/ );
+	}
+
+	function extractLast( term ) {
+		return split( term ).pop();
+	}
+
+	$( "#tags" )
+    // don't navigate away from the field on tab when selecting an item
+    .on( "keydown", function( event ) {
+    	if ( event.keyCode === $.ui.keyCode.TAB &&
+    		$( this ).autocomplete( "instance" ).menu.active ) {
+    		event.preventDefault();
+    }
+  })
+    .autocomplete({
+    	minLength: 0,
+    	source: function( request, response ) {
+        // delegate back to autocomplete, but extract the last term
+        response( $.ui.autocomplete.filter(
+        	availableTags, extractLast( request.term ) ) );
+      },
+      focus: function() {
+        // prevent value inserted on focus
+        return false;
+      },
+      select: function( event, ui ) {
+      	var terms = split( this.value );
+        // remove the current input
+        terms.pop();
+        // add the selected item
+        terms.push( ui.item.value );
+        // add placeholder to get the comma-and-space at the end
+        terms.push( "" );
+        this.value = terms.join( ", " );
+        return false;
+      }
+    });
+  } );
+</script>
+
+<div class="container-fluid row create-box">
+	<h1 class="title text-center">Create Event</h1>
+	<!-- event image here -->
+	<center><img src="img/profile.png" class="img-circle" ng-click="addImage()"></img></center>
+	<div class="inner-box">
+		<form name="form" novalidate>
+
+			<div class="form form-group">
+				<label for="name">Name <span class="required" ng-show="form.name.$error.required">*required</span></label>
+				<input type="text" name="name" class="form-control" ng-model="input.name" id="name" placeholder="Name" required>
 			</div>
-		</div>
+
+			<div class="form form-group">
+				<label for="description">Description <span class="required" ng-show="form.desc.$error.required">*required</span></label>
+				<textarea name="desc" class="form-control" rows="5" ng-model="input.description" id="description" placeholder="Description" required></textarea>
+			</div>
+
+			<div class="form form-group">
+				<label for="tags">Skills <span class="required" ng-show="form.tags.$error.required">*required</span></label>
+				<input id="tags" name="tags" class="form-control ui-autocomplete-input" ng-model="tags" placeholder="i.e. Java, Angular JS, Firebase..." required>
+			</div>
+
+			<div class="text-center">
+				<button type="button" class="btn btn-success" ng-click="addEvent()" ng-disabled="!input.description || !input.name || !input.tags">submit</button>
+			</div>
+		</form>
 	</div>
 </div>
+
+
+<script type="text/javascript">
+	$('.ui-autocomplete.ui-menu').css('font-size', '20px');
+</script>

@@ -1,0 +1,28 @@
+<div class="container-fluid row create-box">
+	<h1 class="title text-center">Edit Event</h1>
+	<!-- event image here -->
+	<center><img src="img/profile.png" class="img-circle" ng-click="addImage()"></img></center>
+	<div class="inner-box">
+		<form name="form" novalidate>
+
+			<div class="form form-group">
+				<label for="name">Name </label>
+				<input type="text" name="name" class="form-control" ng-model="event.name" id="name"required>
+			</div>
+
+			<div class="form form-group">
+				<label for="description">Description </label>
+				<textarea name="desc" class="form-control" rows="5" ng-model="event.description" id="description"required></textarea>
+			</div>
+
+			<div class="form form-group">
+				<label for="tags">Interessts</label>
+				<input id="tags" name="tags" class="form-control ui-autocomplete-input" ng-model="tags" required>
+			</div>
+
+			<div class="text-center">
+				<button type="button" class="btn btn-success" ng-click="submit()" ui-sref="eventPage({id : event.$id})" ng-disabled="!event.description || !event.name || !tags">submit</button>
+			</div>
+		</form>
+	</div>
+</div>

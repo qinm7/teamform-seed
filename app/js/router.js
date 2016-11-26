@@ -44,6 +44,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			controller: 'displayEventCtrl',
 			authenticate: false
 		})
+			.state('recEvents', {
+			url: '/recommendedEvents',
+			templateUrl: 'pages/recommendedEvents.html',
+			controller: 'recommendCtrl',
+			authenticate: false
+		})
 
 		.state('createEvent', {
 			url: "/createEvent",

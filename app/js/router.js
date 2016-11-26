@@ -11,13 +11,23 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			url: '/profile/:id',
 			templateUrl: 'pages/createProfile.html',
 			controller: 'myProfileCtrl',
-			authenticate: true
+			authenticate: true,
+			resolve: {
+				"currentAuth": function ($firebaseAuth) {
+					return $firebaseAuth().$requireSignIn();
+				}
+			}
 		})
 
 		.state('userProfile', {
 			url: '/userprofile/:id',
 			templateUrl: 'pages/userProfile.html',
 			controller: 'myProfileCtrl',
+			resolve: {
+				"currentAuth": function ($firebaseAuth) {
+					return $firebaseAuth().$requireSignIn();
+				}
+			},
 			authenticate: true
 		})
 
@@ -39,6 +49,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			url: "/createEvent",
 			templateUrl: 'pages/createEvent.html',
 			controller: 'createEventCtrl',
+			resolve: {
+				"currentAuth": function ($firebaseAuth) {
+					return $firebaseAuth().$requireSignIn();
+				}
+			},
 			authenticate: true
 		})
 
@@ -46,6 +61,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			url: "/createTeam/:id",
 			templateUrl: 'pages/createTeam.html',
 			controller: 'createTeamCtrl',
+			resolve: {
+				"currentAuth": function ($firebaseAuth) {
+					return $firebaseAuth().$requireSignIn();
+				}
+			},
 			authenticate: true
 		})
 
@@ -53,6 +73,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			url: "/editEvent/:id",
 			templateUrl: 'pages/editEvent.html',
 			controller: 'editEventCtrl',
+			resolve: {
+				"currentAuth": function ($firebaseAuth) {
+					return $firebaseAuth().$requireSignIn();
+				}
+			},
 			authenticate: true
 		})
 
@@ -60,6 +85,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			url: "/editTeam/:id",
 			templateUrl: 'pages/editTeam.html',
 			controller: 'editTeamCtrl',
+			resolve: {
+				"currentAuth": function ($firebaseAuth) {
+					return $firebaseAuth().$requireSignIn();
+				}
+			},
 			authenticate: true
 		})
 
@@ -67,7 +97,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			url: "/eventPage/:id",
 			templateUrl: 'pages/event_info.html',
 			controller: 'eventCtrl',
-			authenticate: false	
+			authenticate: false
 		})
 
 		.state('teamPage', {
@@ -80,23 +110,22 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		.state('adminEvent', {
 			url: "/adminEvent",
 			templateUrl: 'pages/event_admin.html',
+			resolve: {
+				"currentAuth": function ($firebaseAuth) {
+					return $firebaseAuth().$requireSignIn();
+				}
+			},
 			authenticate: true
 		})
 
 	$urlRouterProvider.otherwise("/about");
 })
 	.run(function ($rootScope, $state) {
-		$rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
-			var user = firebase.auth().currentUser;
-			if (toState.authenticate && !user) {
+
+		$rootScope.$on("$stateChangeError", function (event, toState, toParams, fromState, fromParams, error) {
+			if (error === "AUTH_REQUIRED") {
 				alert("Please login first");
-				//$state.transitionTo("about");
-				event.preventDefault();
+				$state.go("about");
 			}
-
-			if (toState.url == '/profile' || toState.url == '/userprofile') {
-				//myProfileService.queryData();
-			}
-
 		});
 	});

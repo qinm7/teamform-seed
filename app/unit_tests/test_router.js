@@ -9,13 +9,8 @@ describe('test router.js', function() {
 		});
 	});
 	describe('testing app config', function() {
-		/*it('check $urlRouteProvider', function() {
-			$urlRouteProvider = '/about';
-			expect($urlRouteProvider).toEqual('/about');
-			
+		/*it('checking $stateProvider', function() {
+			expect($urlRouterProvider).toBeDefined();
 		});*/
-		it('checking $stateProvider', function() {
-			expect($stateProvider.state('/about')).toBeDefined();
-		});
 	});
 });

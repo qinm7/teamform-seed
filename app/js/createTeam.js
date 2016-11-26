@@ -68,7 +68,10 @@ app.controller('createTeamCtrl',
 				$scope.input.tags = tags;
 				$scope.input.imgURL = imgAdd;
 				// add an input event
-				$scope.teams.$add($scope.input);
+				$scope.teams.$add($scope.input).then(function(ref) {
+					console.log(ref.key);
+					$state.go("teamPage", {id: ref.key});
+				});
 			}
 		}
 
@@ -110,10 +113,7 @@ app.controller('editTeamCtrl',
 		var ref = database.ref("TeamForm/teams/" + $stateParams.id);
 		$firebaseObject(ref).$loaded().then(function (info) {
 			$scope.team = info;
-			console.log($scope.team);
 			$scope.tags = info.tags.join(", ");
-			console.log($scope.tags);
-			//$scope.$digest();
 		});
 
 		var imgAdd;
@@ -148,8 +148,7 @@ app.controller('editTeamCtrl',
 		$scope.submit = function() {
 			// update the date
 			if ( $scope.team.name != "" && $scope.team.description != "" && $scope.team.tags != "") {
-				//$scope.team.admin = firebase.auth().currentUser.uid;
-				//$scope.t.created = new Date().toString();
+
 				var re = new RegExp(", |,");
 				var tags = $scope.tags.split(re);
 				if (tags[tags.length - 1] == "")

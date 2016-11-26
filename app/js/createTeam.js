@@ -52,7 +52,10 @@ app.controller('createTeamCtrl',
 					tags.splice(tags.length - 1,1);
 				$scope.input.tags = tags;
 				// add an input event
-				$scope.teams.$add($scope.input);
+				$scope.teams.$add($scope.input).then(function(ref) {
+					console.log(ref.key);
+					$state.go("teamPage", {id: ref.key});
+				});
 			}
 		}
 
@@ -93,8 +96,7 @@ app.controller('editTeamCtrl',
 			
 			// update the date
 			if ( $scope.team.name != "" && $scope.team.description != "" && $scope.team.tags != "") {
-				//$scope.team.admin = firebase.auth().currentUser.uid;
-				//$scope.t.created = new Date().toString();
+
 				var re = new RegExp(", |,");
 				var tags = $scope.tags.split(re);
 				if (tags[tags.length - 1] == "")

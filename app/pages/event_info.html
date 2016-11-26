@@ -33,7 +33,7 @@
 
 						<div class="col-sm-6 col-md-4" ng-show="teams[$index]">
 							<div class="white-box" ui-sref="teamPage({id : teams[$index].$id})">
-								<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
+								<img ng-src="{{teams[$index].imgURL}}" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
 								<div class="caption">
 									<h3>{{teams[$index].name}}</h3>
 									<p>{{teams[$index].description}}</p>
@@ -43,7 +43,7 @@
 
 						<div class="col-sm-6 col-md-4" ng-show="teams[$index+1]">
 							<div class="white-box" ui-sref="teamPage({id : teams[$index+1].$id})">
-								<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
+								<img ng-src="{{teams[$index+1].imgURL}}" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
 								<div class="caption">
 									<h3>{{teams[$index+1].name}}</h3>
 									<p>{{teams[$index+1].description}}</p>
@@ -53,7 +53,7 @@
 
 						<div class="col-sm-6 col-md-4" ng-show="teams[$index+2]">
 							<div class="white-box" ui-sref="teamPage({id : teams[$index+2].$id})">
-								<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
+								<img ng-src="{{teams[$index+2].imgURL}}" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
 								<div class="caption">
 									<h3>{{teams[$index+2].name}}</h3>
 									<p>{{teams[$index+2].description}}</p>

@@ -43,6 +43,12 @@ div.white-box{
 div.white-box .caption{
 	font-size: 16px;
 }
+div.white-box>img{
+	min-width: 80px;
+	min-height: 80px;
+	max-width: 150px;
+	max-height: 120px;
+}
 div.inner-box{
 	width: 60%;
 	margin: auto;

@@ -20,8 +20,7 @@ angular.module('teamformApp')
 			$scope.prospectUsers = [];
 			var user = firebase.auth().currentUser;
 			var relid;
-
-
+			var storage = firebase.storage();
 
 			$firebaseObject(ref).$loaded().then(function (data) {
 				$scope.team = data;
@@ -79,5 +78,14 @@ angular.module('teamformApp')
 				//calculate();
 			}
 
+			// getting profile image
+		    storage.ref().child('teams/'+ $stateParams.id+'.png').getDownloadURL().then(function(url){
+		    	$scope.imgSrc = url;
+			    $scope.$digest();
+		    }).catch(function(error){
+		    // if there is no profile image get a default image.
+		    	$scope.imgSrc = 'https://firebasestorage.googleapis.com/v0/b/teamform-46380.appspot.com/o/users%2Fprofile.png?alt=media&token=e9fc1bb3-adb0-4f4e-b490-057e738f68f0';
+		        $scope.$digest();
+		    });
 		}]);
 

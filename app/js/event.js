@@ -2,11 +2,9 @@ var app = angular.module('teamformApp');
 app.controller('displayEventCtrl', ['$scope', '$firebaseArray',
     function($scope, $firebaseArray) {
         $scope.searchText = "";
-        // $scope.startSearch = function(){
-        //   $scope.events = searchService.startSearchEvent($scope.searchText)
-        // };
         var ref = firebase.database().ref('TeamForm/events');
-        $scope.events = $firebaseArray(ref);
+        var backupEvents = $firebaseArray(ref);
+        $scope.events = backupEvents;
         $scope.searchText;
 
         var startSearch = function(text) {
@@ -46,7 +44,6 @@ app.controller('displayEventCtrl', ['$scope', '$firebaseArray',
 
             });
             return;
-
         }
 
         $scope.startSearch = function() {

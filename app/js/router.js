@@ -50,8 +50,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
             controller: 'recommendCtrl',
             authenticate: false
         })
-	 .state('recTeams', {
-            url: '/recommendedTeams',
+        .state('recTeams', {
+            url: '/recommendedTeams/:id',
             templateUrl: 'pages/recommendedTeams.html',
             controller: 'recommendCtrl',
             authenticate: false

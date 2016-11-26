@@ -1,6 +1,6 @@
 var app = angular.module("teamformApp");
-app.controller('recommendCtrl', ['$firebaseArray', '$scope', '$location', ' $state',
-  function ($firebaseArray, $scope, $location, $state) {
+app.controller('recommendCtrl', ['$firebaseArray', '$scope', '$location', '$state', '$stateParams',
+  function ($firebaseArray, $scope, $location,  $state, $stateParams) {
     var database = firebase.database();
     var events;
     var teams = {};
@@ -55,6 +55,7 @@ app.controller('recommendCtrl', ['$firebaseArray', '$scope', '$location', ' $sta
       "Hiking": { "name": "Hiking", "Sub": "Outdoor", "Cat": "Sports" }
 
     };
+    $scope.orig = $stateParams.id;
 
 
 
@@ -67,7 +68,8 @@ app.controller('recommendCtrl', ['$firebaseArray', '$scope', '$location', ' $sta
         $firebaseArray(eventRef).$loaded().then(function (e) {
           events = e;
           compareEventTags();
-          recEvents.sort(sortEvents);
+          if(recEvents) recEvents.sort(sortEvents);
+          else alert("sorry we have no recommendations yet");
           $scope.testing = recEvents;
         });
       });
@@ -78,11 +80,12 @@ app.controller('recommendCtrl', ['$firebaseArray', '$scope', '$location', ' $sta
       var userRef = database.ref('TeamForm/users/' + user.uid + '/tags');
       $firebaseArray(userRef).$loaded().then(function (u) {
         userTags = u;
-        var eventRef = database.ref('TeamForm/teams');
+        var eventRef = database.ref('TeamForm/teams' + $stateParams.id);
         $firebaseArray(eventRef).$loaded().then(function (e) {
           events = e;
           compareEventTags();
-          recEvents.sort(sortEvents);
+          if(recEvents) recEvents.sort(sortEvents);
+          else alert("sorry we have no recommendations yet");
           $scope.testing = recEvents;
         });
       });
@@ -90,13 +93,13 @@ app.controller('recommendCtrl', ['$firebaseArray', '$scope', '$location', ' $sta
 
     var compareEventTags = function () {
       for (var i = 0; i < events.length; i++) {
-        recEvents = compareToUser((events[i].tags), recEvents, events[i]);
-
+        recEvents = compareToUser(events[i].tags, recEvents, events[i]);
       }
     }
 
     var compareToUser = function (compareTags, array, id) {
       var points = 0;
+      if(!compareTags) return;
       for (var i = 0; i < userTags.length; i++) {
         for (var j = 0; j < compareTags.length; j++) {
           if (allTags[compareTags[j]] && allTags[userTags[i].$value]) {
@@ -115,7 +118,6 @@ app.controller('recommendCtrl', ['$firebaseArray', '$scope', '$location', ' $sta
       if (points > 0) {
         var element = id;
         element.points = points;
-        console.log(points + id.name);
         array.push(element);
       }
       return array;
@@ -124,9 +126,9 @@ app.controller('recommendCtrl', ['$firebaseArray', '$scope', '$location', ' $sta
     var sortEvents = function (a, b) {
       return b.points - a.points;
     }
-
-    if ($state == "event") getRecommendations();
+    if($state.current.name == "recEvents") getRecommendations();
     else getRecommendationsTeams();
+
 
     $scope.go = function (path) {
       $location.path(path);

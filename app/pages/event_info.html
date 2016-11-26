@@ -13,7 +13,7 @@
 					</div>
 					<span class="input-group-btn">
 						<button class="btn btn-default" type="button"><i class="fa fa-search" aria-hidden="true" ng-click="startSearch()"></i></button>
-						<button class="btn btn-default" type="button" ui-sref="recTeams"><i class="fa fa-magic" aria-hidden="true"></i></button>
+						<button class="btn btn-default" type="button" ui-sref="recTeams({id : event.$id})"><i class="fa fa-magic" aria-hidden="true"></i></button>
 						<button ng-show="isAdmin" ui-sref="editEvent({id : event.$id})" class="btn btn-default" type="button"><i class="fa fa-arrow-right" aria-hidden="true"></i>Edit</button>
 						<button ui-sref="createTeam({id : event.$id})" class="btn btn-default" type="button"><i class="fa fa-check" aria-hidden="true"></i>Create</button>
 					</span>

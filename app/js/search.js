@@ -8,30 +8,38 @@ app.factory("searchService",
 		var eventID = null;
 		var teams = {};
 		var name = "default";
-		var events = [];
-		//var searchText = "";
-		var startSearch = function (text) {
+		
+
+		var startSearch = function (text, toReturn) {
+			var events = [];
 			var flag = false;
 			var database = firebase.database();
 			var query = database.ref("TeamForm/events/");
 			query.once("value").then(function (snapshot) {
 				snapshot.forEach(function (childSnapshot) {
-
 					var name = childSnapshot.child("name").val();
 					if (name == text) {
-						events.push(childSnapshot);
+						var event = childSnapshot.val();
+						event.$id = childSnapshot.key;
+						events.push(event);
+						console.log(event);
 					} else {
 						var tags = childSnapshot.child("tags");
 						tags.forEach(function (tagSnapshot) {
 							if (tagSnapshot.val() == text) {
-								events.push(childSnapshot);
+								var event = childSnapshot.val();
+								event.$id = childSnapshot.key;
+								events.push(event);
+								console.log(event);
 							}
 						});
 					}
 				});
 
 			});
-			return events;
+			if(events.length == 0) alert("your search had no matches");
+			console.log(events);
+			toReturn = events;
 		}
 
 		return {

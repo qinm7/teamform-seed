@@ -9,9 +9,9 @@ app.controller('displayEventCtrl', ['$scope', '$firebaseArray', 'searchService',
     $scope.events = $firebaseArray(ref);
     $scope.searchText;
 
-      $scope.startSearch = function(){
-        var result = searchService.startSearch($scope.searchText);
-        $scope.events = result;
+    $scope.startSearch = function(){
+        searchService.startSearch($scope.searchText, $scope.events);
+        //if($scope.events.length == 0) alert("your search had no matches");
       }
       
 

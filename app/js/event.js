@@ -22,6 +22,18 @@ app.controller('displayEventCtrl', ['$scope', '$firebaseArray',
       $scope.teams = $firebaseArray(refTeams);
       //console.log($scope.teams);
       //console.log($scope.teams);
+      
+      ///////////
+				
+	 var eventInfo;
+     database.ref("TeamForm/events/" + $stateParams.id).once("value").then(function(snapshot){
+			eventInfo = snapshot.val();
+	 });
+	if(eventInfo == null )
+		alert("No event is found, try again");
+    document.getElementById("eventName").innerHTML = eventInfo.name;
+    document.getElementById("eventDescription").innerHTML  = eventInfo.description;
+		
 
 
     }])

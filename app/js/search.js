@@ -8,7 +8,7 @@ app.factory("searchService",
 		var eventID = null;
 		var teams = {};
 		var name = "default";
-		
+
 
 		var startSearch = function (text, toReturn) {
 			var events = [];
@@ -35,11 +35,13 @@ app.factory("searchService",
 						});
 					}
 				});
+				if (events.length == 0) alert("your search had no matches");
+				console.log(events);
+				toReturn =  events;
 
 			});
-			if(events.length == 0) alert("your search had no matches");
-			console.log(events);
-			toReturn = events;
+			return;
+
 		}
 
 		return {

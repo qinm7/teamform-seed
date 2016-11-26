@@ -9,13 +9,44 @@ app.controller('displayEventCtrl', ['$scope', '$firebaseArray', 'searchService',
     $scope.events = $firebaseArray(ref);
     $scope.searchText;
 
-    $scope.startSearch = function(){
-        searchService.startSearch($scope.searchText, $scope.events);
-        //if($scope.events.length == 0) alert("your search had no matches");
-      }
-      
+    var startSearch = function (text) {
+      var events = [];
+      var flag = false;
+      var database = firebase.database();
+      var query = database.ref("TeamForm/events/");
+      query.once("value").then(function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+          var name = childSnapshot.child("name").val();
+          if (name == text) {
+            var event = childSnapshot.val();
+            event.$id = childSnapshot.key;
+            events.push(event);
+          } else {
+            var tags = childSnapshot.child("tags");
+            tags.forEach(function (tagSnapshot) {
+              if (tagSnapshot.val() == text) {
+                var event = childSnapshot.val();
+                event.$id = childSnapshot.key;
+                events.push(event);
+              }
+            });
+          }
+        });
+        if (events.length == 0) alert("your search had no matches");
+        $scope.events = events;
+        $scope.$digest();
+
+      });
+      return;
+
+    }
+
+    $scope.startSearch = function () {
+      startSearch($scope.searchText);
+    }
 
   }])
+
   .controller('eventCtrl', ['$scope', '$firebaseObject', '$stateParams', '$firebaseArray',
     function ($scope, $firebaseObject, $stateParams, $firebaseArray) {
       var ref = firebase.database().ref('TeamForm/events/' + $stateParams.id);
@@ -32,16 +63,16 @@ app.controller('displayEventCtrl', ['$scope', '$firebaseArray', 'searchService',
       //console.log($scope.teams);
 
       ///////////
-				
-	 var eventInfo;
-     database.ref("TeamForm/events/" + $stateParams.id).once("value").then(function(snapshot){
-			eventInfo = snapshot.val();
-	 });
-	if(eventInfo == null )
-		alert("No event is found, try again");
-    document.getElementById("eventName").innerHTML = eventInfo.name;
-    document.getElementById("eventDescription").innerHTML  = eventInfo.description;
-		
+
+      //  var eventInfo;
+      //    database.ref("TeamForm/events/" + $stateParams.id).once("value").then(function(snapshot){
+      // 		eventInfo = snapshot.val();
+      //  });
+      // if(eventInfo == null )
+      // 	alert("No event is found, try again");
+      //   document.getElementById("eventName").innerHTML = eventInfo.name;
+      //   document.getElementById("eventDescription").innerHTML  = eventInfo.description;
+
 
 
     }])

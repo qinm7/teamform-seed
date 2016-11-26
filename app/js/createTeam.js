@@ -68,10 +68,7 @@ app.controller('editTeamCtrl',
 		var ref = database.ref("TeamForm/teams/" + $stateParams.id);
 		$firebaseObject(ref).$loaded().then(function (info) {
 			$scope.team = info;
-			console.log($scope.team);
 			$scope.tags = info.tags.join(", ");
-			console.log($scope.tags);
-			//$scope.$digest();
 		});
 
 		$scope.addImage = function(){

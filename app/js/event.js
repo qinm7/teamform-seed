@@ -1,6 +1,6 @@
 var app = angular.module('teamformApp');
-app.controller('displayEventCtrl', ['$scope', '$firebaseArray', 'searchService',
-  function ($scope, $firebaseArray, searchService) {
+app.controller('displayEventCtrl', ['$scope', '$firebaseArray',
+  function ($scope, $firebaseArray) {
     $scope.searchText = "";
     // $scope.startSearch = function(){
     //   $scope.events = searchService.startSearchEvent($scope.searchText)
@@ -79,7 +79,6 @@ app.controller('displayEventCtrl', ['$scope', '$firebaseArray', 'searchService',
                   var event = childSnapshot.val();
                   event.$id = childSnapshot.key;
                   teams.push(event);
-                  console.log(event);
                 }
               });
             }

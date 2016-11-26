@@ -1,5 +1,5 @@
 var app = angular.module("teamformApp");
-app.factory('recommendService', function ($firebaseArray) {
+app.controller('recommendCtrl', ['$firebaseArray', '$scope', '$location', function ($firebaseArray, $scope, $location) {
   var database = firebase.database();
   var events;
   var teams = {};
@@ -67,7 +67,8 @@ app.factory('recommendService', function ($firebaseArray) {
         events = e;
         compareEventTags();
         recEvents.sort(sortEvents);
-        return recEvents;
+        $scope.testing = recEvents;
+        console.log($scope.testing);
       });
     });
   }
@@ -119,27 +120,16 @@ app.factory('recommendService', function ($firebaseArray) {
 
 
 
-  return {
-    getRecommendations,
-    recEvents
-  }
+  // return {
+  //   getRecommendations,
+  //   recEvents
+  // }
+  getRecommendations();
+
+  $scope.go = function (path) {
+    $location.path(path);
+  };
 
 
 
-
-});
-
-
-app.controller('recommendCtrl', ['$scope', 'recommendService', '$location', '$firebaseArray',
-  function ($scope, $recommendService, $location, $firebaseArray) {
-
-    $scope.getRecommendations = function () {
-      $scope.events = $recommendService.getRecommendations();
-    };
-
-    $scope.go = function (path) {
-      $location.path(path);
-    };
-
-
-  }]);
+}]);

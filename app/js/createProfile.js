@@ -29,10 +29,10 @@ angular.module('teamformApp')
         $scope.isAdmin = $scope.currentUser ? $scope.currentUser.uid == $stateParams.id : false;
         $scope.$digest();
       });
-
       $scope.teams = " ";
-      storage.ref().child('users/'+ firebase.auth().currentUser.uid+'.png').getDownloadURL().then(function(url){
+      storage.ref().child('users/'+ $scope.currentUser.uid+'.png').getDownloadURL().then(function(url){
         $scope.imgSrc = url;
+        $scope.$digest();
       }).catch(function(error){
         // if there is no profile image get a default image.
         $scope.imgSrc = 'https://firebasestorage.googleapis.com/v0/b/teamform-46380.appspot.com/o/users%2Fprofile.png?alt=media&token=e9fc1bb3-adb0-4f4e-b490-057e738f68f0';
@@ -61,7 +61,7 @@ angular.module('teamformApp')
           //get file
           var file = e.target.files[0];
           // create storage ref
-          var profileRef = storage.ref('users/'+ firebase.auth().currentUser.uid+".png");
+          var profileRef = storage.ref('users/'+ $scope.currentUser.uid+".png");
           
           // upload
           var task = profileRef.put(file);

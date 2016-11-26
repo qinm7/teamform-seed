@@ -49,7 +49,6 @@ app.controller('createEventCtrl',
 		var ref = database.ref("TeamForm/events/" + $stateParams.id);
 		$firebaseObject(ref).$loaded().then(function (info) {
 			$scope.event = info;
-			console.log(info);
 			$scope.tags = info.tags.join(", ");
 			//$scope.$digest();
 		});

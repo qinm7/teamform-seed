@@ -31,11 +31,11 @@ angular.module('teamformApp')
       });
 
       $scope.teams = " ";
-      //$scope.imgSrc = 'https://firebasestorage.googleapis.com/v0/b/teamform-46380.appspot.com/o/users%2FOi7PnjCx09Z7FYdqd7njETis2Wf1.png?alt=media&token=cc8ceac0-bdf6-4d5a-bfb2-9df45ff82682';
       storage.ref().child('users/'+ firebase.auth().currentUser.uid+'.png').getDownloadURL().then(function(url){
         $scope.imgSrc = url;
       }).catch(function(error){
-        alert('img loading error');
+        // if there is no profile image get a default image.
+        $scope.imgSrc = 'https://firebasestorage.googleapis.com/v0/b/teamform-46380.appspot.com/o/users%2Fprofile.png?alt=media&token=e9fc1bb3-adb0-4f4e-b490-057e738f68f0';
       });
       
       $scope.submit = function () {

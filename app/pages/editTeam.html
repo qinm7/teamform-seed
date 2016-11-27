@@ -1,5 +1,5 @@
 <div>
-    <div class="container-fluid">
+	<div class="container-fluid">
 		<div class="row create-box">
 			<h1 class="title text-center">Edit Team</h1>
 			<!-- team image here -->
@@ -7,12 +7,12 @@
 				<img ng-src="{{team.icon}}" class="img-circle profile" alt="Image Loading..."></img>
 				<div class="overlay">
 					<p>
-                    	<i class="fa fa-picture-o">
+						<i class="fa fa-picture-o">
 						<input type="file" value="upload" id="fileUpload" ng-click="upload()"/>
                     	</i>
 					</p>
 				</div>
-			</div>	
+			</div>
 			<div class="inner-box">
 				<div class="form form-group">
 					<label for="name">Name</label>
@@ -24,33 +24,45 @@
 				</div>
 				<div class="form form-group">
 					<label for="currentTeamSize">Minimum Prefered Team Size</label>
-					<span id="currentTeamSize">
-						<span class="badge" ng-model="team.min">{{team.min}}</span>
-						<div class="inline right">
-						<button class="controller"><span class="glyphicon glyphicon-plus" ng-click="increaseMin();"></span></button>
-						<button class="controller"><span class="glyphicon glyphicon-minus" ng-click="decreaseMin();"></span></button>
-						</div>
-					</span>
+					<div class="input-group">
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default btn-number" ng-click="decreaseMin()">
+								<span class="glyphicon glyphicon-minus"></span>
+						</button>
+						</span>
+						<input class="form-control input-number  text-center" ng-model="team.min">
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default btn-number" data-type="plus" ng-click="increaseMin()">
+								<span class="glyphicon glyphicon-plus"></span>
+						</button>
+						</span>
+					</div>
 				</div>
 				<div class="form form-group">
 					<label for="currentTeamSize">Maximum Prefered Team Size</label>
-					<span id="currentTeamSize">
-						<span class="badge" ng-model="team.max">{{team.max}}</span>
-						<div class="inline right">
-						<button class="controller"><span class="glyphicon glyphicon-plus" ng-click="increaseMax();"></span></button>
-						<button class="controller"><span class="glyphicon glyphicon-minus" ng-click="decreaseMax();"></span></button>
-						</div>
-					</span>
+					<div class="input-group">
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default btn-number" ng-click="decreaseMax()">
+								<span class="glyphicon glyphicon-minus"></span>
+						</button>
+						</span>
+						<input class="form-control input-number  text-center" ng-model="team.max">
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default btn-number" data-type="plus" ng-click="increaseMax()">
+								<span class="glyphicon glyphicon-plus"></span>
+						</button>
+						</span>
+					</div>
 				</div>
 				<div class="form form-group">
 					<label for="tags">Tags</label>
 					<input id="tags" class="form-control" ng-model="tags">
 				</div>
 				<div class="text-center">
-				<button type="button" ui-sref="teamPage({id : team.$id})" ng-click="submit()" class="btn btn-success btn-lg"  ng-disabled="!team.name && !team.description">Submit</button>
+					<button type="button" ui-sref="teamPage({id : team.$id})" ng-click="submit()" class="btn btn-success btn-lg" ng-disabled="!team.name && !team.description">Submit</button>
 				</div>
 			</div>
-		</div>	
+		</div>
 	</div>
 
 </div>

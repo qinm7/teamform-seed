@@ -90,9 +90,8 @@
     </div>
     
     <!-- Main Part -->
-    <ui-view autoscroll="true"></ui-view>
-    
-   <a href="#Top"><i class="fa fa-chevron-circle-up fixed"></i></a>
+    <ui-view autoscroll="false"></ui-view>
+    <i ng-controller="scrollCtrl" class="fa fa-chevron-circle-up fixed" title="Back to Top" ng-click="scroll()" style="font-size:0.6em;cursor:pointer;color:#1E88E5;"></i>
     </body>
     <!-- FOOTER -->
     <footer>

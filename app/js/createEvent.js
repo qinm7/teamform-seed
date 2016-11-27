@@ -30,8 +30,9 @@ app.controller('createEventCtrl',
 				var currentUser = firebase.auth().currentUser;
 				$scope.input.admin = currentUser.uid;
 				$scope.input.created = new Date().toString();
-				var re = new RegExp(", |,");
-				var tags = $scope.tags.split(re);
+				var re1 = new RegExp(", ");
+				var re2 = new RegExp(",");
+				var tags = $scope.tags.split(re1||re2);
 				if (tags[tags.length - 1] == "")
 					tags.splice(tags.length - 1, 1);
 				$scope.input.tags = tags;
@@ -57,7 +58,7 @@ app.controller('createEventCtrl',
 		});
 
 		$scope.submit = function () {
-			var re = new RegExp(",");
+			var re = new RegExp(", |,");
 			var tags = $scope.tags.split(re);
 			if (tags[tags.length - 1] == "") {
 				tags.splice(tags.length - 1, 1);

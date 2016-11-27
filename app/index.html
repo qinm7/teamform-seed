@@ -42,8 +42,10 @@
       <script src="js/recommend.js"></script>
 
 
-      <!-- JavaScript of this page -->
-
+      <!-- JQuery -->
+	  <script src="js/jquery-1.11.3.js"></script>
+  	  <script src="js/jquery-ui.js"></script>
+  	  
       <!--CSS-->  	  
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
@@ -90,8 +92,9 @@
     </div>
     
     <!-- Main Part -->
-    <ui-view autoscroll="false"></ui-view>
-    <i ng-controller="scrollCtrl" class="fa fa-chevron-circle-up fixed" title="Back to Top" ng-click="scroll()" style="font-size:0.6em;cursor:pointer;color:#1E88E5;"></i>
+    <ui-view autoscroll="true"></ui-view>
+    
+   <a href="#Top"><i class="fa fa-chevron-circle-up fixed"></i></a>
     </body>
     <!-- FOOTER -->
     <footer>

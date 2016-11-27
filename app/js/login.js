@@ -22,7 +22,6 @@ app.controller("AuthCtrl", ['$scope', '$state', '$firebaseArray',
         var ref = database.ref('TeamForm/users');
         ref.once('value', function (snapshot) {
           if (!snapshot.hasChild(user.uid)) {
-            console.log("wtf is going on");
             database.ref('TeamForm/users/' + user.uid).set({
               name: user.displayName,
               email: (user.email ? (user.email) : null),

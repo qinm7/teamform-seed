@@ -3,7 +3,17 @@
 		<div class="row create-box">
 			<h1 class="title text-center">Create Team</h1>
 			<!-- team image here -->
-			<center><img src="img/profile.png" class="img-circle" alt="team picture"></img></center>
+			<!--<div class="hovereffect">-->
+			<div class="text-center">
+				<img ng-src="{{imgSrc}}" class="img-circle profile" alt="Image Loading..."></img>
+				<!--<div class="overlay">
+					<p>
+                    	<i class="fa fa-picture-o">
+						<input type="file" value="upload" id="fileUpload" ng-click="upload()"/>
+                    	</i>
+					</p>
+				</div>-->
+			</div>
 			<div class="inner-box">
 				<div class="form form-group">
 					<label for="name">Name</label>
@@ -38,7 +48,7 @@
 					<input id="tags" class="form-control ui-autocomplete-input" ng-model="input.tags">
 				</div>
 				<div class="text-center">
-				<button type="button" ui-sref="eventPage({id : input.event})" ng-click="addTeam()" class="btn btn-success btn-lg"  ng-disabled="!input.name && !input.description">Submit</button>
+				<button type="button" ng-click="addTeam()" class="btn btn-success btn-lg"  ng-disabled="!input.name && !input.description">Submit</button>
 				</div>
 			</div>
 		</div>	

@@ -4,7 +4,7 @@ var app = angular.module('teamformApp',[]);
 app.controller('createEventCtrl',
 
 	// Implementation the todoCtrl 
-	function ($scope, $firebaseArray) {
+	function ($scope, $firebaseArray, $state) {
 
 		$scope.input = {
 			admin: "",
@@ -27,7 +27,8 @@ app.controller('createEventCtrl',
 
 			// update the date
 			if ($scope.input.name != "" && $scope.input.description != "" && $scope.tags != "") {
-				$scope.input.admin = firebase.auth().currentUser.uid;
+				var currentUser = firebase.auth().currentUser;
+				$scope.input.admin = currentUser.uid;
 				$scope.input.created = new Date().toString();
 				var re = new RegExp(", |,");
 				var tags = $scope.tags.split(re);
@@ -35,7 +36,10 @@ app.controller('createEventCtrl',
 					tags.splice(tags.length - 1, 1);
 				$scope.input.tags = tags;
 				// add an input event
-				$scope.events.$add($scope.input);
+				$scope.events.$add($scope.input).then(function(ref) {
+					console.log(ref.key);
+					$state.go("eventPage", {id: ref.key});
+				});
 			}
 		}
 
@@ -48,7 +52,6 @@ app.controller('createEventCtrl',
 		var ref = database.ref("TeamForm/events/" + $stateParams.id);
 		$firebaseObject(ref).$loaded().then(function (info) {
 			$scope.event = info;
-			console.log(info);
 			$scope.tags = info.tags.join(", ");
 			//$scope.$digest();
 		});

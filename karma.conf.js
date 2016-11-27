@@ -5,16 +5,16 @@ module.exports = function(config) {
     basePath: './app',
 	frameworks: ['jasmine'],
     files: [
-	  'lib/jquery.min.js',
-      'lib/angular.min.js',
-      'lib/angular-route.min.js',
-      'lib/angular-mocks.js',
-	  'lib/firebase.js',
-	  'lib/angularfire.min.js',	  
-	  'js/*.js',
-      'unit_tests/*.js'	  
+    'lib/jquery.min.js',
+    'lib/angular.js',
+    'lib/firebase.js',
+    'lib/angularfire.min.js',
+    'js/router.js',
+    'js/!(router).js',
+    'unit_tests/*.js'	  
     ],
 	exclude: [
+		'js/firebase_storage.js'
 	],
 	preprocessors: {	 	
 		 'js/site.js' : ['coverage'],		
@@ -45,10 +45,10 @@ module.exports = function(config) {
     browsers: ['Firefox'], //Changed from Chrome
 	singleRun: true,
     plugins: [
-      'karma-chrome-launcher', 
-	'karma-firefox-launcher',     
-      'karma-jasmine',
-	  'karma-coverage'
+    'karma-chrome-launcher', 
+    'karma-firefox-launcher',     
+    'karma-jasmine',
+    'karma-coverage'
     ]    
 
   });

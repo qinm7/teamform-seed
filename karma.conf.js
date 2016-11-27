@@ -19,11 +19,20 @@ module.exports = function(config) {
 	preprocessors: {	 	
 		 'js/site.js' : ['coverage'],		
 		 'js/index.js' : ['coverage'],
-		 'js/admin.js' : ['coverage'],
-		 'js/team.js' : ['coverage'],
-		 'js/member.js' : ['coverage'],
-		 'js/createCtrl.js' : ['coverage'],
-		 'js/router.js' : ['coverage']
+		 //'js/admin.js' : ['coverage'],
+		 //'js/team.js' : ['coverage'],
+		 //'js/member.js' : ['coverage'],
+		 //'js/createCtrl.js' : ['coverage'],
+		 'js/createEvent.js' : ['coverage']
+		 //'js/createProfile.js' : ['coverage'],
+		 //'js/createTeam.js' : ['coverage'],
+		 //'js/event.js' : ['coverage'],
+		 //'js/firebase_storage.js' : ['coverage'],
+ 		 //'js/login.js' : ['coverage'],
+	 	 //'js/recommend.js' : ['coverage'],
+		 //'js/router.js' : ['coverage'],
+		 //'js/search.js' : ['coverage'],
+		 //'js/router.js' : ['coverage']
 	},
 	reporters: ['progress', 'coverage'],
 	coverageReporter: {

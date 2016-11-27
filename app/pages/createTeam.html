@@ -15,11 +15,11 @@
 				</div>-->
 			</div>
 			<div class="inner-box">
-				<div class="form form-group">
+				<div class="form form-group" ng-class="{ 'has-error' : !input.name}">
 					<label for="name">Name</label>
 					<input type="text" class="form-control" id="name" ng-model="input.name">
 				</div>
-				<div class="form form-group">
+				<div class="form form-group" ng-class="{ 'has-error' : !input.description}">
 					<label for="desciption">Description</label>
 					<textarea class="form-control" rows="5" id="description" ng-model="input.description">{{input.description}}</textarea>
 				</div>

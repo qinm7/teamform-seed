@@ -8,8 +8,8 @@
 						<input type="text" class="form-control" ng-model="searchText"  placeholder="Search Event"/>
 					</div>
 					<span class="input-group-btn">
-						<button class="btn btn-default" type="button" ng-click="startSearch()"><i class="fa fa-search" aria-hidden="true" ></i></button>
-						<button class="btn btn-default" type="button" ui-sref="recEvents" ><i class="fa fa-magic" aria-hidden="true" ></i></button>
+						<button class="btn btn-default" type="button" ng-click="startSearch()" title="Search"><i class="fa fa-search" aria-hidden="true" ></i></button>
+						<button class="btn btn-default" type="button" ui-sref="recEvents" title="Recommended Events"><i class="fa fa-magic" aria-hidden="true" ></i></button>
 					</span>
 				</div>
 			</form>
@@ -24,8 +24,8 @@
 				<div class="col-lg-10 col-lg-offset-1">
 					<div class="row" ng-repeat="event in events" ng-if="$index % 3 == 0">
 						<div class="col-sm-6 col-md-4">
-							<div class="white-box" ui-sref="eventPage({id : events[$index].$id})">
-									<img src="{{events[$index].icon}}" class="img-center img-responsive img-circle" align = "middle" alt="img/profile.png" width="150" height="150" ></a>
+							<div class="white-box" ui-sref="eventPage({id : events[$index].$id})" style="cursor: : pointer">
+								<img src="{{events[$index].icon}}" class="img-center img-responsive img-circle" align = "middle" alt="img/profile.png" width="150" height="150" ></a>
 								<div class="caption">
 									<h3>{{events[$index].name}}</h3>
 									<p>{{events[$index].description}}</p>
@@ -34,7 +34,7 @@
 						</div>
 
 						<div class="col-sm-6 col-md-4" ng-show="events[$index+1]">
-							<div class="white-box"  ui-sref="eventPage({id : events[$index+1].$id})">
+							<div class="white-box"  ui-sref="eventPage({id : events[$index+1].$id})" style="cursor: : pointer">
 								<img src="{{events[$index+1].icon}}" class="img-center img-responsive img-circle" align = "middle" alt="img/profile.png" width="150" height="150">
 								<div class="caption">
 									<h3>{{events[$index+1].name}}</h3>
@@ -44,7 +44,7 @@
 						</div>
 
 						<div class="col-sm-6 col-md-4" ng-show="events[$index+2]">
-							<div class="white-box"  ui-sref="eventPage({id : events[$index+2].$id})">
+							<div class="white-box"  ui-sref="eventPage({id : events[$index+2].$id})" style="cursor: : pointer">
 								<img src="{{events[$index+2].icon}}" class="img-center img-responsive img-circle" align = "middle" alt="img/profile.png" width="150" height="150">
 								<div class="caption">
 									<h3>{{events[$index+2].name}}</h3>

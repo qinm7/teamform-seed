@@ -12,8 +12,8 @@
 						<input type="text" class="form-control" ng-model="searchText" placeholder="Search for Team"/>
 					</div>
 					<span class="input-group-btn">
-						<button class="btn btn-default" type="button"><i class="fa fa-search" aria-hidden="true" ng-click="startSearch()"></i></button>
-						<button class="btn btn-default" type="button" ui-sref="recTeams({id : event.$id})"><i class="fa fa-magic" aria-hidden="true"></i></button>
+						<button class="btn btn-default" type="button"><i class="fa fa-search" aria-hidden="true" ng-click="startSearch()" title="Search"></i></button>
+						<button class="btn btn-default" type="button" ui-sref="recTeams({id : event.$id})"><i class="fa fa-magic" aria-hidden="true" title="Recommended Teams"></i></button>
 						<button ng-show="isAdmin" ui-sref="editEvent({id : event.$id})" class="btn btn-default" type="button"><i class="fa fa-arrow-right" aria-hidden="true"></i>Edit</button>
 						<button ui-sref="createTeam({id : event.$id})" class="btn btn-default" type="button"><i class="fa fa-check" aria-hidden="true"></i>Create</button>
 					</span>
@@ -32,7 +32,7 @@
 					<div class="row" ng-repeat="team in teams" ng-if="$index % 3 == 0">
 
 						<div class="col-sm-6 col-md-4" ng-show="teams[$index]">
-							<div class="white-box" ui-sref="teamPage({id : teams[$index].$id})">
+							<div class="white-box" ui-sref="teamPage({id : teams[$index].$id})" style="cursor: pointer;">
 								<img ng-src="{{teams[$index].imgURL}}" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
 								<div class="caption">
 									<h3>{{teams[$index].name}}</h3>
@@ -42,7 +42,7 @@
 						</div>
 
 						<div class="col-sm-6 col-md-4" ng-show="teams[$index+1]">
-							<div class="white-box" ui-sref="teamPage({id : teams[$index+1].$id})">
+							<div class="white-box" ui-sref="teamPage({id : teams[$index+1].$id})" style="cursor: pointer;">
 								<img ng-src="{{teams[$index+1].imgURL}}" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
 								<div class="caption">
 									<h3>{{teams[$index+1].name}}</h3>
@@ -52,7 +52,7 @@
 						</div>
 
 						<div class="col-sm-6 col-md-4" ng-show="teams[$index+2]">
-							<div class="white-box" ui-sref="teamPage({id : teams[$index+2].$id})">
+							<div class="white-box" ui-sref="teamPage({id : teams[$index+2].$id})" style="cursor: pointer;">
 								<img ng-src="{{teams[$index+2].imgURL}}" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
 								<div class="caption">
 									<h3>{{teams[$index+2].name}}</h3>

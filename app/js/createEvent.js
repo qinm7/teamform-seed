@@ -57,7 +57,7 @@ app.controller('createEventCtrl',
 		});
 
 		$scope.submit = function () {
-			var re = new RegExp(", |,");
+			var re = new RegExp(",");
 			var tags = $scope.tags.split(re);
 			if (tags[tags.length - 1] == "") {
 				tags.splice(tags.length - 1, 1);

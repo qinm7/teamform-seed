@@ -9,28 +9,23 @@ module.exports = function(config) {
     'lib/angular.js',
     'lib/firebase.js',
     'lib/angularfire.min.js',
+    'lib/angular-mocks.js',
     'js/router.js',
     'js/!(router).js',
     'unit_tests/*.js'	  
     ],
 	exclude: [
-		'js/firebase_storage.js'
 	],
-	preprocessors: {	 	
-		 'js/site.js' : ['coverage'],		
-		 'js/index.js' : ['coverage'],
-		 //'js/admin.js' : ['coverage'],
+	preprocessors: {	 
 		 //'js/team.js' : ['coverage'],
-		 //'js/member.js' : ['coverage'],
 		 //'js/createCtrl.js' : ['coverage'],
-		 'js/createEvent.js' : ['coverage']
+		 'js/createEvent.js' : ['coverage'],
 		 //'js/createProfile.js' : ['coverage'],
 		 //'js/createTeam.js' : ['coverage'],
 		 //'js/event.js' : ['coverage'],
-		 //'js/firebase_storage.js' : ['coverage'],
  		 //'js/login.js' : ['coverage'],
 	 	 //'js/recommend.js' : ['coverage'],
-		 //'js/router.js' : ['coverage'],
+		 'js/router.js' : ['coverage']
 		 //'js/search.js' : ['coverage'],
 		 //'js/router.js' : ['coverage']
 	},

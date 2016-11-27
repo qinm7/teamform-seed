@@ -30,15 +30,7 @@ angular.module('teamformApp')
         $scope.$digest();
       });
       $scope.teams = " ";
-      
-      storage.ref().child('users/'+ $scope.currentUser.uid+'.png').getDownloadURL().then(function(url){
-        $scope.imgSrc = url;
-        $scope.$digest();
-      }).catch(function(error){
-        // if there is no profile image get a default image.
-        $scope.imgSrc = 'https://firebasestorage.googleapis.com/v0/b/teamform-46380.appspot.com/o/users%2Fprofile.png?alt=media&token=e9fc1bb3-adb0-4f4e-b490-057e738f68f0';
-      });
-      
+            
       $scope.submit = function () {
         var re = new RegExp(", |,");
         var tags = $scope.tags.split(re);
@@ -76,7 +68,16 @@ angular.module('teamformApp')
             
             },
             function complete(){
-            alert('upload complete!');
+              var imgSrc;
+              storage.ref().child('users/'+ $scope.currentUser.uid+'.png').getDownloadURL().then(function(url){
+                imgSrc = url;
+                database.ref('TeamForm/users/' + $stateParams.id).update({
+                  profile_picture: imgSrc
+                });
+              }).catch(function(error){
+                
+              });
+              alert('upload complete!');
             });
         });
       };

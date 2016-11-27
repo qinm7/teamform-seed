@@ -61,11 +61,18 @@ div.input-box{
 	margin-top: 40px;
 	width: 60%;
 }
+div.tags{
+	font-size: 18px;
+	display: inline-block;
+	margin: 0 5px;
+}
 div#about{
 	margin-top: 200px;
 	margin-bottom: 200px
 }
-
+label{
+	display: block;
+}
 img.img-center{
 	display: inline;
 }

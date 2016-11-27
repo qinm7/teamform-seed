@@ -1,15 +1,3 @@
-// $(document).ready(function(){
-
-// 	$('#team_page_controller').hide();
-// 	$('#text_event_name').text("Error: Invalid event name ");
-// 	var eventName = getURLParameter("q");
-// 	if (eventName != null && eventName !== '' ) {
-// 		$('#text_event_name').text("Event name: " + eventName);
-
-// 	}
-
-// });
-
 angular.module('teamformApp')
 	.controller('teamCtrl', ['$scope', '$firebaseObject', '$stateParams', '$firebaseArray',
 		function ($scope, $firebaseObject, $stateParams, $firebaseArray) {
@@ -56,6 +44,7 @@ angular.module('teamformApp')
 
 						}
 					})
+					$scope.joinable = ($scope.team.max > data.length) && !$scope.joined;
 				});
 			}
 			calculate();
@@ -75,7 +64,10 @@ angular.module('teamformApp')
 			//can also be used to reject user.
 			$scope.leave = function () {
 				$scope.relations.$remove(relid).then(calculate);
-				//calculate();
+			}
+
+			$scope.remove = function (id) {
+				$firebaseObject(firebase.database().ref("TeamForm/RelationUT/"+id)).$remove().then(calculate);
 			}
 
 		}]);

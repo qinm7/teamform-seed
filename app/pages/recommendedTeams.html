@@ -1,34 +1,20 @@
-<div class="box" >
-	<div class="row">
-		<div class="col-md-12">
-			<div>
-				<center><img src="img/profile.png" class="img-responsive img-circle" align = "middle" alt="profile" width="200" height="200"></center>
-			</div>
-			<h1 class="title text-center">{{teams.name}}</h1>
-			<h3 class="text-center">{{teams.description}}</h3>		
-			<form>
-					<div class="form-group has-feedback">
-					</div>
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="button" ui-sref="eventPage({id : orig})"><i class="fa fa-magic" aria-hidden="true"></i></button>
-						<button ui-sref="createTeam({id : orig})" class="btn btn-default" type="button"><i class="fa fa-check" aria-hidden="true"></i>Create</button>
-					</span>
-			</form>
-		</div>
-	</div>
-</div>
 <div class="box">
 	<div class="row">
 		<div class="col-md-12">
 			<h1 class="title text-center"> Recommended Teams </h1>
-			<hr class="blue-line">
 			<div class="row text-center">
+				<button class="btn btn-info btn-block" type="button" ui-sref="eventPage({id : orig})">View all Teams</button>
+				
+				<div class="alert alert-danger" ng-show"!testing">
+					<strong>Sorry!</strong> We could not find any recommendations for you.
+				</div>
+
 				<div class="col-lg-10 col-lg-offset-1">
 					<div class="row" ng-repeat="test in testing" ng-if="$index % 3 == 0">
 
 						<div class="col-sm-6 col-md-4" ng-show="testing[$index]">
 							<div class="white-box" ui-sref="teamPage({id : testing[$index].$id})">
-								<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
+								<img src="img/profile.png" class="img-center img-responsive img-circle" align="middle" alt="profile" width="150" height="150">
 								<div class="caption">
 									<h3>{{testing[$index].name}}</h3>
 									<p>{{testing[$index].description}}</p>
@@ -38,7 +24,7 @@
 
 						<div class="col-sm-6 col-md-4" ng-show="testing[$index+1]">
 							<div class="white-box" ui-sref="teamPage({id : testing[$index+1].$id})">
-								<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
+								<img src="img/profile.png" class="img-center img-responsive img-circle" align="middle" alt="profile" width="150" height="150">
 								<div class="caption">
 									<h3>{{testing[$index+1].name}}</h3>
 									<p>{{testing[$index+1].description}}</p>
@@ -48,7 +34,7 @@
 
 						<div class="col-sm-6 col-md-4" ng-show="testing[$index+2]">
 							<div class="white-box" ui-sref="teamPage({id : testing[$index+2].$id})">
-								<img src="img/profile.png" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
+								<img src="img/profile.png" class="img-center img-responsive img-circle" align="middle" alt="profile" width="150" height="150">
 								<div class="caption">
 									<h3>{{testing[$index+2].name}}</h3>
 									<p>{{testing[$index+2].description}}</p>
@@ -61,4 +47,4 @@
 			</div>
 		</div>
 	</div>
-</div>		
+</div>

@@ -39,8 +39,8 @@
 									<h3>{{teams[$index].name}}</h3>
 									<p>{{teams[$index].description}}</p>
 								</div>
-								<span ng-show="teams[$index].memberNbr >= teams[$index].max" class="label label-success">We're full!</span>
-								<span ng-show="teams[$index].memberNbr < teams[$index].min" class="label label-danger">We need more members</span>
+								<div ng-show="teams[$index].memberNbr >= teams[$index].max" class="label label-success">We're full!</div>
+								<div ng-show="teams[$index].memberNbr < teams[$index].min" class="label label-danger">We need more members</div>
 							</div>
 						</div>
 
@@ -52,8 +52,8 @@
 									<h3>{{teams[$index+1].name}}</h3>
 									<p>{{teams[$index+1].description}}</p>
 								</div>
-								<span ng-show="teams[$index].memberNbr >= teams[$index].max" class="label label-success">We're full!</span>
-								<span ng-show="teams[$index].memberNbr < teams[$index].min" class="label label-danger">We need more members</span>
+								<div ng-show="teams[$index].memberNbr >= teams[$index].max" class="label label-success">We're full!</div>
+								<div ng-show="teams[$index].memberNbr < teams[$index].min" class="label label-danger">We need more members</div>
 							</div>
 						</div>
 
@@ -65,8 +65,8 @@
 									<h3>{{teams[$index+2].name}}</h3>
 									<p>{{teams[$index+2].description}}</p>
 								</div>
-								<span ng-show="teams[$index].memberNbr >= teams[$index].max" class="label label-success">We're full!</span>
-								<span ng-show="teams[$index].memberNbr < teams[$index].min" class="label label-danger">We need more members</span>
+								<div ng-show="teams[$index].memberNbr >= teams[$index].max" class="label label-success">We're full!</div>
+								<div ng-show="teams[$index].memberNbr < teams[$index].min" class="label label-danger">We need more members</div>
 							</div>
 						</div>
 

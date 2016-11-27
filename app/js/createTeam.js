@@ -25,7 +25,7 @@ app.controller('createTeamCtrl',
 			$scope.input.icon = prompt("Add your Image URL", "default.jpg");
 		}
         $scope.increaseMin = function(){
-            if($scope.input.min<=$scope.input.max) $scope.input.min++;
+            if($scope.input.min< $scope.input.max) $scope.input.min++;
         }
         $scope.decreaseMin = function(){
             if($scope.input.min>0) $scope.input.min--;
@@ -81,7 +81,7 @@ app.controller('editTeamCtrl',
 			$scope.input.icon = prompt("Add your Image URL", "default.jpg");
 		}
         $scope.increaseMin = function(){
-            if($scope.team.min<=$scope.team.max) $scope.team.min++;
+            if($scope.team.min < $scope.team.max) $scope.team.min++;
         }
         $scope.decreaseMin = function(){
             if($scope.team.min>0) $scope.team.min--;

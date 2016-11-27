@@ -1,31 +1,36 @@
-    <div class="container-fluid">
-		<div class="row create-box">
-			<h1 class="title text-center">{{user.name}}'s Profile</h1>
+<div class="container-fluid">
+	<div class="row create-box">
+		<h1 class="title text-center">{{user.name}}'s Profile</h1>
 
-			<!-- profile image here -->
-			<center><img ng-src="{{user.profile_picture}}" class="img-circle profile" alt="Image Loading..."></img></center>
+		<!-- profile image here -->
+		<center><img ng-src="{{user.profile_picture}}" class="img-circle profile" alt="Image Loading..."></img>
+		</center>
 
-			<div class="inner-box">
-				<div class="form form-group">
-					<label for="name">Name</label>
-					<h4>{{user.name}}</h4>
-				</div>
-				<div class="form form-group">
-					<label for="desciption">Description</label>
-                    <h4>{{user.description}}</h4>
-				</div>
-				<div class="form ui-widget">
-					<label for="tags">Interests</label>
-					<h4>{{tags}}</h4>
-				</div>
-				<div class="form ui-widget">
-					<label for="tags">Teams</label>
-					<h4>{{teams}}</h4>
-				</div>
-				<div class="text-center" ng-show="isAdmin">
-					<button type="button" class="btn btn-info btn-lg" ui-sref="myProfile({id : currentUser.uid})">Edit</button>
+		<div class="inner-box">
+			<div class="form form-group">
+				<label for="name">Name</label>
+				<h4>{{user.name}}</h4>
+			</div>
+			<div class="form form-group">
+				<label for="desciption">Description</label>
+				<h4>{{user.description}}</h4>
+			</div>
+			<div class="form ui-widget">
+				<label for="tags">Interests</label>
+				<div ng-repeat="tag in tags">
+					<span class="label label-info">{{tag}}</span>
 				</div>
 			</div>
-			
+			<div class="form ui-widget">
+				<label for="tags">Teams</label>
+				<div ng-repeat="team in teams">
+					<span class="label label-info" ui-sref="teamPage({id : team.ref})">{{team.name}}</span>
+				</div>
+			</div>
+			<div class="text-center" ng-show="isAdmin">
+				<button type="button" class="btn btn-info btn-lg" ui-sref="myProfile({id : currentUser.uid})">Edit</button>
+			</div>
 		</div>
+
 	</div>
+</div>

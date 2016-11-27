@@ -1,7 +1,16 @@
 <div class="container-fluid row create-box">
 	<h1 class="title text-center">Edit Event</h1>
 	<!-- event image here -->
-	<center><img src="img/profile.png" class="img-circle" ng-click="addImage()"></img></center>
+	<div class="hovereffect">
+		<img ng-src="{{event.icon}}" class="img-circle profile" alt="Image Loading..."></img>
+		<div class="overlay">
+			<p>
+            	<i class="fa fa-picture-o">
+				<input type="file" value="upload" id="fileUpload" ng-click="upload()"/>
+            	</i>
+			</p>
+		</div>
+	</div>
 	<div class="inner-box">
 		<form name="form" novalidate>
 

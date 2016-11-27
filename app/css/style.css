@@ -70,8 +70,9 @@ div#about{
 	margin-top: 200px;
 	margin-bottom: 200px
 }
-label{
+div.label{
 	display: block;
+	font-size: 60%;
 }
 img.img-center{
 	display: inline;
@@ -94,6 +95,7 @@ hr.blue-line{
 label{
 	font-size: 24px;
 	color: #424242;
+	display: block;
 }
 input.submit{
 	padding: 10px;

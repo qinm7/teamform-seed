@@ -1,72 +1,95 @@
 <style>
 	.required{color: red;}
 </style>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
 $( function() {
 	var availableTags = [
-	"ActionScript",
-	"AppleScript",
-	"Asp",
-	"BASIC",
-	"C",
-	"C++",
-	"Clojure",
-	"COBOL",
-	"ColdFusion",
-	"Erlang",
-	"Fortran",
-	"Groovy",
-	"Haskell",
+	"Computer Science",
 	"Java",
-	"JavaScript",
-	"Lisp",
-	"Perl",
-	"PHP",
+	"C++",
 	"Python",
-	"Ruby",
-	"Scala",
-	"Scheme"
+	"JavaScript",
+	"C",
+	"Assembly",
+	"Swift",
+	"AngularJS",
+	"Django",
+	"Ruby-on-Rails",
+	"Node.js",
+	"asp.net",
+	"Math",
+	"Physics",
+	"Chemistry",
+	"Biology",
+	"Science",
+	"Art",
+	"Film",
+	"Photography",
+	"Photoshop",
+	"Graphic Design",
+	"Painting",
+	"Drawing",
+	"Sculpting",
+	"Dance",
+	"Music",
+	"Acting",
+	"Singing",
+	"Food",
+	"Cooking",
+	"Baking",
+	"Cake Decorating",
+	"Sports",
+	"Basketball",
+	"Baseball",
+	"Football",
+	"Tennis",
+	"Badminton",
+	"Squash",
+	"Swimming",
+	"Jogging",
+	"Hiking"
 	];
 
 	function split( val ) {
-		return val.split( /,\s*/ );
-	}
-
-	function extractLast( term ) {
-		return split( term ).pop();
-	}
-
-	$( "#tags" )
-    // don't navigate away from the field on tab when selecting an item
-    .on( "keydown", function( event ) {
-    	if ( event.keyCode === $.ui.keyCode.TAB &&
-    		$( this ).autocomplete( "instance" ).menu.active ) {
-    		event.preventDefault();
+      return val.split( /,\s*/ );
     }
-  })
-    .autocomplete({
-    	minLength: 0,
-    	source: function( request, response ) {
-        // delegate back to autocomplete, but extract the last term
-        response( $.ui.autocomplete.filter(
-        	availableTags, extractLast( request.term ) ) );
-      },
-      focus: function() {
-        // prevent value inserted on focus
-        return false;
-      },
-      select: function( event, ui ) {
-      	var terms = split( this.value );
-        // remove the current input
-        terms.pop();
-        // add the selected item
-        terms.push( ui.item.value );
-        // add placeholder to get the comma-and-space at the end
-        terms.push( "" );
-        this.value = terms.join( ", " );
-        return false;
-      }
-    });
+    function extractLast( term ) {
+      return split( term ).pop();
+    }
+ 
+    $( "#tags" )
+      // don't navigate away from the field on tab when selecting an item
+      .on( "keydown", function( event ) {
+        if ( event.keyCode === $.ui.keyCode.TAB &&
+            $( this ).autocomplete( "instance" ).menu.active ) {
+          event.preventDefault();
+        }
+      })
+      .autocomplete({
+        minLength: 1,
+        source: function( request, response ) {
+          // delegate back to autocomplete, but extract the last term
+          response( $.ui.autocomplete.filter(
+            availableTags, extractLast( request.term ) ) );
+        },
+        focus: function() {
+          // prevent value inserted on focus
+          return false;
+        },
+        select: function( event, ui ) {
+          var terms = split( this.value );
+          // remove the current input
+          terms.pop();
+          // add the selected item
+          terms.push( ui.item.value );
+          // add placeholder to get the comma-and-space at the end
+          terms.push( "" );
+          this.value = terms.join( ", " );
+          return false;
+        }
+      });
   } );
 </script>
 
@@ -89,9 +112,9 @@ $( function() {
 
 			<div class="form form-group">
 				<label for="tags">Skills <span class="required" ng-show="form.tags.$error.required">*required</span></label>
-				<input id="tags" name="tags" class="form-control ui-autocomplete-input" ng-model="tags" placeholder="i.e. Java, Angular JS, Firebase..." required>
+				<input id="tags" name="tags" class="form-control ui-autocomplete-input" ng-model="tags" placeholder="i.e. Java, Angular JS, Firebase..." required/>
 			</div>
-
+			
 			<div class="text-center">
 				<button type="button" class="btn btn-success" ng-click="addEvent()" ng-disabled="!input.description || !input.name || !input.tags">submit</button>
 			</div>
@@ -100,6 +123,6 @@ $( function() {
 </div>
 
 
-<!--<script type="text/javascript">
+<script type="text/javascript">
 	$('.ui-autocomplete.ui-menu').css('font-size', '20px');
-</script>-->
+</script>

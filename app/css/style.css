@@ -14,10 +14,6 @@ body{
 	font-family: 'Roboto', serif;
 	font-size: 48px;
 }
-h3.disc{
-	width: 60%;
-	margin: auto;
-}
 div.inline{
 	display: inline;
 }
@@ -128,6 +124,9 @@ footer p {
 }
 i.fa-circle{
 	color: #1E88E5;
+}
+li.ui-menu-item{
+	font-size: 18px;
 }
 .btm-right{
 	position: fixed;

@@ -30,11 +30,11 @@ angular.module('teamformApp')
 
 
       $scope.submit = function () {
-        var re = new RegExp(", |,");
-        var tags = $scope.tags.split(re);
-        if (tags[tags.length - 1] == "") {
-          tags.splice(tags.length - 1, 1);
-        }
+      var inputtags = $('#profile_tags').tokenfield('getTokensList');
+       var re = new RegExp(", |,");
+		var tags = inputtags.split(re);
+		if (tags[tags.length - 1] == "")
+			tags.splice(tags.length - 1, 1);
 
         $scope.user.tags = tags;
         database.ref('TeamForm/users/' + $stateParams.id).update({

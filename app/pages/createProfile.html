@@ -1,3 +1,34 @@
+<script src="js/bootstrap-tokenfield.js"></script>
+<script>
+
+
+
+$('#profile_tags').tokenfield({
+  autocomplete: {
+    source: ["Computer Science","Java","C++","Python","JavaScript","C","Assembly","Swift","AngularJS","Django",
+	"Ruby-on-Rails","Node.js","asp.net","Math","Physics","Chemistry","Biology","Science","Art","Film","Photography","Photoshop",
+	"Graphic Design","Painting","Drawing","Sculpting","Dance","Music","Acting","Singing","Food","Cooking","Baking",
+	"Cake Decorating","Sports","Basketball","Baseball","Football","Tennis","Badminton","Squash","Swimming","Jogging","Hiking"],
+    delay: 100
+  },
+  limit:10,
+  createTokensOnBlur:true,
+  showAutocompleteOnFocus: true
+}).on('tokenfield:createtoken', function (event) {
+  var exists = true;
+  $.each(["Computer Science","Java","C++","Python","JavaScript","C","Assembly","Swift","AngularJS","Django",
+	"Ruby-on-Rails","Node.js","asp.net","Math","Physics","Chemistry","Biology","Science","Art","Film","Photography","Photoshop",
+	"Graphic Design","Painting","Drawing","Sculpting","Dance","Music","Acting","Singing","Food","Cooking","Baking",
+	"Cake Decorating","Sports","Basketball","Baseball","Football","Tennis","Badminton","Squash","Swimming","Jogging","Hiking"], function(index, token) {
+    if (token === event.attrs.value)
+      exists = false;
+  })
+  if(exists === true)
+    event.preventDefault();
+});
+
+</script>
+
 <div class="container-fluid">
 	<div class="row create-box">
 		<h1 class="title text-center">Edit Profile</h1>
@@ -24,11 +55,11 @@
 				<textarea class="form-control" rows="5" id="description" ng-model="user.description" required></textarea>
 			</div>
 			<div class="form form-group">
-				<label for="tags">Interests</label>
-				<input type="text" id="tags" class="form-control" ng-model="tags">
+				<label for="profile_tags">Interests</label>
+				<input type="text" id="profile_tags" name="tags" class="tag" ng-model="user.tags"/>
 			</div>
 			<div class="form form-group">
-				<label for="tags">Teams</label>
+				<label >Teams</label>
 				<div ng-repeat="team in teams">
 					<span class="label label-info" ui-sref="teamPage({id : team.ref})">{{team.name}}</span>
 				</div>

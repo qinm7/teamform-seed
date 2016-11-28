@@ -14,10 +14,6 @@ body{
 	font-family: 'Roboto', serif;
 	font-size: 48px;
 }
-h3.disc{
-	width: 60%;
-	margin: auto;
-}
 div.inline{
 	display: inline;
 }

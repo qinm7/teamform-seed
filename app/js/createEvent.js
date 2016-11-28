@@ -30,7 +30,7 @@ app.controller('createEventCtrl',
 				var currentUser = firebase.auth().currentUser;
 				$scope.input.admin = currentUser.uid;
 				$scope.input.created = new Date().toString();
-				var inputtags = $('#tags').tokenfield('getTokensList');
+				var inputtags = $('#event_tags').tokenfield('getTokensList');
 				var re = new RegExp(", |,");
 				var tags = inputtags.split(re);
 				if (tags[tags.length - 1] == "")
@@ -54,16 +54,20 @@ app.controller('createEventCtrl',
 		var storage = firebase.storage();
 		$firebaseObject(ref).$loaded().then(function (info) {
 			$scope.event = info;
-			$scope.tags = info.tags.join(", ");
-			//$scope.$digest();
+			$scope.tags = info.tags;
+			for(var i = 0; i < info.tags.length ; i++ ) {
+				$('#event_tags').tokenfield('createToken', info.tags[i]);
+			}
+			
 		});
 
 		$scope.submit = function () {
+			
+			var inputtags = $('#event_tags').tokenfield('getTokensList');
 			var re = new RegExp(", |,");
-			var tags = $scope.tags.split(re);
-			if (tags[tags.length - 1] == "") {
+			var tags = inputtags.split(re);
+			if (tags[tags.length - 1] == "")
 				tags.splice(tags.length - 1, 1);
-			}
 
 			$scope.event.tags = tags;
 			database.ref('TeamForm/events/' + $stateParams.id).update({
@@ -106,38 +110,3 @@ app.controller('createEventCtrl',
 
 	});
 	
-// app.directive('autoComplete', function(autoCompleteDataService) {
-//     return {
-//         restrict: 'A',
-//         link: function(scope, elem, attr, ctrl) {
-//                     // elem is a jquery lite object if jquery is not present,
-//                     // but with jquery and jquery ui, it will be a full jquery object.
-//             elem.autocomplete({
-//                 source: ["Computer Science","Java","C++","Python"], //from your service
-//                 minLength: 1,
-//                 source: function( request, response ) {
-//           // delegate back to autocomplete, but extract the last term
-//           response( $.ui.autocomplete.filter(
-//             availableTags, extractLast( request.term ) ) );
-//         },
-//         focus: function() {
-//           // prevent value inserted on focus
-//           return false;
-//         },
-//         select: function( event, ui ) {
-//           var terms = split( this.value );
-//           // remove the current input
-//           terms.pop();
-//           // add the selected item
-//           terms.push( ui.item.value );
-//           // add placeholder to get the comma-and-space at the end
-//           terms.push( "" );
-//           this.value = terms.join( "," );
-//           
-//           return false;
-//             }
-//             });
-//             
-//         }
-//     };
-// });

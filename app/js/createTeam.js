@@ -44,10 +44,10 @@ app.controller('createTeamCtrl',
 		$scope.addTeam = function() {
 			
 			// update the date
-			if ( $scope.input.name != "" && $scope.input.description != "" && $scope.input.tags != "") {
+			if ( $scope.input.name != "" && $scope.input.description != "" && $scope.tags != "") {
 				$scope.input.admin = firebase.auth().currentUser.uid;
 				$scope.input.created = new Date().toString();
-				var inputtags = $('#tags').tokenfield('getTokensList');
+				var inputtags = $('#team_tags').tokenfield('getTokensList');
 				var re = new RegExp(", |,");
 				var tags = inputtags.split(re);
 				if (tags[tags.length - 1] == "")
@@ -74,7 +74,10 @@ app.controller('editTeamCtrl',
 		var ref = database.ref("TeamForm/teams/" + $stateParams.id);
 		$firebaseObject(ref).$loaded().then(function (info) {
 			$scope.team = info;
-			$scope.tags = info.tags.join(", ");
+			$scope.tags = info.tags;
+			for(var i = 0; i < info.tags.length ; i++ ) {
+				$('#team_tags').tokenfield('createToken', info.tags[i]);
+			}
 		});
 
 
@@ -100,10 +103,11 @@ app.controller('editTeamCtrl',
 			// update the date
 			if ( $scope.team.name != "" && $scope.team.description != "" && $scope.team.tags != "") {
 
+				var inputtags = $('#team_tags').tokenfield('getTokensList');
 				var re = new RegExp(", |,");
-				var tags = $scope.tags.split(re);
+				var tags = inputtags.split(re);
 				if (tags[tags.length - 1] == "")
-					tags.splice(tags.length - 1,1);
+				tags.splice(tags.length - 1, 1);
 				$scope.team.tags = tags;
 				// add an input event
 				database.ref('TeamForm/teams/' + $stateParams.id).update({

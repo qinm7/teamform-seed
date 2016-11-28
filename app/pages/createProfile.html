@@ -1,6 +1,5 @@
-<script src="js/bootstrap-tokenfield.js"></script>
+ <script src="js/bootstrap-tokenfield.js"></script>
 <script>
-
 
 
 $('#profile_tags').tokenfield({
@@ -15,6 +14,7 @@ $('#profile_tags').tokenfield({
   createTokensOnBlur:true,
   showAutocompleteOnFocus: true
 }).on('tokenfield:createtoken', function (event) {
+	
   var exists = true;
   $.each(["Computer Science","Java","C++","Python","JavaScript","C","Assembly","Swift","AngularJS","Django",
 	"Ruby-on-Rails","Node.js","asp.net","Math","Physics","Chemistry","Biology","Science","Art","Film","Photography","Photoshop",
@@ -22,6 +22,11 @@ $('#profile_tags').tokenfield({
 	"Cake Decorating","Sports","Basketball","Baseball","Football","Tennis","Badminton","Squash","Swimming","Jogging","Hiking"], function(index, token) {
     if (token === event.attrs.value)
       exists = false;
+  })
+  var existingtokens = $(this).tokenfield('getTokens');
+  $.each(existingtokens,function(index,token){
+  	if(token.value === event.attrs.value)
+  		exists = true;
   })
   if(exists === true)
     event.preventDefault();

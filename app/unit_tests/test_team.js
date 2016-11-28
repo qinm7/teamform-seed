@@ -2,7 +2,7 @@ describe('team.js test', function() {
 	var $controller, $rootScope, controller, $scope;
 
 	beforeEach( function() {
-		module('teamform-team-app');
+		module('teamformApp');
 		inject(function(_$controller_,_$rootScope_,_$firebaseObject_,_$firebaseArray_) {
 			$controller=_$controller_;
 			$rootScope=_$rootScope_;

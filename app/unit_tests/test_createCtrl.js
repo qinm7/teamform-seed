@@ -1,6 +1,6 @@
-describe('test createCrtl.js', function() {
+describe('test createEvent.js', function() {
 	beforeEach( function() {
-		module('teamform-46380');
+		module('teamformApp');
 		inject(function(_$controller_,_$rootScope_) {
 			$controller=_$controller_;
 			$rootScope=_$rootScope_;

@@ -47,10 +47,11 @@ app.controller('createTeamCtrl',
 			if ( $scope.input.name != "" && $scope.input.description != "" && $scope.input.tags != "") {
 				$scope.input.admin = firebase.auth().currentUser.uid;
 				$scope.input.created = new Date().toString();
+				var inputtags = $('#tags').tokenfield('getTokensList');
 				var re = new RegExp(", |,");
-				var tags = $scope.input.tags.split(re);
+				var tags = inputtags.split(re);
 				if (tags[tags.length - 1] == "")
-					tags.splice(tags.length - 1,1);
+					tags.splice(tags.length - 1, 1);
 				$scope.input.tags = tags;
 				$scope.input.icon = 'https://firebasestorage.googleapis.com/v0/b/teamform-46380.appspot.com/o/users%2Fprofile.png?alt=media&token=e9fc1bb3-adb0-4f4e-b490-057e738f68f0';
 				// add an input event

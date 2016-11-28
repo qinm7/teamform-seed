@@ -39,15 +39,17 @@ $('#tags').tokenfield({
 		<form name="form" novalidate>
 
 			<div class="form form-group">
-				<div class="form form-group" ng-class="{ 'has-error' : !input.name}">
+				<div class="form-group" ng-class="{ 'has-error' : !input.name}">
  				<label for="name">Name </label>
 				<input type="text" name="name" class="form-control" ng-model="input.name" id="name" placeholder="Name" required>
+				</div>
 			</div>
 
 			<div class="form forms-group">
-				<div class="form form-group" ng-class="{ 'has-error' : !input.description}">
+				<div class="form-group" ng-class="{ 'has-error' : !input.description}">
       			<label for="description">Description</label>
 				<textarea name="desc" class="form-control" rows="5" ng-model="input.description" id="description" placeholder="Description" required></textarea>
+				</div>
 			</div>
 
 			<div class="form form-group">

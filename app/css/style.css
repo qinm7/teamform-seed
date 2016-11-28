@@ -125,6 +125,9 @@ footer p {
 i.fa-circle{
 	color: #1E88E5;
 }
+li.ui-menu-item{
+	font-size: 18px;
+}
 .btm-right{
 	position: fixed;
 	bottom: 10px;

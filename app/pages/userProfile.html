@@ -24,7 +24,7 @@
 			<div class="form ui-widget">
 				<label for="tags">Teams</label>
 				<div class="tags" ng-repeat="team in teams">
-					<span class="label label-info" ui-sref="teamPage({id : team.ref})">{{team.name}}" style="cursor: pointer" </span>
+					<span class="label label-info" style="cursor: pointer" ui-sref="teamPage({id : team.ref})">{{team.name}} </span>
 				</div>
 			</div>
 			<div class="text-center" ng-show="isAdmin">

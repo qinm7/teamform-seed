@@ -17,6 +17,7 @@ $('#tags').tokenfield({
   createTokensOnBlur:true,
   showAutocompleteOnFocus: true
 }).on('tokenfield:createtoken', function (event) {
+	
   var exists = true;
   $.each(["Computer Science","Java","C++","Python","JavaScript","C","Assembly","Swift","AngularJS","Django",
 	"Ruby-on-Rails","Node.js","asp.net","Math","Physics","Chemistry","Biology","Science","Art","Film","Photography","Photoshop",
@@ -25,11 +26,17 @@ $('#tags').tokenfield({
     if (token === event.attrs.value)
       exists = false;
   })
+  var existingtokens = $(this).tokenfield('getTokens');
+  $.each(existingtokens,function(index,token){
+  	if(token.value === event.attrs.value)
+  		exists = true;
+  })
   if(exists === true)
     event.preventDefault();
 });
 
 </script>
+
 
 <div class="container-fluid row create-box">
 	<h1 class="title text-center">Create Event</h1>
@@ -52,9 +59,9 @@ $('#tags').tokenfield({
 				</div>
 			</div>
 
-			<div class="form form-group">
+			<div class="form form-group" ng-controller="tokenCtrl">
 				<label for="tags">Skills</label>
-				<input type="text" id="tags" name="tags" class="tag" ng-model="input.tags" placeholder="i.e. Java, Angular JS, C++..." required/>
+				<input type="text" id="tags" name="tags" class="tag" ng-model="tags" placeholder="i.e. Java, Angular JS, C++..." required/>
 			</div>
 			
 			<div class="text-center">

@@ -39,7 +39,6 @@ app.controller('createEventCtrl',
 				$scope.input.icon = 'https://firebasestorage.googleapis.com/v0/b/teamform-46380.appspot.com/o/users%2Fprofile.png?alt=media&token=e9fc1bb3-adb0-4f4e-b490-057e738f68f0';
 				// add an input event
 				$scope.events.$add($scope.input).then(function(ref) {
-					console.log(ref.key);
 					$state.go("eventPage", {id: ref.key});
 				});
 			}

@@ -15,19 +15,19 @@ module.exports = function(config) {
     'unit_tests/*.js'	  
     ],
 	exclude: [
+		'js/firebase_storage.js'
 	],
-	preprocessors: {	 
-		 //'js/team.js' : ['coverage'],
-		 //'js/createCtrl.js' : ['coverage'],
+	preprocessors: {	 	
+		 'js/site.js' : ['coverage'],		
+		 'js/index.js' : ['coverage'],
+		 'js/team.js' : ['coverage'],
+		 'js/member.js' : ['coverage'],
 		 'js/createEvent.js' : ['coverage'],
-		 //'js/createProfile.js' : ['coverage'],
-		 //'js/createTeam.js' : ['coverage'],
-		 //'js/event.js' : ['coverage'],
- 		 //'js/login.js' : ['coverage'],
-	 	 //'js/recommend.js' : ['coverage'],
-		 'js/router.js' : ['coverage']
-		 //'js/search.js' : ['coverage'],
-		 //'js/router.js' : ['coverage']
+		 'js/router.js' : ['coverage'],
+		 'js/recommend.js' : ['coverage'],
+		 'js/script.js' : ['coverage'],
+		 'js/firebase.js' : ['coverage'],
+		 'js/login.js' : ['coverage']
 	},
 	reporters: ['progress', 'coverage'],
 	coverageReporter: {

@@ -37,12 +37,14 @@ app.controller("AuthCtrl", ['$scope', '$state', '$firebaseArray',
         var errorMessage = error.message;
         var email = error.email;
         var credential = error.credential;
+
       });
-
+      
     };
-
+    
     //change value of isLogged in if user logs in or out
     firebase.auth().onAuthStateChanged(function (user) {
+
       $scope.isLoggedIn = user;
       $scope.$digest();
 

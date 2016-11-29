@@ -16,7 +16,7 @@ describe('team.js test', function() {
 			controller = $controller('TeamCtrl', {$scope: $scope});
 		});
 		it('testing retreive', function() {
-			expect($scope.refreshViewRequestsReceived()).toBeUndefined();
+			expect(controller.refreshViewRequestsReceived()).toBeUndefined();
 		});
 	});
 });

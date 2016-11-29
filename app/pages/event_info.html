@@ -1,15 +1,15 @@
-<div class="box" >
+<div class="box">
 	<div class="row">
 		<div class="col-md-12">
 			<div>
-				<center><img src="img/profile.png" class="img-responsive img-circle" align = "middle" alt="profile" width="200" height="200"></center>
+				<center><img ng-src="{{event.icon}}" class="img-responsive img-circle" align="middle" alt="profile" width="200" height="200"></center>
 			</div>
 			<h1 class="title text-center">{{event.name}}</h1>
-			<h3 class="text-center">{{event.description}}</h3>		
+			<h3 class="text-center">{{event.description}}</h3>
 			<form>
 				<div class="input-group input-box">
 					<div class="form-group has-feedback">
-						<input type="text" class="form-control" ng-model="searchText" placeholder="Search for Team"/>
+						<input type="text" class="form-control" ng-model="searchText" placeholder="Search for Team" />
 					</div>
 					<span class="input-group-btn">
 						<button class="btn btn-default" type="button"><i class="fa fa-search" aria-hidden="true" ng-click="startSearch()" title="Search"></i></button>
@@ -32,32 +32,41 @@
 					<div class="row" ng-repeat="team in teams" ng-if="$index % 3 == 0">
 
 						<div class="col-sm-6 col-md-4" ng-show="teams[$index]">
-							<div class="white-box" ui-sref="teamPage({id : teams[$index].$id})" style="cursor: pointer;">
-								<img ng-src="{{teams[$index].imgURL}}" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
+							<div class="white-box" ui-sref="teamPage({id : teams[$index].$id})" style="cursor: pointer">
+								<img ng-src="{{teams[$index].icon}}" class="img-center img-responsive img-circle" align="middle" alt="No Image" width="150"
+									height="150">
 								<div class="caption">
 									<h3>{{teams[$index].name}}</h3>
 									<p>{{teams[$index].description}}</p>
 								</div>
+								<div ng-show="teams[$index].memberNbr >= teams[$index].max" class="label label-success">We're full!</div>
+								<div ng-show="teams[$index].memberNbr < teams[$index].min" class="label label-danger">We need more members</div>
 							</div>
 						</div>
 
 						<div class="col-sm-6 col-md-4" ng-show="teams[$index+1]">
-							<div class="white-box" ui-sref="teamPage({id : teams[$index+1].$id})" style="cursor: pointer;">
-								<img ng-src="{{teams[$index+1].imgURL}}" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
+							<div class="white-box" ui-sref="teamPage({id : teams[$index+1].$id})" style="cursor: pointer">
+								<img ng-src="{{teams[$index+1].icon}}" class="img-center img-responsive img-circle" align="middle" alt="No Image" width="150"
+									height="150">
 								<div class="caption">
 									<h3>{{teams[$index+1].name}}</h3>
 									<p>{{teams[$index+1].description}}</p>
 								</div>
+								<div ng-show="teams[$index+1].memberNbr >= teams[$index+1].max" class="label label-success">We're full!</div>
+								<div ng-show="teams[$index+1].memberNbr < teams[$index+1].min" class="label label-danger">We need more members</div>
 							</div>
 						</div>
 
 						<div class="col-sm-6 col-md-4" ng-show="teams[$index+2]">
-							<div class="white-box" ui-sref="teamPage({id : teams[$index+2].$id})" style="cursor: pointer;">
-								<img ng-src="{{teams[$index+2].imgURL}}" class="img-center img-responsive img-circle" align = "middle" alt="profile" width="150" height="150">
+							<div class="white-box" ui-sref="teamPage({id : teams[$index+2].$id})" style="cursor: pointer">
+								<img ng-src="{{teams[$index+2].icon}}" class="img-center img-responsive img-circle" align="middle" alt="No Image" width="150"
+									height="150">
 								<div class="caption">
 									<h3>{{teams[$index+2].name}}</h3>
 									<p>{{teams[$index+2].description}}</p>
 								</div>
+								<div ng-show="teams[$index+2].memberNbr >= teams[$index+2].max" class="label label-success">We're full!</div>
+								<div ng-show="teams[$index+2].memberNbr < teams[$index+2].min" class="label label-danger">We need more members</div>
 							</div>
 						</div>
 
@@ -66,4 +75,4 @@
 			</div>
 		</div>
 	</div>
-</div>		
+</div>

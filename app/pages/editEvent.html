@@ -1,7 +1,52 @@
+ <script src="js/bootstrap-tokenfield.js"></script>
+<script>
+
+
+$('#event_tags').tokenfield({
+  autocomplete: {
+    source: ["Computer Science","Java","C++","Python","JavaScript","C","Assembly","Swift","AngularJS","Django",
+	"Ruby-on-Rails","Node.js","asp.net","Math","Physics","Chemistry","Biology","Science","Art","Film","Photography","Photoshop",
+	"Graphic Design","Painting","Drawing","Sculpting","Dance","Music","Acting","Singing","Food","Cooking","Baking",
+	"Cake Decorating","Sports","Basketball","Baseball","Football","Tennis","Badminton","Squash","Swimming","Jogging","Hiking"],
+    delay: 100
+  },
+  limit:10,
+  createTokensOnBlur:true,
+  showAutocompleteOnFocus: true
+}).on('tokenfield:createtoken', function (event) {
+	
+  var exists = true;
+  $.each(["Computer Science","Java","C++","Python","JavaScript","C","Assembly","Swift","AngularJS","Django",
+	"Ruby-on-Rails","Node.js","asp.net","Math","Physics","Chemistry","Biology","Science","Art","Film","Photography","Photoshop",
+	"Graphic Design","Painting","Drawing","Sculpting","Dance","Music","Acting","Singing","Food","Cooking","Baking",
+	"Cake Decorating","Sports","Basketball","Baseball","Football","Tennis","Badminton","Squash","Swimming","Jogging","Hiking"], function(index, token) {
+    if (token === event.attrs.value)
+      exists = false;
+  })
+  var existingtokens = $(this).tokenfield('getTokens');
+  $.each(existingtokens,function(index,token){
+  	if(token.value === event.attrs.value)
+  		exists = true;
+  })
+  if(exists === true)
+    event.preventDefault();
+});
+
+</script>
+
 <div class="container-fluid row create-box">
 	<h1 class="title text-center">Edit Event</h1>
 	<!-- event image here -->
-	<center><img src="img/profile.png" class="img-circle" ng-click="addImage()"></img></center>
+	<div class="hovereffect">
+		<img ng-src="{{event.icon}}" class="img-circle profile" alt="Image Loading..."></img>
+		<div class="overlay">
+			<p>
+            	<i class="fa fa-picture-o">
+				<input type="file" value="upload" id="fileUpload" ng-click="upload()"/>
+            	</i>
+			</p>
+		</div>
+	</div>
 	<div class="inner-box">
 		<form name="form" novalidate>
 
@@ -16,8 +61,8 @@
 			</div>
 
 			<div class="form form-group">
-				<label for="tags">Interessts</label>
-				<input id="tags" name="tags" class="form-control ui-autocomplete-input" ng-model="tags" required>
+				<label for="tags">Interests</label>
+				<input id="event_tags" name="tags" class="form-control" ng-model="tags" required>
 			</div>
 
 			<div class="text-center">

@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 # teamform-seed modified the Xth times....
 ## The introductino to team-forming, the single-webpage application
+=======
+# teamform-seed modified the 4th times....
+## The seed project for the team forming web application
+>>>>>>> hkpeterpeter/master
 
 ## Server is needed to execute the single-webpage app
 

@@ -1,3 +1,39 @@
+<script src="js/bootstrap-tokenfield.js"></script>
+<script>
+
+
+$('#team_tags').tokenfield({
+  autocomplete: {
+    source: ["Computer Science","Java","C++","Python","JavaScript","C","Assembly","Swift","AngularJS","Django",
+	"Ruby-on-Rails","Node.js","asp.net","Math","Physics","Chemistry","Biology","Science","Art","Film","Photography","Photoshop",
+	"Graphic Design","Painting","Drawing","Sculpting","Dance","Music","Acting","Singing","Food","Cooking","Baking",
+	"Cake Decorating","Sports","Basketball","Baseball","Football","Tennis","Badminton","Squash","Swimming","Jogging","Hiking"],
+    delay: 100
+  },
+  limit:10,
+  createTokensOnBlur:true,
+  showAutocompleteOnFocus: true
+}).on('tokenfield:createtoken', function (event) {
+	
+  var exists = true;
+  $.each(["Computer Science","Java","C++","Python","JavaScript","C","Assembly","Swift","AngularJS","Django",
+	"Ruby-on-Rails","Node.js","asp.net","Math","Physics","Chemistry","Biology","Science","Art","Film","Photography","Photoshop",
+	"Graphic Design","Painting","Drawing","Sculpting","Dance","Music","Acting","Singing","Food","Cooking","Baking",
+	"Cake Decorating","Sports","Basketball","Baseball","Football","Tennis","Badminton","Squash","Swimming","Jogging","Hiking"], function(index, token) {
+    if (token === event.attrs.value)
+      exists = false;
+  })
+  var existingtokens = $(this).tokenfield('getTokens');
+  $.each(existingtokens,function(index,token){
+  	if(token.value === event.attrs.value)
+  		exists = true;
+  })
+  if(exists === true)
+    event.preventDefault();
+});
+
+</script>
+
 <div>
 	<div class="container-fluid">
 		<div class="row create-box">
@@ -5,7 +41,7 @@
 			<!-- team image here -->
 			<!--<div class="hovereffect">-->
 			<div class="text-center">
-				<img ng-src="{{imgSrc}}" class="img-circle profile" alt="Image Loading..."></img>
+				<img ng-src="img/profile.png" class="img-circle profile" alt="Image Loading..."></img>
 				<!--<div class="overlay">
 					<p>
                     	<i class="fa fa-picture-o">
@@ -27,14 +63,14 @@
 					<label for="currentTeamSize">Minimum Prefered Team Size</label>
 					<div class="input-group">
 						<span class="input-group-btn">
-              				<button type="button" class="btn btn-default btn-number" ng-click="decreaseMin()">
-                  				<span class="glyphicon glyphicon-minus"></span>
-							</button>
+							<button type="button" class="btn btn-default btn-number" ng-click="decreaseMin()">
+								<span class="glyphicon glyphicon-minus"></span>
+						</button>
 						</span>
-						<input type="text" ng-model="input.min" class="form-control text-center" >
+						<input class="form-control input-number  text-center" ng-model="input.min">
 						<span class="input-group-btn">
-              				<button type="button" class="btn btn-default btn-number" ng-click="increaseMin()">
-                  				<span class="glyphicon glyphicon-plus"></span>
+							<button type="button" class="btn btn-default btn-number" data-type="plus" ng-click="increaseMin()">
+								<span class="glyphicon glyphicon-plus"></span>
 							</button>
 						</span>
 					</div>
@@ -43,21 +79,21 @@
 					<label for="currentTeamSize">Maximum Prefered Team Size</label>
 					<div class="input-group">
 						<span class="input-group-btn">
-              				<button type="button" class="btn btn-default btn-number" ng-click="decreaseMax()">
-                  				<span class="glyphicon glyphicon-minus"></span>
-							</button>
+							<button type="button" class="btn btn-default btn-number" ng-click="decreaseMax()">
+								<span class="glyphicon glyphicon-minus"></span>
+						</button>
 						</span>
-						<input type="text" ng-model="input.max" class="form-control text-center" >
+						<input class="form-control input-number  text-center" ng-model="input.max">
 						<span class="input-group-btn">
-              				<button type="button" class="btn btn-default btn-number" ng-click="increaseMax()">
-                  				<span class="glyphicon glyphicon-plus"></span>
+							<button type="button" class="btn btn-default btn-number" data-type="plus" ng-click="increaseMax()">
+								<span class="glyphicon glyphicon-plus"></span>
 							</button>
 						</span>
 					</div>
 				</div>
 				<div class="form form-group">
 					<label for="tags">Tags</label>
-					<input id="tags" class="form-control ui-autocomplete-input" ng-model="input.tags">
+					<input type="text" id="team_tags" name="tags" class="tag" ng-model="tags" placeholder="i.e. Java, Angular JS, C++..." required/>
 				</div>
 				<div class="text-center">
 					<button type="button" ng-click="addTeam()" class="btn btn-success btn-lg" ng-disabled="!input.name && !input.description">Submit</button>

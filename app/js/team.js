@@ -1,15 +1,3 @@
-// $(document).ready(function(){
-
-// 	$('#team_page_controller').hide();
-// 	$('#text_event_name').text("Error: Invalid event name ");
-// 	var eventName = getURLParameter("q");
-// 	if (eventName != null && eventName !== '' ) {
-// 		$('#text_event_name').text("Event name: " + eventName);
-
-// 	}
-
-// });
-
 angular.module('teamformApp')
 	.controller('teamCtrl', ['$scope', '$firebaseObject', '$stateParams', '$firebaseArray',
 		function ($scope, $firebaseObject, $stateParams, $firebaseArray) {
@@ -56,6 +44,7 @@ angular.module('teamformApp')
 
 						}
 					})
+					$scope.joinable = ($scope.team.max > data.length) && !$scope.joined;
 				});
 			}
 			calculate();
@@ -75,17 +64,11 @@ angular.module('teamformApp')
 			//can also be used to reject user.
 			$scope.leave = function () {
 				$scope.relations.$remove(relid).then(calculate);
-				//calculate();
 			}
 
-			// getting profile image
-		    storage.ref().child('teams/'+ $stateParams.id+'.png').getDownloadURL().then(function(url){
-		    	$scope.imgSrc = url;
-			    $scope.$digest();
-		    }).catch(function(error){
-		    // if there is no profile image get a default image.
-		    	$scope.imgSrc = 'https://firebasestorage.googleapis.com/v0/b/teamform-46380.appspot.com/o/users%2Fprofile.png?alt=media&token=e9fc1bb3-adb0-4f4e-b490-057e738f68f0';
-		        $scope.$digest();
-		    });
+			$scope.remove = function (id) {
+				$firebaseObject(firebase.database().ref("TeamForm/RelationUT/"+id)).$remove().then(calculate);
+			}
+
 		}]);
 

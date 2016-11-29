@@ -17,8 +17,7 @@ app.controller('createTeamCtrl',
 			public: true,
 			tags: [],
             min: 0,
-            max: 10,
-            imgURL:""
+            max: 10
 		}
 		var storage = firebase.storage();
 
@@ -26,7 +25,7 @@ app.controller('createTeamCtrl',
 			$scope.input.icon = prompt("Add your Image URL", "default.jpg");
 		}
         $scope.increaseMin = function(){
-            if($scope.input.min<=$scope.input.max) $scope.input.min++;
+            if($scope.input.min< $scope.input.max) $scope.input.min++;
         }
         $scope.decreaseMin = function(){
             if($scope.input.min>0) $scope.input.min--;
@@ -42,31 +41,19 @@ app.controller('createTeamCtrl',
 		var ref = firebase.database().ref("TeamForm/teams/");
 		$scope.teams = $firebaseArray(ref);
 
-		// getting profile image
-		var imgAdd;
-		storage.ref().child('teams/'+ $stateParams.id+'.png').getDownloadURL().then(function(url){
-	    	$scope.imgSrc = url;
-	    	imgAdd = url;
-	    	$scope.$digest();
-	    }).catch(function(error){
-	    	// if there is no profile image get a default image.
-	    	$scope.imgSrc = 'https://firebasestorage.googleapis.com/v0/b/teamform-46380.appspot.com/o/users%2Fprofile.png?alt=media&token=e9fc1bb3-adb0-4f4e-b490-057e738f68f0';
-	    	imgAdd = $scope.imgSrc;
-	    	$scope.$digest();
-	    });
-
 		$scope.addTeam = function() {
 			
 			// update the date
-			if ( $scope.input.name != "" && $scope.input.description != "" && $scope.input.tags != "") {
+			if ( $scope.input.name != "" && $scope.input.description != "" && $scope.tags != "") {
 				$scope.input.admin = firebase.auth().currentUser.uid;
 				$scope.input.created = new Date().toString();
+				var inputtags = $('#team_tags').tokenfield('getTokensList');
 				var re = new RegExp(", |,");
-				var tags = $scope.input.tags.split(re);
+				var tags = inputtags.split(re);
 				if (tags[tags.length - 1] == "")
-					tags.splice(tags.length - 1,1);
+					tags.splice(tags.length - 1, 1);
 				$scope.input.tags = tags;
-				$scope.input.imgURL = imgAdd;
+				$scope.input.icon = 'https://firebasestorage.googleapis.com/v0/b/teamform-46380.appspot.com/o/users%2Fprofile.png?alt=media&token=e9fc1bb3-adb0-4f4e-b490-057e738f68f0';
 				// add an input event
 				$scope.teams.$add($scope.input).then(function(ref) {
 					console.log(ref.key);
@@ -74,32 +61,6 @@ app.controller('createTeamCtrl',
 				});
 			}
 		}
-
-		// upload team profile image
-		$scope.upload = function() {
-	        var fileUpload = document.getElementById('fileUpload');
-	        fileUpload.addEventListener('change', function(e){
-	          //get file
-	          var file = e.target.files[0];
-	          // create storage ref
-	          var profileRef = storage.ref('teams/'+ $stateParams.id+".png");
-	          
-	          // upload
-	          var task = profileRef.put(file);
-	          
-	          // handle progress bar
-	          task.on('state_changed', 
-	            function progress(snapshot) {
-	      
-	            },
-	            function error(err){
-	            
-	            },
-	            function complete(){
-	            alert('upload complete!');
-	            });
-	        });
-	      }
 	}
 );
 
@@ -113,25 +74,18 @@ app.controller('editTeamCtrl',
 		var ref = database.ref("TeamForm/teams/" + $stateParams.id);
 		$firebaseObject(ref).$loaded().then(function (info) {
 			$scope.team = info;
-			$scope.tags = info.tags.join(", ");
+			$scope.tags = info.tags;
+			for(var i = 0; i < info.tags.length ; i++ ) {
+				$('#team_tags').tokenfield('createToken', info.tags[i]);
+			}
 		});
 
-		var imgAdd;
-		// getting profile image
-		storage.ref().child('teams/'+ $stateParams.id+'.png').getDownloadURL().then(function(url){
-	    	$scope.imgSrc = url;
-	    	$scope.$digest();
-	    }).catch(function(error){
-	      // if there is no profile image get a default image.
-	      $scope.imgSrc = 'https://firebasestorage.googleapis.com/v0/b/teamform-46380.appspot.com/o/users%2Fprofile.png?alt=media&token=e9fc1bb3-adb0-4f4e-b490-057e738f68f0';
-	      $scope.$digest();
-	    });
 
 		$scope.addImage = function(){
 			$scope.input.icon = prompt("Add your Image URL", "default.jpg");
 		}
         $scope.increaseMin = function(){
-            if($scope.team.min<=$scope.team.max) $scope.team.min++;
+            if($scope.team.min < $scope.team.max) $scope.team.min++;
         }
         $scope.decreaseMin = function(){
             if($scope.team.min>0) $scope.team.min--;
@@ -149,10 +103,11 @@ app.controller('editTeamCtrl',
 			// update the date
 			if ( $scope.team.name != "" && $scope.team.description != "" && $scope.team.tags != "") {
 
+				var inputtags = $('#team_tags').tokenfield('getTokensList');
 				var re = new RegExp(", |,");
-				var tags = $scope.tags.split(re);
+				var tags = inputtags.split(re);
 				if (tags[tags.length - 1] == "")
-					tags.splice(tags.length - 1,1);
+				tags.splice(tags.length - 1, 1);
 				$scope.team.tags = tags;
 				// add an input event
 				database.ref('TeamForm/teams/' + $stateParams.id).update({
@@ -161,7 +116,6 @@ app.controller('editTeamCtrl',
 				tags: $scope.team.tags,
 				min: $scope.team.min,
 				max: $scope.team.max,
-				imgURL: imgAdd
 			});
 			}
 		}
@@ -188,10 +142,9 @@ app.controller('editTeamCtrl',
 	            },
 	            function complete(){
 	            storage.ref().child('teams/'+ $stateParams.id+'.png').getDownloadURL().then(function(url){
-			    	imgAdd = url;
+			    	database.ref('TeamForm/teams/' + $stateParams.id).update({icon: url});
 			    }).catch(function(error){
 			      alert('error');
-			      imgAdd = 'https://firebasestorage.googleapis.com/v0/b/teamform-46380.appspot.com/o/users%2Fprofile.png?alt=media&token=e9fc1bb3-adb0-4f4e-b490-057e738f68f0';
 			    });
 	            alert('Upload Complete!');
 	            });

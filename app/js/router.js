@@ -1,11 +1,9 @@
 var app = angular.module('teamformApp', ['ui.router', 'firebase']);
-
 app.controller('scrollCtrl', ['$scope', '$anchorScroll', function ($scope, $anchorScroll) {
     $scope.scroll = function () {
         $anchorScroll();
     };
 }]);
-
 app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
         //route for the home page
@@ -141,7 +139,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 })
     .run(function($rootScope, $state) {
         $rootScope.$on('$stateChangeSuccess', function () {
-            document.body.scrollTop = document.documentElement.scrollTop = 0;
+          document.body.scrollTop = document.documentElement.scrollTop = 0;
         });
 
         $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {

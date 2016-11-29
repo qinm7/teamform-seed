@@ -1,105 +1,78 @@
 <style>
 	.required{color: red;}
 </style>
+ <script src="js/bootstrap-tokenfield.js"></script>
 <script>
-$( function() {
-	var availableTags = [
-	"ActionScript",
-	"AppleScript",
-	"Asp",
-	"BASIC",
-	"C",
-	"C++",
-	"Clojure",
-	"COBOL",
-	"ColdFusion",
-	"Erlang",
-	"Fortran",
-	"Groovy",
-	"Haskell",
-	"Java",
-	"JavaScript",
-	"Lisp",
-	"Perl",
-	"PHP",
-	"Python",
-	"Ruby",
-	"Scala",
-	"Scheme"
-	];
 
-	function split( val ) {
-		return val.split( /,\s*/ );
-	}
 
-	function extractLast( term ) {
-		return split( term ).pop();
-	}
-
-	$( "#tags" )
-    // don't navigate away from the field on tab when selecting an item
-    .on( "keydown", function( event ) {
-    	if ( event.keyCode === $.ui.keyCode.TAB &&
-    		$( this ).autocomplete( "instance" ).menu.active ) {
-    		event.preventDefault();
-    }
+$('#event_tags').tokenfield({
+  autocomplete: {
+    source: ["Computer Science","Java","C++","Python","JavaScript","C","Assembly","Swift","AngularJS","Django",
+	"Ruby-on-Rails","Node.js","asp.net","Math","Physics","Chemistry","Biology","Science","Art","Film","Photography","Photoshop",
+	"Graphic Design","Painting","Drawing","Sculpting","Dance","Music","Acting","Singing","Food","Cooking","Baking",
+	"Cake Decorating","Sports","Basketball","Baseball","Football","Tennis","Badminton","Squash","Swimming","Jogging","Hiking"],
+    delay: 100
+  },
+  limit:10,
+  createTokensOnBlur:true,
+  showAutocompleteOnFocus: true
+}).on('tokenfield:createtoken', function (event) {
+	
+  var exists = true;
+  $.each(["Computer Science","Java","C++","Python","JavaScript","C","Assembly","Swift","AngularJS","Django",
+	"Ruby-on-Rails","Node.js","asp.net","Math","Physics","Chemistry","Biology","Science","Art","Film","Photography","Photoshop",
+	"Graphic Design","Painting","Drawing","Sculpting","Dance","Music","Acting","Singing","Food","Cooking","Baking",
+	"Cake Decorating","Sports","Basketball","Baseball","Football","Tennis","Badminton","Squash","Swimming","Jogging","Hiking"], function(index, token) {
+    if (token === event.attrs.value)
+      exists = false;
   })
-    .autocomplete({
-    	minLength: 0,
-    	source: function( request, response ) {
-        // delegate back to autocomplete, but extract the last term
-        response( $.ui.autocomplete.filter(
-        	availableTags, extractLast( request.term ) ) );
-      },
-      focus: function() {
-        // prevent value inserted on focus
-        return false;
-      },
-      select: function( event, ui ) {
-      	var terms = split( this.value );
-        // remove the current input
-        terms.pop();
-        // add the selected item
-        terms.push( ui.item.value );
-        // add placeholder to get the comma-and-space at the end
-        terms.push( "" );
-        this.value = terms.join( ", " );
-        return false;
-      }
-    });
-  } );
+  var existingtokens = $(this).tokenfield('getTokens');
+  $.each(existingtokens,function(index,token){
+  	if(token.value === event.attrs.value)
+  		exists = true;
+  })
+  if(exists === true)
+    event.preventDefault();
+});
+
 </script>
+
 
 <div class="container-fluid row create-box">
 	<h1 class="title text-center">Create Event</h1>
 	<!-- event image here -->
-	<center><img src="img/profile.png" class="img-circle" ng-click="addImage()"></img></center>
+	<center><img src="img/profile.png" class="img-circle"></img></center>
 	<div class="inner-box">
 		<form name="form" novalidate>
 
 			<div class="form form-group">
-				<label for="name">Name <span class="required" ng-show="form.name.$error.required">*required</span></label>
+				<div class="form-group" ng-class="{ 'has-error' : !input.name}">
+ 				<label for="name">Name </label>
 				<input type="text" name="name" class="form-control" ng-model="input.name" id="name" placeholder="Name" required>
+				</div>
 			</div>
 
-			<div class="form form-group">
-				<label for="description">Description <span class="required" ng-show="form.desc.$error.required">*required</span></label>
+			<div class="form forms-group">
+				<div class="form-group" ng-class="{ 'has-error' : !input.description}">
+      			<label for="description">Description</label>
 				<textarea name="desc" class="form-control" rows="5" ng-model="input.description" id="description" placeholder="Description" required></textarea>
+				</div>
 			</div>
 
 			<div class="form form-group">
-				<label for="tags">Skills <span class="required" ng-show="form.tags.$error.required">*required</span></label>
-				<input id="tags" name="tags" class="form-control ui-autocomplete-input" ng-model="tags" placeholder="i.e. Java, Angular JS, Firebase..." required>
+				<label for="tags">Skills</label>
+				<input type="text" id="event_tags" name="tags" class="tag" ng-model="tags" placeholder="i.e. Java, Angular JS, C++..." required/>
 			</div>
-
+			
 			<div class="text-center">
 				<button type="button" class="btn btn-success" ng-click="addEvent()" ng-disabled="!input.description || !input.name || !input.tags">submit</button>
 			</div>
+		
 		</form>
 	</div>
 </div>
 
 
-<!--<script type="text/javascript">
+<script type="text/javascript">
 	$('.ui-autocomplete.ui-menu').css('font-size', '20px');
-</script>-->
+</script>

@@ -61,11 +61,19 @@ div.input-box{
 	margin-top: 40px;
 	width: 60%;
 }
+div.tags{
+	font-size: 18px;
+	display: inline-block;
+	margin: 0 5px;
+}
 div#about{
 	margin-top: 200px;
 	margin-bottom: 200px
 }
-
+div.label{
+	display: block;
+	font-size: 50%;
+}
 img.img-center{
 	display: inline;
 }
@@ -87,6 +95,7 @@ hr.blue-line{
 label{
 	font-size: 24px;
 	color: #424242;
+	display: block;
 }
 input.submit{
 	padding: 10px;
@@ -115,6 +124,9 @@ footer p {
 }
 i.fa-circle{
 	color: #1E88E5;
+}
+li.ui-menu-item{
+	font-size: 18px;
 }
 .btm-right{
 	position: fixed;

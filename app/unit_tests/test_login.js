@@ -1,6 +1,6 @@
 describe('test login.js', function() {
 	beforeEach( function() {
-		module('teamform-46380');
+		module('teamformApp');
 		inject(function(_$controller_,_$rootScope_,_$location_,_$state_) {
 			$controller=_$controller_;
 			$rootScope=_$rootScope_;

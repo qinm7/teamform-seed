@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 var app = angular.module("teamformApp");
 app.controller('recommendCtrl', ['$firebaseArray', '$scope', '$location', '$state', '$stateParams',
   function ($firebaseArray, $scope, $location,  $state, $stateParams) {

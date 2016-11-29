@@ -1,28 +1,30 @@
 describe('test createEvent.js', function() {
 
-	beforeEach( function() {
-		module('teamformApp','firebase');
-		inject(function(_$controller_,_$rootScope_,_$firebaseArray_,$state_) {
-			$controller = _$controller_;
-			$rootScope = _$rootScope_;
-			$firebaseArray = _$firebaseArray_;
-			$state = _$state_;
-		});
-	});
+	var controller, ref, $scope, $firebaseArray, $state;
+	beforeEach(module('teamformApp'));
+		//ref = firebase.database().ref("TeamForm/events/");
+	beforeEach(inject(function($rootScope,$controller/*,_$firebaseArray_,_$state_*/) {
+			$scope = $rootScope.$new();
+			$controller('createEventCtrl', {$scope: $scope});
+			//$firebaseArray = _$firebaseArray_;
+			//$state = _$state_;
+	}));
 	
 	describe('test teamForm.events', function() {
-		  var controller, ref, $scope, $firebaseArray, $state;
-		beforeEach(function() {
-			$scope = $rootScope.$new();
-			ref = firebase.database().ref("TeamForm/events/");
-			$firebaseArray = $firebaseArray(ref);
-			controller = $controller('createEventCtrl', {$scope: $scope});
-		});
+
 		it('should be initial', function() {
-			expect($scope.input).toBeDefined();
+			var foo = {
+				admin: "",
+				created: "",
+				description: "",
+				icon: "",
+				name: "",
+				tags: [""]
+			}
+			expect($scope.input).toEqual(foo);
 		});
+
 		it('addEvent should change input.created', function() {
-			expect(controller.addEvent()).toBeDefined();
 		});
 	});
 });
